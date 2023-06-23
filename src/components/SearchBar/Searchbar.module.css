@@ -1,23 +1,32 @@
-.BottonSearch{
-    text-decoration: none;
-    background-color: red;
-    border-radius: 0px 0px 20px 0px;
-    border:0;
-    padding-top: 0px;
-   vertical-align: top;
- }
- .BottonSearch:hover{
-    background-color: rgb(64, 209, 84);
-    padding-bottom: 2.5px;
- }
- 
- .NavSearch{
-    outline: none;
- }
- .icon{
-   font-size: 27px;
-    /* color: azure; */
- }
- .icon:hover{
-    font-size: 24px;
- }
+.BottonSearch {
+  text-decoration: none;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 0px 0px 20px 0px;
+  padding-top: 0px;
+  vertical-align: top;
+  height: 30px;
+}
+
+.NavSearch::placeholder {
+  font-size: 12px;
+  font-style: oblique;
+}
+
+.BottonSearch:hover {
+  background-color: #eaeaea;
+  ;
+}
+
+
+.icon {
+  font-size: 27px;
+  /* color: azure; */
+}
+
+.searchbar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}

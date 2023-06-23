@@ -1,10 +1,9 @@
-/*Falta agregar un estilo o color de fondo*/
 .container {
   max-width: 500px;
   margin: 20px auto;
   padding: 20px;
   background-color: #f6f6f6;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -19,9 +18,9 @@
 .formGroup {
   margin-bottom: 10px;
   display: flex;
-  flex-direction: row; /* Alineación horizontal */
-  justify-content: flex-start; /* Alineación horizontal a la izquierda */
-  align-items: center; /* Alineación vertical */
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .label {
@@ -50,53 +49,15 @@
   display: inline-block;
   border: none;
   border-radius: 10px;
+  border: 1px solid #ccc;
   padding: 10px 20px;
-  font-size: 1em;
-  font-weight: bold;
-  color: #fff;
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #646cff);
-  background-image: -moz-linear-gradient(top, #3498db, #646cff);
-  background-image: -ms-linear-gradient(top, #3498db, #646cff);
-  background-image: -o-linear-gradient(top, #3498db, #646cff);
-  background-image: linear-gradient(to bottom, #3498db, #646cff);
+  background-color: #f8f8f8;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .button:hover {
-  background: #8fdbc5;
-  background-image: -webkit-linear-gradient(top, #8fdbc5, #646cff);
-  background-image: -moz-linear-gradient(top, #8fdbc5, #646cff);
-  background-image: -ms-linear-gradient(top, #8fdbc5, #646cff);
-  background-image: -o-linear-gradient(top, #8fdbc5, #646cff);
-  background-image: linear-gradient(to bottom, #8fdbc5, #646cff);
-}
-
-.scrollButton {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background-color: #646cff;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.scrollButton:hover {
-  background-color: #535bf2;
-}
-
-.scrollButton::before {
-  content: '\2191';
-  font-size: 24px;
+  background-color: #eaeaea;
 }
 
 .error {
@@ -104,7 +65,7 @@
   font-size: 0.9em;
   margin-top: 5px;
   flex-basis: 100%;
-  text-align: center; /* Alinear el texto al centro */
+  text-align: center;
 }
 
 .confirmation {
@@ -112,5 +73,5 @@
   font-size: 1em;
   margin-top: 10px;
   flex-basis: 100%;
-  text-align: center; /* Alinear el texto al centro */
+  text-align: center;
 }

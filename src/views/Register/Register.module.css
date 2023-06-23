@@ -1,0 +1,50 @@
+.login-container {
+  height: 100vh;
+}
+
+.login-container .bg-box {
+  background-image: url('https://theartwolf.com/wp-content/uploads/2021/05/Van_Gogh_-_Rhone_-_1920-1080.jpg');
+  background-size: cover;
+
+  text-align: left;
+}
+
+.landing-text{
+  position: absolute;
+    backdrop-filter: blur(10px);
+      /* Efecto blur */
+      background-color: rgba(213, 209, 209, 0.4);
+      /* Fondo transparente */
+  top:30%;
+  left:4.25%;
+  width: 570px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+    font-weight: lighter;
+  
+}
+
+.landing-title{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  font-style: oblique;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.confirmation {
+  color: green;
+  font-size: 1em;
+  margin-top: 10px;
+  flex-basis: 100%;
+  text-align: center;
+}
+

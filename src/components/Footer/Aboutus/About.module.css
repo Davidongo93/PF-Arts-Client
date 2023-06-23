@@ -1,19 +1,97 @@
-.about{
-    background: black;
-    color: aliceblue;
-    min-height: 100vh;
-    padding: 20px;
+.about {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
+
+.txtContainer {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.txtContainer span {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.txtContainer p {
+  text-align: justify;
+}
+
 .BttBack {
-    text-decoration: none;
-    background-color: blue;
-    color: azure;
-    border-radius: 10px;
-    font-weight: bold;
-    padding: 5px;
-    margin-top: 20px;
+  text-decoration: none;
+  background-color: white;
+  color: rgb(53, 53, 53);
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 5px;
+  margin-top: 20px;
 }
- .BttBack:hover{
-     background-color: rgb(65, 204, 109);
-     font-size: 17px;
- }
+
+.BttBack:hover {
+  background-color: rgb(53, 53, 53);
+  color: white;
+}
+
+.Admins {
+  /* border: 2px solid white; */
+  text-align: center;
+  width: 300px;
+  font-family: Arial, serif;
+  margin-bottom: 40px;
+}
+
+/* @keyframes border-animation {
+  0% {
+    border-color: red;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+  }
+
+  100% {
+    border-color: blue;
+    border-bottom-width: 5px;
+    border-right-width: 5px;
+  }
+}
+
+@keyframes shadow-animation {
+  0% {
+    box-shadow: 0 0 10px rgba(216, 30, 30, 0.968);
+  }
+
+  100% {
+    box-shadow: 0 0 20px rgba(10, 32, 234, 0.915);
+  }
+} */
+
+.Participantes {
+  padding-left: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 50px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  /* Ajusta el espacio entre los elementos */
+}
+
+
+.imgStyle {
+  clip-path: circle(80% at top center);
+  height: 300px;
+  width: 250px;
+
+}
+
+.text {
+  margin-top: -40px;
+}
+
+
+.Icons {
+  margin-right: 10px;
+  font-size: 25px;
+}

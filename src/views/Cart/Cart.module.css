@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  box-sizing: border-box;
+  margin: 0px -18px;
+}
+
+.leftColumn {
+  flex: 1;
+  padding: 35px;
+  background-color: #f7f7f7;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.rightColumn {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.link {
+  color: blue;
+}
+
+.infoBox {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #f7f7f7;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.separator {
+  height: 1px;
+  background-color: #e7d6d6;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.imgContainer {
+  width: 100px; /* Elige el tamaño deseado para la imagen */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.imgContainer img {
+  max-width: 100%;
+  height: auto;
+}
+
+.boldTitle {
+  font-weight: bold;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #e7d6d6;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}

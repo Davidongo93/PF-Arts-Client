@@ -1,52 +1,113 @@
 .detailContainer {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centrar horizontalmente */
+  justify-content: center;
   padding: 25px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 50px 50px 150px 70px;
 }
 
 .imgContainer {
-  flex: 0 0 50%; /* Tamaño de la imagen (50% del contenedor) */
-  padding-right: 20px; /* Margen a la derecha */
+  position: relative;
+  display: inline-block;
 }
 
 .imgContainer img {
-  width: 100%;
-  max-width: 400px;
+  max-width: 100%;
   height: auto;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.frame {
+  position: absolute;
+  top: -45px;
+  left: -35px;
+  right: -35px;
+  bottom: -45px;
+  z-index: 1;
+}
+
+.frameContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: -8px 13px 15px 28px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: -8px 13px 15px 28px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: -8px 13px 15px 28px rgba(0, 0, 0, 0.35);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 .propsContainer {
-  margin-bottom: 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-right: 50px;
+  background-color: white;
+  text-align: left;
+  /* display: inline-block; */
+  width: 230px;
+  margin: 0 0 0 0;
+  padding: 15px;
+  font-family: Arial;
+  box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.41);
+  -webkit-box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.41);
 }
 
 .propsContainer h3 {
-  margin-bottom: 5px;
-  margin-right: 80px;
   font-size: 1.5em;
   font-weight: bold;
-  text-align: center;
+  font-style: italic;
+}
+
+.user {
+  color: #3498db;
+  font-weight: 100;
+  text-decoration: none;
+}
+
+.hr {
+  border-width: 3px;
+  border-style: inset;
+}
+
+.deleteButton {
+  display: block;
+  font-size: 12px;
+  background-color: #999999;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.deleteButton:hover {
+  background-color: #cc0000;
 }
 
 .propsContainer p {
   margin: 0;
-  margin-right: 80px;
-  font-size: 1.2em;
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.propsContainer span {
+  font-style: oblique;
+}
+
+.prop{
+  font-weight: bolder;
 }
 
 .actionsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 30px;
 }
 
 .likeStyle {
@@ -88,8 +149,8 @@
 
 .shareButtons {
   display: flex;
-  gap: 8px; /* Espacio horizontal entre los botones de compartir */
-  margin-top: 10px; /* Añadido para separar de los botones anteriores */
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .shareButton {
@@ -115,32 +176,6 @@
   margin-right: 4px;
 }
 
-.scrollButton {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background-color: #646cff;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.scrollButton:hover {
-  background-color: #535bf2;
-}
-
-.scrollButton::before {
-  content: '\2191'; /* Código de la flecha hacia arriba */
-  font-size: 24px;
-}
-
 .ratingContainer {
   display: flex;
   justify-content: center;
@@ -159,4 +194,108 @@
 
 .ratingStarActive {
   color: #ffcc00;
+}
+
+/* Estilos para botones Save y Cancel del edit */
+.updateButtonSave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background-color: rgb(146, 194, 146); /*fondo*/
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  color: #ffffff; /*texto*/
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateButtonSave:focus {
+  outline: none;
+}
+
+.updateButtonSave:hover {
+  background-color: rgb(95, 129, 95);
+  color: #ffffff;
+}
+
+.updateButtonCancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background-color: rgb(121, 165, 190);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateButtonCancel:focus {
+  outline: none;
+}
+
+.updateButtonCancel:hover {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+.updateIcon {
+  margin-right: 8px;
+}
+
+
+/* Estilos para la edición y lápiz */
+.all{
+  display: inline-block;
+  width: 230px;
+  margin-top: 95px;
+  margin-left: 70px;
+  margin-right: 15px;
+  /* background-color:#3498db; */
+}
+
+.editC{
+  margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editButton {
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  color: #999999;
+  background-color: transparent;
+  padding:0;
+  margin: 10px 0 0 0;
+}
+
+.editButton:hover {
+  background-color: transparent;
+  color: #c7c7c7;
+}
+
+.editButton:focus {
+  outline: none;
+}
+
+.editIcon {
+  margin-right: 8px;
+}
+
+.editInput {
+  border: 1px solid #ccc;
+  padding-right: 5px;
+  font-size: 1em;
+  margin-left: 1px;
 }

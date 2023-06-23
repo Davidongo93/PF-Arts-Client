@@ -1,6 +1,6 @@
 .dark {
-  background-color: #111;
-  color: #fff;
+  background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
+  color: #8f8f8f;
 }
 
 .darkModeButton {
@@ -8,7 +8,7 @@
   border: none;
   cursor: pointer;
   font-size: 24px;
-  color: #fff;
+  color: #7e7c7c;
   transition: color 0.3s;
 }
 

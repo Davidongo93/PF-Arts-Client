@@ -4,51 +4,90 @@ import { BsFillHouseFill, BsPersonFill, BsTools } from 'react-icons/bs';
 import { GiPencilBrush } from 'react-icons/gi';
 import { FaPowerOff } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-    //    por favor no usar pretier aqui en navmenu
+
 const NavMenu = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const toggleMenu = (event) => {
-        event.stopPropagation();
-        setMenuOpen(!menuOpen);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = (event) => {
+    event.stopPropagation();
+    setMenuOpen(!menuOpen);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      const menuOptions = document.querySelector('.menu-options');
+      if (!menuOptions.contains(event.target)) {
+        setMenuOpen(false);
+      }
     };
+    document.addEventListener('click', handleOutsideClick);
 
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            const menuOptions = document.querySelector('.menu-options');
-            if (!menuOptions.contains(event.target)) {
-                setMenuOpen(false);
-            }
-        };
-        document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
-        return () => {
-            document.removeEventListener('click', handleOutsideClick);
-        };
-    }, []);
-    return (
+  return (
     <nav>
-      <div className={`navbar-menu ${menuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+      <div
+        className={`navbar-menu ${menuOpen ? 'active' : ''}`}
+        onClick={toggleMenu}
+      >
         <span></span>
         <span></span>
         <span></span>
       </div>
       <div className={`menu-options ${menuOpen ? 'active' : ''}`}>
-        {/* por favor no usar pretier aqui */}
         <ul>
-          <li><BsPersonFill /><NavLink to='/artistas' onClick={toggleMenu}>{' '} Artists</NavLink></li>
+          <li>
+            <BsFillHouseFill />
+            <NavLink to='/' onClick={toggleMenu}>
+              {' '}
+              Home
+            </NavLink>
+          </li>
           <hr />
-          <li><BsTools /><NavLink to='/tecnicas' onClick={toggleMenu}>{' '}Techniques</NavLink></li>
+          <li>
+            <BsPersonFill />
+            <NavLink to='/users' onClick={toggleMenu}>
+              {' '}
+              Artists
+            </NavLink>
+          </li>
           <hr />
-          <li><BsFillHouseFill /><NavLink to='/' onClick={toggleMenu}>{' '}Home</NavLink></li>
+          {/* <li>
+            <BsTools />
+            <NavLink to='/tecnicas' onClick={toggleMenu}>
+              Techniques
+            </NavLink>
+          </li> */}
+          {/* <hr /> */}
+          <li>
+            <GiPencilBrush />
+            <NavLink to='/create' onClick={toggleMenu}>
+              {' '}
+              Create
+            </NavLink>
+          </li>
           <hr />
-          <li><GiPencilBrush /><NavLink to='/create' onClick={toggleMenu}>{' '}Create</NavLink></li>
-          <hr />
-          <li><GiPencilBrush /><NavLink to='/MyCreations' onClick={toggleMenu}>{' '}My creations</NavLink></li>
-          <hr />
-          <li><FaPowerOff /><NavLink to='/login' onClick={toggleMenu}>{' '}Login</NavLink></li>
+          {/* <li>
+            <GiPencilBrush />
+            <NavLink to="/MyCreations" onClick={toggleMenu}>
+              My creations
+            </NavLink>
+          </li>
+          <hr /> */}
+          <li>
+            <FaPowerOff />
+            <NavLink to='/login' onClick={toggleMenu}>
+              {' '}
+              Login
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
-    )
+  );
 };
+
 export default NavMenu;

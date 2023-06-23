@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+// import axios from 'axios';
+import { useState } from 'react';
 import { postArts } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import styles from './Form.module.css';
@@ -8,17 +9,17 @@ export default function Form() {
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     title: '',
+    authorName: '',
     image: '',
-    artistName: '',
-    completionYear: '',
-    width: '',
+    date: '',
     height: '',
-    description: '',
+    width: '',
+    price: '',
+    userId: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [showScrollButton, setShowScrollButton] = useState(false);
 
   function validate(input) {
     let errors = {};
@@ -27,18 +28,26 @@ export default function Form() {
     }
     if (!input.image) {
       errors.image = 'Need an image URL';
+    } else if (!/^https?:\/\/[^\s/$.?#].[^\s]*$/.test(input.image)) {
+      errors.image = 'Invalid URL';
     }
-    if (!input.artistName) {
-      errors.artistName = 'Need an artist name';
+    if (!input.authorName) {
+      errors.authorName = 'Need an author name';
     }
-    if (!input.completionYear) {
-      errors.completionYear = 'Need a year';
+    if (!input.date) {
+      errors.date = 'Need a year';
     }
     if (!input.width) {
       errors.width = 'Need a width';
     }
     if (!input.height) {
       errors.height = 'Need a height';
+    }
+    if (!input.price) {
+      errors.price = 'Need a price';
+    }
+    if (!input.userId) {
+      errors.userId = 'Need a userId';
     }
     return errors;
   }
@@ -59,6 +68,7 @@ export default function Form() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const errors = validate(input);
     setErrors(errors);
     setSubmitted(true);
@@ -67,10 +77,11 @@ export default function Form() {
       Object.keys(errors).length === 0 &&
       input.title &&
       input.image &&
-      input.artistName &&
-      input.completionYear &&
+      input.authorName &&
+      input.date &&
       input.width &&
-      input.height
+      input.height &&
+      input.price
     ) {
       const updatedInput = {
         ...input,
@@ -80,11 +91,12 @@ export default function Form() {
       setInput({
         title: '',
         image: '',
-        artistName: '',
-        completionYear: '',
+        authorName: '',
+        date: '',
         width: '',
         height: '',
-        description: '',
+        price: '',
+        userId: '',
       });
       setSubmitted(false);
       setErrors({});
@@ -92,29 +104,6 @@ export default function Form() {
       setShowAlert(true);
     }
   }
-
-  function handleScrollButton() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }
-
-  useEffect(() => {
-    function handleScroll() {
-      const windowHeight = window.innerHeight;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const bodyHeight = document.body.offsetHeight;
-      const isBottom = scrollY >= bodyHeight - windowHeight;
-
-      setShowScrollButton(isBottom);
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <div>
@@ -127,66 +116,66 @@ export default function Form() {
           <div className={styles.formGroup}>
             <label className={styles.label}>Title: </label>
             <input
-              type="text"
+              type='text'
               value={input.title}
-              name="title"
+              name='title'
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter a title"
+              placeholder='Enter a title'
             />
             {errors.title && <p className={styles.error}>{errors.title}</p>}
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Image: </label>
             <input
-              type="text"
+              type='text'
               value={input.image}
-              name="image"
+              name='image'
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter an image URL"
+              placeholder='Enter an image URL'
             />
             {submitted && errors.image && (
               <p className={styles.error}>{errors.image}</p>
             )}
           </div>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Artist name: </label>
+            <label className={styles.label}>Author: </label>
             <input
-              type="text"
-              value={input.artistName}
-              name="artistName"
+              type='text'
+              value={input.authorName}
+              name='authorName'
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter an artist name"
+              placeholder='Enter an author name'
             />
-            {submitted && errors.artistName && (
-              <p className={styles.error}>{errors.artistName}</p>
+            {submitted && errors.authorName && (
+              <p className={styles.error}>{errors.authorName}</p>
             )}
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Year: </label>
             <input
-              type="text"
-              value={input.completionYear}
-              name="completionYear"
+              type='number'
+              value={input.date}
+              name='date'
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter a year"
+              placeholder='Enter a year'
             />
-            {submitted && errors.completionYear && (
-              <p className={styles.error}>{errors.completionYear}</p>
+            {submitted && errors.date && (
+              <p className={styles.error}>{errors.date}</p>
             )}
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>Width: </label>
             <input
-              type="number"
+              type='number'
               value={input.width}
-              name="width"
+              name='width'
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter a width"
+              placeholder='Enter a width'
             />
             {submitted && errors.width && (
               <p className={styles.error}>{errors.width}</p>
@@ -195,28 +184,46 @@ export default function Form() {
           <div className={styles.formGroup}>
             <label className={styles.label}>Height: </label>
             <input
-              type="number"
+              type='number'
               value={input.height}
-              name="height"
+              name='height'
               onChange={handleChange}
               className={styles.input}
-              placeholder="Enter a height"
+              placeholder='Enter a height'
             />
             {submitted && errors.height && (
               <p className={styles.error}>{errors.height}</p>
             )}
           </div>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Description: </label>
-            <textarea
-              value={input.description}
-              name="description"
+            <label className={styles.label}>Price: </label>
+            <input
+              type='number'
+              value={input.price}
+              name='price'
               onChange={handleChange}
-              className={styles.textarea}
-              placeholder="Enter a description..."
+              className={styles.input}
+              placeholder='Enter a price...'
             />
+            {submitted && errors.price && (
+              <p className={styles.error}>{errors.price}</p>
+            )}
           </div>
-          <button type="submit" className={styles.button}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>userId: </label>
+            <input
+              type='text'
+              value={input.userId}
+              name='userId'
+              onChange={handleChange}
+              className={styles.input}
+              placeholder='Enter a userId...'
+            />
+            {submitted && errors.userId && (
+              <p className={styles.error}>{errors.userId}</p>
+            )}
+          </div>
+          <button type='submit' className={styles.button}>
             Create
           </button>
           {showConfirmation && (
@@ -224,12 +231,6 @@ export default function Form() {
           )}
         </form>
       </div>
-      {showScrollButton && (
-        <button
-          className={styles.scrollButton}
-          onClick={handleScrollButton}
-        ></button>
-      )}
     </div>
   );
 }

@@ -1,34 +1,54 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getAllArts, getArtsByTitle } from '../../redux/actions';
+import {
+  getAllArts,
+  getArtsByTitle,
+  getArtsByAuthor,
+} from '../../redux/actions';
 import { MdManageSearch } from 'react-icons/md';
+import PropTypes from 'prop-types';
 import style from './Searchbar.module.css';
 
-const Searchbar = () => {
+const Searchbar = ({ setCurrentPage }) => {
   const dispatch = useDispatch();
 
-  const [title, setTitle] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  function handleChange(event) {
-    setTitle(event.target.value);
-  }
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-  const handleSearch = () => {
-    if (!title) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!searchQuery) {
       dispatch(getAllArts());
     } else {
-      dispatch(getArtsByTitle(title));
+      dispatch(getArtsByTitle(searchQuery));
+      dispatch(getArtsByAuthor(searchQuery));
+      setCurrentPage(1);
     }
   };
 
   return (
-    <form onChange={handleChange}>
-      <input className={style['NavSearch']} placeholder='Search...' type='search' />
-      <button className={style['BottonSearch']} type='submit' onClick={handleSearch}>
-        <MdManageSearch className={style['icon']} />
-      </button>
-    </form>
+    <div className={style['searchbar-container']}>
+      <form onSubmit={handleSubmit}>
+        <input
+          className={style['NavSearch']}
+          placeholder='Search by title/author...'
+          type='search'
+          value={searchQuery}
+          onChange={handleChange}
+        />
+        <button className={style['BottonSearch']} type='submit'>
+          <MdManageSearch className={style['icon']} />
+        </button>
+      </form>
+    </div>
   );
+};
+
+Searchbar.propTypes = {
+  setCurrentPage: PropTypes.func.isRequired,
 };
 
 export default Searchbar;

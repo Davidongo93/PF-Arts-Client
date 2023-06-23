@@ -1,10 +1,43 @@
 .navbar {
-  z-index: 9999; /* para que se muestre sobre los demas elementos */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: rgba(213, 209, 209, 0.9);
+  /* Fondo transparente */
   display: flex;
   align-items: center;
-  background-color: #47d1ba;
   height: 10vh;
+  transition: background-color 0.3s ease;
+  /* Transición de color de fondo */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
+
+.navbar.scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+  /* Efecto blur */
+  background-color: rgba(213, 209, 209, 0.4);
+  /* Fondo transparente */
+  display: flex;
+  align-items: center;
+  height: 10vh;
+  transition: background-color 0.3s ease;
+  /* Transición de color de fondo */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar img {
+  margin-left: 10px;
+  /* Ajusta el margen izquierdo según tus necesidades */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Ajusta los valores de sombra según tus necesidades */
+}
+
 
 .navbar-menu,
 .navbar-title,
@@ -13,11 +46,16 @@
   display: flex;
   align-items: center;
   padding-left: 0.7rem;
+
 }
 
 .navbar-title {
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 400;
+  font-style: oblique;
+  color: rgb(53, 53, 53);
+  /* Color de texto */
+  text-shadow: black 0.4px 0.4px;
 }
 
 .navlinks-container {
@@ -26,13 +64,17 @@
 
 .navlinks {
   text-decoration: none;
-  color: black;
-  padding: 5px;
+  color: rgb(53, 53, 53);
+  /* Color de texto */
+  padding: 10px;
+  font-size: 20px;
+  transition: color 0.3s ease;
+  /* Transición de color de texto */
+  text-shadow: black 0.4px 0.4px;
 }
 
 .navlinks:hover {
-  font-weight: bold;
-  color: blue;
+  color: rgb(255, 255, 255);
 }
 
 .navbar-user {
@@ -51,6 +93,8 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+  transition: background-color 0.3s ease;
+  /* Transición de color de fondo del botón */
 }
 
 .boton-out:hover {
@@ -67,9 +111,14 @@
   background-color: rgba(255, 255, 255, 0.2);
   transform: skewX(-20deg);
   z-index: -1;
-  transition: left 0.3s ease;
+  transition: left 1.3s ease;
 }
 
 .boton-out:hover::before {
   left: 100%;
+}
+
+.cartLogo {
+  width: 30px;
+  height: 30px;
 }

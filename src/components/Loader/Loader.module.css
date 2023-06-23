@@ -1,0 +1,11 @@
+.loaderContainer {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  margin-right: 30px;
+  width: 300px;
+}

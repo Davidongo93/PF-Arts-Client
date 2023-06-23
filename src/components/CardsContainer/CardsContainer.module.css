@@ -16,3 +16,19 @@
   justify-content: center;
   min-height: 80vh;
 }
+
+.searchContainer {
+  margin-top: 15px;
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
