@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/NavBar/Navbar.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 import Detail from './views/Detail/Detail';
 import Form from './views/Form/Form';
 import Home from './views/Home/Home';
