@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getArtsByFilters } from '../../redux/actions';
-import styles from './filters.module.css';
+import styles from './Filters.module.css';
 
 const Filters = ({ setCurrentPage }) => {
   const dispatch = useDispatch();
