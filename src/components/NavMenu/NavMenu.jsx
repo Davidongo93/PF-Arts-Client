@@ -1,9 +1,10 @@
 import './NavMenu.css';
 import { useState, useEffect } from 'react';
-import { BsFillHouseFill, BsPersonFill, BsTools } from 'react-icons/bs';
+import { BsFillHouseFill, BsPersonFill } from 'react-icons/bs';
 import { GiPencilBrush } from 'react-icons/gi';
 import { FaPowerOff } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import { AiFillHeart } from 'react-icons/ai'
 
 const NavMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,13 +56,14 @@ const NavMenu = () => {
             </NavLink>
           </li>
           <hr />
-          {/* <li>
-            <BsTools />
-            <NavLink to='/tecnicas' onClick={toggleMenu}>
-              Techniques
+          <li>
+            <NavLink to='/favorites' onClick={toggleMenu}>
+            <AiFillHeart />
+              {' '}
+             Favorites
             </NavLink>
-          </li> */}
-          {/* <hr /> */}
+          </li> 
+          <hr />
           <li>
             <GiPencilBrush />
             <NavLink to='/create' onClick={toggleMenu}>

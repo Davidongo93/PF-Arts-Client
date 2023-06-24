@@ -18,7 +18,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const GET_ARTS_BY_AUTHOR_NAME = 'GET_ARTS_BY_AUTHOR_NAME;';
 export const GET_ARTS_BY_FILTERS = 'GET_ARTS_BY_FILTERS';
 export const UPDATE_ARTWORK = 'UPDATE_ARTWORK';
-export const GET_FAVORITES = 'GET_FAVORITES;'
+export const GET_FAVORITES = 'GET_FAVORITES;';
 
 export const getAllArts = () => {
   return async function (dispatch) {
@@ -93,7 +93,11 @@ export function updateUser(updatedUser) {
         },
       };
       console.log(token);
-      const response = await axios.put(`${URL}/users/edit`, updatedUser, config);
+      const response = await axios.put(
+        `${URL}/users/edit`,
+        updatedUser,
+        config
+      );
       dispatch({ type: UPDATE_USER, payload: response.data });
       return response;
     } catch (error) {
@@ -101,7 +105,6 @@ export function updateUser(updatedUser) {
     }
   };
 }
-
 
 // Acción para agregar un favorito
 export function addFavorite(payload) {

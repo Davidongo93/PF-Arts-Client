@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,32 +10,61 @@ import {
   faLock,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { loadScript } from '@paypal/paypal-js';
+import { clearDetail } from '../../redux/actions';
 import styles from './Cart.module.css';
 
 //Poner json web token para almacenar carrito
 const Checkout = () => {
+  const [showDetail, setShowDetail] = useState(true);
   const selectedArtwork = useSelector((state) => state.detail);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  let paypal;
 
   const removeArtworkFromCart = () => {
     // Lógica para eliminar el artículo del carrito
     // Me falta despachar una acción de Redux para actualizar el estado del carrito
     // Por ejemplo: dispatch(removeArtwork(selectedArtwork.id));
-
-    // Recargar la página para reflejar los cambios o puedo poner un mensaje
-    window.location.reload();
+    setShowDetail(false);
   };
 
   useEffect(() => {
     const initializePayPal = async () => {
       try {
-        const paypal = await loadScript({
+        paypal = await loadScript({
           clientId:
             'AR7Htz5PEZkht1GZRgG-IjedcAkciDgEHHRk1gLEcbnlWGmKIrUWyIBoRUmEXjhmdPj26nJL0MY5CmGR',
         });
-        // Acá se puede realizar acciones adicionales con "paypal"
-        paypal.Buttons().render('#your-container-element');
+
+        paypal
+          .Buttons({
+            locale: 'en_US',
+            createOrder: function (data, actions) {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: selectedArtwork.price,
+                    },
+                  },
+                ],
+              });
+            },
+            onApprove: function (data, actions) {
+              return actions.order.capture().then(function (details) {
+                // Mensaje de compra exitosa
+                toast.success(
+                  'Successful purchase! Thank you for your purchase.'
+                );
+                // Actualizar el estado de detail en cart, queda en 0. Lo ideal es configurar stock.
+                dispatch(clearDetail());
+              });
+            },
+          })
+          .render('#paypal-button-container');
       } catch (error) {
         console.error('Failed to load the PayPal JS SDK script', error);
       }
@@ -46,7 +75,7 @@ const Checkout = () => {
 
   return (
     <div className={styles.container}>
-      {selectedArtwork ? (
+      {selectedArtwork && showDetail ? (
         <>
           <div className={styles.leftColumn}>
             <p>
@@ -69,14 +98,14 @@ const Checkout = () => {
             <div className={styles.separator}></div>
             <p>
               <span className={styles.boldText}>PRICE</span>{' '}
-              {selectedArtwork.price} M
+              {selectedArtwork.price} USD
             </p>
             <p>
               <span className={styles.boldText}>SHIPPING COSTS </span> included
             </p>
             <p>
               <span className={styles.boldText}>TOTAL</span>{' '}
-              {selectedArtwork.price} M
+              {selectedArtwork.price} USD
             </p>
             <div className={styles.separator}></div>
             <button
@@ -116,8 +145,14 @@ const Checkout = () => {
           </div>
         </>
       ) : (
-        <p>No work has been selected.</p>
+        <div className={styles.emptyCartMessage}>
+          Your cart is empty!
+          <Link to='/' className={styles.buyButton}>
+            Buy now
+          </Link>
+        </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

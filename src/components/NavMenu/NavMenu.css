@@ -46,6 +46,7 @@
 
 .menu-options a:hover {
   color: rgb(255, 255, 255);
+  text-shadow: 4px 5px 3px rgba(0,0,0,0.49);
 }
 
 /* Estilos adicionales basados en Navbar */
@@ -70,3 +71,7 @@
 .navbar.scrolled .menu-options a:hover {
   color: rgb(255, 255, 255);
 }
+.cora {
+:hover{
+  color: white;
+}}

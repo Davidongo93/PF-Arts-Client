@@ -218,7 +218,7 @@ const Detail = () => {
                 onChange={(e) => setPrice(e.target.value)}
               />
             ) : (
-              <span>{detail.price} M</span>
+              <span>{detail.price} USD</span>
             )}
           </p>
           {isCreatedByUser && (

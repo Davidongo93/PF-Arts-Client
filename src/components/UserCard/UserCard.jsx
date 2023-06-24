@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { updateUser } from '../../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 import styles from './UserCard.module.css';
 
 const UserCard = ({ user }) => {
@@ -53,10 +54,24 @@ const UserCard = ({ user }) => {
     setErrors({});
   };
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
     // Acá va la lógica para subir la imagen a Cloudinary
-    console.log('Imagen seleccionada:', file);
+    // Crea una instancia de FormData
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      // Envía la imagen al backend para subirla a Cloudinary
+      const response = await axios.post('/api/upload', formData);
+      const imageUrl = response.data.url;
+
+      // Actualiza el estado de la imagen con la URL de Cloudinary
+      setImage(imageUrl);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      window.alert('Error uploading image. Please try again.');
+    }
   };
 
   const handleDelete = (userId) => {
@@ -127,12 +142,19 @@ const UserCard = ({ user }) => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className={styles.input}
-              placeholder='Enter an location'
+              placeholder='Enter a location'
             />
           </p>
           <p>
             Profile picture:{' '}
-            <input type='file' accept='image/*' onChange={handleImageChange} />
+            <label className={styles.uploadButton}>
+              <input
+                type='file'
+                accept='image/*'
+                onChange={handleImageChange}
+              />
+              Upload Image
+            </label>
           </p>
           <button className={styles.saveButton} onClick={handleSave}>
             Save

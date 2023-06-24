@@ -132,3 +132,26 @@
   background-color: transparent;
   color: #c7c7c7;
 }
+
+.uploadButton {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f2f2f2;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.uploadButton:hover {
+  background-color: #ddd;
+}
+
+.uploadButton:active {
+  background-color: #ccc;
+}
+
+.uploadButton input[type='file'] {
+  display: none;
+}

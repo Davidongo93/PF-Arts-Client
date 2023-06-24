@@ -1,18 +1,18 @@
 .container {
+  display: flex;
+  flex-direction: column;
   max-width: 500px;
-  margin: 20px auto;
+  margin: -5px auto;
   padding: 20px;
   background-color: #f6f6f6;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
 }
 
 .heading {
   font-size: 2em;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .formGroup {
@@ -31,6 +31,14 @@
   margin-bottom: 5px;
 }
 
+.labelImageURL {
+  flex: 0 0 30%;
+  max-width: 30%;
+  font-size: 1em;
+  font-weight: lighter;
+  margin-bottom: 5px;
+}
+
 .textarea,
 .input {
   width: 100%;
@@ -43,6 +51,15 @@
 
 .textarea {
   resize: vertical;
+}
+
+.inputImageURL {
+  width: 100%;
+  padding: 4px;
+  font-size: 0.8em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .button {
@@ -74,4 +91,40 @@
   margin-top: 10px;
   flex-basis: 100%;
   text-align: center;
+}
+
+.uploadButton {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f2f2f2;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.uploadButton:hover {
+  background-color: #ddd;
+}
+
+.uploadButton:active {
+  background-color: #ccc;
+}
+
+.uploadButton input[type='file'] {
+  display: none;
+}
+
+.separator {
+  height: 1px;
+  background-color: #e7d6d6;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.icon {
+  font-size: 0.8em; /* Ajusta el tamaño del icono según tus preferencias */
+  margin-left: 0.2rem; /* Ajusta el espacio entre el icono y el texto según tus preferencias */
+  vertical-align: middle;
 }

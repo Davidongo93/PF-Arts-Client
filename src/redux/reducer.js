@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   GET_ARTS,
   GET_ARTS_BY_TITLE,
@@ -12,7 +13,7 @@ import {
   POST_USERS,
   DELETE_ART,
   UPDATE_USER,
-  GET_FAVORITES//
+  GET_FAVORITES,
 } from './actions';
 
 const initialState = {
@@ -50,8 +51,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allUsers: action.payload,
       };
-    
-    case GET_FAVORITES://para mostrar los favorites
+
+    case GET_FAVORITES: //para mostrar los favorites
       return {
         ...state,
         myFavorites: action.payload,
