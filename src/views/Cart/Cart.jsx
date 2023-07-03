@@ -9,7 +9,7 @@ import {
   faCheck,
   faDollarSign,
 } from '@fortawesome/free-solid-svg-icons';
-import styles from './cart.module.css';
+import styles from './Cart.module.css';
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart);

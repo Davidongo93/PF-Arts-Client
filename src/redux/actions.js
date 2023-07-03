@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const URL = 'https://pf-arts-api-production.up.railway.app';
-const URL = 'http://localhost:3001';
+ const URL = 'https://pf-arts-api.vercel.app';
+// const URL = 'http://localhost:3001';
 
 // -------- ARTS ---------
 export const GET_ARTS = 'GET_ARTS';
