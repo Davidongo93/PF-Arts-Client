@@ -46,14 +46,14 @@
 
 .menu-options a:hover {
   color: rgb(255, 255, 255);
-  text-shadow: 4px 5px 3px rgba(0,0,0,0.49);
+  text-shadow: 4px 5px 3px rgba(0, 0, 0, 0.49);
 }
 
 /* Estilos adicionales basados en Navbar */
 
 .navbar.scrolled .navbar-menu,
 .navbar.scrolled .menu-options {
-  background-color: rgba(213, 209, 209, 0.4);
+  background-color: transparent;
 }
 
 .navbar.scrolled .navbar-menu span {
@@ -72,6 +72,7 @@
   color: rgb(255, 255, 255);
 }
 .cora {
-:hover{
-  color: white;
-}}
+  :hover {
+    color: white;
+  }
+}

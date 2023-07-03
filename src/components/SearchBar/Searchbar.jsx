@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  getAllArts,
-  getArtsByTitle,
-  getArtsByAuthor,
-} from '../../redux/actions';
-import { MdManageSearch } from 'react-icons/md';
+import { getAllArts, getArtsByTitle, getArtsByAuthor } from '../../redux/actions';
+import { MdSearch } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import style from './Searchbar.module.css';
 
@@ -32,15 +28,9 @@ const Searchbar = ({ setCurrentPage }) => {
   return (
     <div className={style['searchbar-container']}>
       <form onSubmit={handleSubmit}>
-        <input
-          className={style['NavSearch']}
-          placeholder='Search by title/author...'
-          type='search'
-          value={searchQuery}
-          onChange={handleChange}
-        />
+        <input className={style['NavSearch']} placeholder='Search by title/author...' type='search' value={searchQuery} onChange={handleChange} />
         <button className={style['BottonSearch']} type='submit'>
-          <MdManageSearch className={style['icon']} />
+          <MdSearch className={style['icon']} />
         </button>
       </form>
     </div>

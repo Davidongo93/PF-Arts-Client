@@ -1,160 +1,149 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setCartItems } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faTruck,
-  faUndo,
-  faCertificate,
-  faGlobe,
-  faLock,
+  faArrowLeft,
   faTrash,
+  faCheck,
+  faDollarSign,
 } from '@fortawesome/free-solid-svg-icons';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { loadScript } from '@paypal/paypal-js';
-import { clearDetail } from '../../redux/actions';
-import styles from './Cart.module.css';
+import styles from './cart.module.css';
 
-//Poner json web token para almacenar carrito
-const Checkout = () => {
-  const [showDetail, setShowDetail] = useState(true);
-  const selectedArtwork = useSelector((state) => state.detail);
-  const cart = useSelector((state) => state.cart);
+const Cart = () => {
+  const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  let paypal;
-
-  const removeArtworkFromCart = () => {
-    // Lógica para eliminar el artículo del carrito
-    // Me falta despachar una acción de Redux para actualizar el estado del carrito
-    // Por ejemplo: dispatch(removeArtwork(selectedArtwork.id));
-    setShowDetail(false);
-  };
 
   useEffect(() => {
-    const initializePayPal = async () => {
-      try {
-        paypal = await loadScript({
-          clientId:
-            'AR7Htz5PEZkht1GZRgG-IjedcAkciDgEHHRk1gLEcbnlWGmKIrUWyIBoRUmEXjhmdPj26nJL0MY5CmGR',
-        });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
-        paypal
-          .Buttons({
-            locale: 'en_US',
-            createOrder: function (data, actions) {
-              return actions.order.create({
-                purchase_units: [
-                  {
-                    amount: {
-                      value: selectedArtwork.price,
-                    },
-                  },
-                ],
-              });
-            },
-            onApprove: function (data, actions) {
-              return actions.order.capture().then(function (details) {
-                // Mensaje de compra exitosa
-                toast.success(
-                  'Successful purchase! Thank you for your purchase.'
-                );
-                // Actualizar el estado de detail en cart, queda en 0. Lo ideal es configurar stock.
-                dispatch(clearDetail());
-              });
-            },
-          })
-          .render('#paypal-button-container');
-      } catch (error) {
-        console.error('Failed to load the PayPal JS SDK script', error);
-      }
-    };
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      dispatch(setCartItems(JSON.parse(storedCartItems)));
+    }
+  }, [dispatch]);
 
-    initializePayPal();
-  }, []);
+  const handleRemoveCartItem = (artworkId) => {
+    const updatedCartItems = cartItems.filter(
+      (item) => item.artworkId !== artworkId
+    );
+    dispatch(setCartItems(updatedCartItems));
+  };
+
+  const renderCartItems = () => {
+    if (cartItems.length === 0) {
+      return (
+        <div
+          className='card text-center'
+          style={{
+            marginTop: '190px',
+            marginLeft: '400px',
+            marginRight: '400px',
+            marginBottom: '186px',
+          }}
+        >
+          <div className='card-body'>
+            <h5 className='card-title'>Your cart is empty.</h5>
+            <p className='card-text'>
+              Start adding items to your cart to make a purchase.
+            </p>
+            <Link to='/' className={styles.buttonShopping}>
+              <FontAwesomeIcon icon={faArrowLeft} className='mr-2' /> Continue
+              Shopping
+            </Link>
+          </div>
+        </div>
+      );
+    }
+    if (cartItems.length > 4) {
+      const limitedCartItems = cartItems.slice(0, 4);
+      return (
+        <div className='card text-center'>
+          <div className='card-body'>
+            <h5 className='card-title'>You can only purchase up to 4 items.</h5>
+            <div className='d-flex justify-content-center'>
+              {limitedCartItems.map((item) => (
+                <div
+                  className='card mx-2'
+                  key={item.artworkId}
+                  style={{ width: '18rem' }}
+                >
+                  <img
+                    src={item.image}
+                    className={`card-img-top ${styles.cardImage}`}
+                    alt={item.title}
+                  />
+                  <div className='card-body'>
+                    <h5 className='card-title'>{item.title}</h5>
+                    <p className='card-text'>Price: {item.price} USD</p>
+                    <button
+                      className={styles.removeButton}
+                      onClick={() => handleRemoveCartItem(item.artworkId)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} className='mr-2' /> Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        className='d-flex justify-content-center'
+        style={{ marginTop: '34px' }}
+      >
+        {cartItems.map((item) => (
+          <div
+            className='card mx-2'
+            key={item.artworkId}
+            style={{ width: '15rem' }}
+          >
+            <img
+              src={item.image}
+              className={`card-img-top ${styles.cardImage}`}
+              alt={item.title}
+            />
+            <div className='card-body'>
+              <h5 className='card-title'>{item.title}</h5>
+              <p className='card-text'>
+                <FontAwesomeIcon icon={faDollarSign} /> Price: {item.price} USD
+              </p>
+              <button
+                className={styles.removeButton}
+                onClick={() => handleRemoveCartItem(item.artworkId)}
+              >
+                <FontAwesomeIcon icon={faTrash} className='mr-2' /> Remove
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <div className={styles.container}>
-      {selectedArtwork && showDetail ? (
-        <>
-          <div className={styles.leftColumn}>
-            <p>
-              If you have already registered with Henry Art Gallery,{' '}
-              <Link to='/login' className={styles.link}>
-                Log in
-              </Link>
-            </p>
-            <div className={styles.separator}></div>
-            <h3>Your cart</h3>
-            <div className={`${styles.imgContainer}`}>
-              <img src={selectedArtwork.image} alt={selectedArtwork.title} />
-            </div>
-            <p className={styles.boldTitle}>{selectedArtwork.title}</p>
-            <p>{selectedArtwork.authorName}</p>
-            <p>
-              {selectedArtwork.width}x{selectedArtwork.height}
-            </p>
-            <p>{selectedArtwork.date}</p>
-            <div className={styles.separator}></div>
-            <p>
-              <span className={styles.boldText}>PRICE</span>{' '}
-              {selectedArtwork.price} USD
-            </p>
-            <p>
-              <span className={styles.boldText}>SHIPPING COSTS </span> included
-            </p>
-            <p>
-              <span className={styles.boldText}>TOTAL</span>{' '}
-              {selectedArtwork.price} USD
-            </p>
-            <div className={styles.separator}></div>
-            <button
-              className={styles.deleteButton}
-              onClick={removeArtworkFromCart}
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
-          </div>
-          <div className={styles.rightColumn}>
-            <div className={styles.infoBox}>
-              <p>
-                <FontAwesomeIcon icon={faTruck} className={styles.icon} />{' '}
-                Professional delivery between 7 to 10 days
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faGlobe} className={styles.icon} />{' '}
-                International delivery
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faLock} className={styles.icon} /> Secure
-                payment
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faUndo} className={styles.icon} /> Free
-                returns 14 days after delivery
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faCertificate} className={styles.icon} />{' '}
-                Original piece with certificate of authenticity
-              </p>
-            </div>
-            <div className={styles.separator}></div>
-            <div id='your-container-element'></div>
-            <div id='paypal-button-container'></div>{' '}
-            {/* Contenedor para el botón de PayPal */}
-          </div>
-        </>
-      ) : (
-        <div className={styles.emptyCartMessage}>
-          Your cart is empty!
-          <Link to='/' className={styles.buyButton}>
-            Buy now
+    <div>
+      {renderCartItems()}
+      {cartItems.length > 0 && (
+        <div className={styles.container}>
+          <Link to='/' className={styles.buttonShopping}>
+            <FontAwesomeIcon icon={faArrowLeft} className='mr-2' /> Continue
+            Shopping
+          </Link>
+          <Link to='/checkout' className={styles.buttonCheckout}>
+            <FontAwesomeIcon icon={faCheck} className='mr-2' /> Checkout
           </Link>
         </div>
       )}
-      <ToastContainer />
     </div>
   );
 };
 
-export default Checkout;
+export default Cart;

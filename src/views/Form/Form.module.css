@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   max-width: 500px;
-  margin: -5px auto;
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 70px;
   padding: 20px;
   background-color: #f6f6f6;
   border-radius: 5px;
@@ -124,7 +126,15 @@
 }
 
 .icon {
-  font-size: 0.8em; /* Ajusta el tamaño del icono según tus preferencias */
-  margin-left: 0.2rem; /* Ajusta el espacio entre el icono y el texto según tus preferencias */
+  font-size: 0.8em;
+  margin-left: 0.2rem;
   vertical-align: middle;
+}
+
+.fileInfo {
+  color: green;
+  font-size: 1em;
+  flex-basis: 40%;
+  text-align: right;
+  margin-top: 1em;
 }

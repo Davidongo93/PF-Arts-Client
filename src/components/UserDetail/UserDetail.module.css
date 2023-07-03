@@ -1,0 +1,240 @@
+.containerUserDetail {
+  /* los tres primeros es para que el footer no moleste y se mande abajo */
+  width: 100%;
+  min-height: 130vh;
+  overflow: hidden;
+}
+
+.positionPhoto {
+  /* para moverlo con tranquilidad */
+  position: absolute;
+  left: 15rem;
+  top: 10rem;
+}
+
+.photoPerfil {
+  margin-top: 8px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userDetail {
+  width: 560px;
+  height: 200px;
+  bottom: fit-content;
+  display: block;
+  justify-content: center;
+  /* background-color: rgb(82, 40, 248); */
+  margin-top: 34px;
+  margin-left: 440px;
+  margin-bottom: 15px;
+}
+
+.details {
+  text-align: justify;
+  background-color: #f8f8f8;
+}
+
+.username {
+  /* background-color: red; */
+  padding-bottom: 12px;
+}
+
+.username-text {
+  font-weight: 500;
+  font-style: oblique;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.location-text {
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+.iconEmail {
+  color: #3498db;
+  font-size: 16px;
+}
+
+.email-text {
+  margin-right: 25px;
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+.iconLocation {
+  color: #3498db;
+  font-size: 16px;
+}
+
+.iconPhone {
+  color: #3498db;
+  font-size: 16px;
+}
+
+.phone {
+  margin-top: 5px;
+}
+
+.phone-text {
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+.bio {
+  margin-top: 10px;
+}
+
+.bio-text {
+  font-size: 14px;
+  font-variant: small-caps;
+  font-weight: 380;
+}
+
+.socialIcons {
+  position: relative;
+  left: 489px;
+  top: 10px;
+  width: fit-content;
+  /* background-color: black; */
+}
+
+.shareIcon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.shareIcon:hover {
+  transform: scale(1.05);
+}
+
+.BttBack {
+  text-decoration: none;
+  background-color: white;
+  color: rgb(53, 53, 53);
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.BttBack:hover {
+  background-color: rgb(53, 53, 53);
+  color: white;
+}
+.carruselContainer {
+  margin-top: 0rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Estilos para botones Save y Cancel del edit */
+
+.inputName {
+  height: 1.3rem;
+  width: 10rem;
+  font-size: 14px;
+} /* Para editar los inputs de edición */
+
+.inputBio {
+  height: 3rem;
+  width: 35rem;
+  font-size: 14px;
+}
+
+.editBs {
+  margin-left: 15px;
+  display: inline-block;
+}
+
+.updateButtonSave {
+  font-size: 12px;
+  background-color: rgb(146, 194, 146); /*fondo*/
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  color: #ffffff; /*texto*/
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateButtonSave:focus {
+  outline: none;
+}
+
+.updateButtonSave:hover {
+  background-color: rgb(95, 129, 95);
+  color: #ffffff;
+}
+
+.updateButtonCancel {
+  font-size: 12px;
+  background-color: rgb(121, 165, 190);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  margin-left: 5px;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateButtonCancel:focus {
+  outline: none;
+}
+
+.updateButtonCancel:hover {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+.updateIcon {
+  margin-bottom: 6px;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+/* Estilos para la edición y lápiz */
+.all {
+  display: inline-block;
+  width: 230px;
+  margin-top: 95px;
+  margin-left: 70px;
+  margin-right: 15px;
+}
+
+.pen {
+  margin-top: 10px;
+}
+
+.editButton {
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  color: #999999;
+  background-color: transparent;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.editButton:hover {
+  background-color: transparent;
+  color: #c7c7c7;
+}
+
+.editButton:focus {
+  outline: none;
+}
+
+.editIcon {
+  margin-right: 8px;
+}

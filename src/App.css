@@ -1,19 +1,24 @@
 .dark {
-  background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
-  color: #8f8f8f;
+  background: rgb(34, 34, 34);
+  color: #5c5c5c;
 }
 
 .darkModeButton {
+  position: absolute;
+  top: 60px;
+  left: 5px;
+  z-index: 100;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 18px;
   color: #7e7c7c;
   transition: color 0.3s;
+  margin-top: 10px;
 }
 
 .darkModeButton:hover {
-  color: #f2f2f2;
+  color: #cbcbce;
 }
 
 .icon {

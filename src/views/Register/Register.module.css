@@ -1,5 +1,6 @@
 .login-container {
-  height: 100vh;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .login-container .bg-box {
@@ -9,23 +10,22 @@
   text-align: left;
 }
 
-.landing-text{
+.landing-text {
   position: absolute;
-    backdrop-filter: blur(10px);
-      /* Efecto blur */
-      background-color: rgba(213, 209, 209, 0.4);
-      /* Fondo transparente */
-  top:30%;
-  left:4.25%;
+  backdrop-filter: blur(10px);
+  /* Efecto blur */
+  background-color: rgba(213, 209, 209, 0.4);
+  /* Fondo transparente */
+  top: 30%;
+  left: 4.25%;
   width: 570px;
   padding: 20px;
   text-align: center;
   color: white;
-    font-weight: lighter;
-  
+  font-weight: lighter;
 }
 
-.landing-title{
+.landing-title {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
@@ -47,4 +47,3 @@
   flex-basis: 100%;
   text-align: center;
 }
-

@@ -6,7 +6,10 @@ const Footer = () => {
     <footer className={style['footer-container']}>
       <div className={style['footer-content']}>
         <p className={style['footer-text']}>
-          Henry Art Gallery © {new Date().getFullYear()}
+          Henry Art Gallery ©{' '}
+          <span className={style['footer-year']}>
+            {new Date().getFullYear()}{' '}
+          </span>
         </p>
         <div className={style['links-container']}>
           <NavLink to='/advisory' activeclassname={style['active-link']}>

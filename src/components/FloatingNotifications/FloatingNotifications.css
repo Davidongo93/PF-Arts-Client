@@ -1,0 +1,43 @@
+.floating-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+  }
+  
+  .notification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: #878787d6;
+    color: #ffffff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  
+  .progress-bar {
+    height: 4px;
+    background-color: #004b89;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .notification-content {
+    padding: 16px;
+  }
+  
+  /* Estilos adicionales según sea necesario */
+  

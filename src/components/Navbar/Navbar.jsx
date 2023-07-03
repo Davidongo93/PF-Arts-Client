@@ -1,15 +1,32 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { auth } from '../../Firebase/config';
-import { signOut } from 'firebase/auth';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import NavMenu from '../NavMenu/NavMenu';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoggedUser } from '../../redux/actions';
 import './Navbar.style.css';
 
 function Navbar() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loggedUser = useSelector((state) => state.loggedUser);
+
+  const { userName, profilePicture, userId } = loggedUser;
+
+  const storedUser = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (storedUser) {
+      setLoggedIn(true);
+      // Recuperar los datos del usuario almacenados en localStorage
+      const user = JSON.parse(localStorage.getItem('user'));
+      dispatch(setLoggedUser(user));
+    }
+  }, [dispatch, storedUser]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,39 +42,31 @@ function Navbar() {
     };
   }, [location]);
 
-  const handleLogout = () => {
-    signOut(auth).then(() => {
-      localStorage.removeItem('email');
-      setLoggedIn(false);
-    });
+  const handleNavigate = () => {
+    navigate(`/users/detail/${userId}`);
   };
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        localStorage.setItem('email', user.email);
-        setLoggedIn(true);
-      } else {
-        localStorage.removeItem('email');
-        setLoggedIn(false);
-      }
-    });
-
-    return unsubscribe;
-  }, []);
-
+  const onClickHome = () => {
+    navigate('/');
+  };
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <NavMenu />
-      <div className='navbar-title'>Henry Art Gallery</div>
+      <NavMenu userId={userId} />
+      <div className='navbar-title' onClick={onClickHome}>
+        <span className='logo'>aA</span>
+        <span className='space'> </span>
+      </div>
+      <span className='sub'>BETA</span>
       <div className='navlinks-container'>
         {loggedIn ? (
-          <NavLink className='navlinks' onClick={handleLogout}>
-            Log out
-          </NavLink>
+          <div className='profile-menu' onClick={handleNavigate}>
+            <p className='user-welcome'>{userName}</p>
+            <div className='profile-menu-photo-container'>
+              <img src={profilePicture} alt='' className='profile-menu-photo' />
+            </div>
+          </div>
         ) : (
           <NavLink to='/login' className='navlinks'>
-            Log in / Sign up
+            Log in
           </NavLink>
         )}
         <NavLink to='/cart' className='navlinks'>

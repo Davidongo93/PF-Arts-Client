@@ -1,3 +1,25 @@
+@font-face {
+  font-family: 'alien';
+  src: url('../../assets/fonts/The-Orb-Report.ttf') format('truetype');
+  /* Ruta relativa a tu archivo CSS */
+}
+
+.logo {
+  font-family: 'alien';
+  font-size: 35px;
+  color: rgb(59, 59, 59);
+}
+
+.sub {
+  font-family: calibri;
+  font-size: 10px;
+  color: rgb(59, 59, 59);
+}
+
+.space {
+  margin-right: 5px;
+}
+
 .navbar {
   top: 0;
   left: 0;
@@ -11,6 +33,7 @@
   transition: background-color 0.3s ease;
   /* Transición de color de fondo */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 60px;
 }
 
 .navbar.scrolled {
@@ -38,7 +61,6 @@
   /* Ajusta los valores de sombra según tus necesidades */
 }
 
-
 .navbar-menu,
 .navbar-title,
 .navlinks-container,
@@ -46,15 +68,13 @@
   display: flex;
   align-items: center;
   padding-left: 0.7rem;
-
 }
 
 .navbar-title {
   font-size: 1.3rem;
   font-weight: 400;
-  font-style: oblique;
   color: rgb(53, 53, 53);
-  /* Color de texto */
+  cursor: pointer;
   text-shadow: black 0.4px 0.4px;
 }
 
@@ -66,7 +86,6 @@
   text-decoration: none;
   color: rgb(53, 53, 53);
   /* Color de texto */
-  padding: 10px;
   font-size: 20px;
   transition: color 0.3s ease;
   /* Transición de color de texto */
@@ -119,6 +138,37 @@
 }
 
 .cartLogo {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.profile-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-welcome {
+  margin: 10px 10px;
+  font-style: oblique;
+  font-weight: lighter;
+}
+
+.profile-menu-photo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 10px 0 0;
+}
+
+.profile-menu-photo-container .profile-menu-photo {
+
+  height: 40px;
+  margin: 0;
 }

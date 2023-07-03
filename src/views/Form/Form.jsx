@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import { postArts } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import {
-  FaUser,
+  FaPen,
   FaArrowsAltH,
   FaArrowsAltV,
   FaDollarSign,
+  FaCalendar,
+  FaUser,
+  FaImage,
+  FaTags,
 } from 'react-icons/fa';
 import styles from './Form.module.css';
 
@@ -16,12 +21,13 @@ export default function Form() {
     title: '',
     authorName: '',
     image: '',
-    date: '',
     height: '',
     width: '',
+    date: '',
     price: '',
-    userId: '',
+    category: '',
   });
+
   const [submitted, setSubmitted] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -31,7 +37,7 @@ export default function Form() {
     if (!input.title) {
       errors.title = 'Need a title';
     }
-
+    //falta poner input de Image file o url
     if (!input.authorName) {
       errors.authorName = 'Need an author name';
     }
@@ -47,52 +53,57 @@ export default function Form() {
     if (!input.price) {
       errors.price = 'Need a price';
     }
-    if (!input.userId) {
-      errors.userId = 'Need a userId';
+    if (!input.category) {
+      errors.category = 'Need a category';
     }
     return errors;
   }
 
   function handleChange(e) {
-    console.log('handleChange called');
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === 'title') {
+      const title = e.target.value;
+      const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
+      setInput({
+        ...input,
+        title: capitalizedTitle,
+      });
+    } else {
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      });
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('handleSubmit called');
-
     const errors = validate(input);
     setErrors(errors);
     setSubmitted(true);
 
-    if (
-      Object.keys(errors).length === 0 &&
-      input.title &&
-      input.authorName &&
-      input.date &&
-      input.width &&
-      input.height &&
-      input.price
-    ) {
-      const updatedInput = {
-        ...input,
-      };
-      dispatch(postArts(updatedInput));
-      console.log('dispatch called');
+    if (Object.keys(errors).length === 0) {
+      const formData = new FormData();
+
+      formData.append('title', input.title);
+      formData.append('authorName', input.authorName);
+      formData.append('image', input.image);
+      formData.append('height', input.height);
+      formData.append('width', input.width);
+      formData.append('date', input.date);
+      formData.append('price', input.price);
+      formData.append('category', input.category);
+
+      dispatch(postArts(formData));
       setShowConfirmation(true);
       setInput({
         title: '',
-        image: '',
         authorName: '',
-        date: '',
-        width: '',
+        image: '',
         height: '',
+        width: '',
+        date: '',
         price: '',
-        userId: '',
+        category: '',
       });
       setSubmitted(false);
       setErrors({});
@@ -103,20 +114,21 @@ export default function Form() {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    // lógica para procesar el archivo seleccionado
-    console.log('Imagen seleccionada:', file);
+    setInput({ ...input, image: file });
   };
 
   return (
     <div>
       <div className={styles.container}>
         <h1 className={styles.heading}>Create a new art!</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType='multipart/form-data'>
           {showAlert && Object.keys(errors).length > 0 && (
             <p className={styles.error}>Please fill out all required fields.</p>
           )}
           <div className={styles.formGroup}>
-            <label className={styles.label}>Title: </label>
+            <label className={styles.label}>
+              <FaPen className={`${styles.icon} icon`} /> Title:{' '}
+            </label>
             <input
               type='text'
               value={input.title}
@@ -129,22 +141,33 @@ export default function Form() {
           </div>
           <div className={styles.separator}></div>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Image:</label>
-            <label className={styles.uploadButton}>
-              <input
-                type='file'
-                value={input.image}
-                name='image'
-                accept='image/*'
-                onChange={handleImageChange}
-              />
-              Upload Image
+            <label className={styles.label}>
+              <FaUser className={`${styles.icon} icon`} /> Author:{' '}
             </label>
-            {input.image && (
-              <p className={styles.fileInfo}>
-                Selected file {input.image.name}
-              </p>
+            <input
+              type='text'
+              value={input.authorName}
+              name='authorName'
+              onChange={handleChange}
+              className={styles.input}
+              placeholder='Enter an author name'
+            />
+            {submitted && errors.authorName && (
+              <p className={styles.error}>{errors.authorName}</p>
             )}
+          </div>
+          <div className={styles.separator}></div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>
+              <FaImage className={`${styles.icon} icon`} /> Image:
+            </label>
+            <input
+              type='file'
+              name='image'
+              accept='image/*'
+              onChange={handleImageChange}
+            />
+            {input.image && <p className={styles.fileInfo}>Selected file</p>}
           </div>
           <div className={styles.formGroup}>
             <label className={styles.labelImageURL}> or image URL: </label>
@@ -159,24 +182,49 @@ export default function Form() {
           </div>
           <div className={styles.separator}></div>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Author: </label>
+            <label className={styles.label}>
+              <FaArrowsAltV className={`${styles.icon} icon`} /> Height:{' '}
+            </label>
             <input
-              type='text'
-              value={input.authorName}
-              name='authorName'
+              type='number'
+              value={input.height}
+              min='0'
+              name='height'
               onChange={handleChange}
               className={styles.input}
-              placeholder='Enter an author name'
+              placeholder='Enter a height'
             />
-            {submitted && errors.authorName && (
-              <p className={styles.error}>{errors.authorName}</p>
+            {submitted && errors.height && (
+              <p className={styles.error}>{errors.height}</p>
             )}
           </div>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Year: </label>
+            <label className={styles.label}>
+              {' '}
+              <FaArrowsAltH className={`${styles.icon} icon`} /> Width:{' '}
+            </label>
+            <input
+              type='number'
+              value={input.width}
+              min='0'
+              name='width'
+              onChange={handleChange}
+              className={styles.input}
+              placeholder='Enter a width'
+            />
+            {submitted && errors.width && (
+              <p className={styles.error}>{errors.width}</p>
+            )}
+          </div>
+          <div className={styles.separator}></div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>
+              <FaCalendar className={`${styles.icon} icon`} /> Year:{' '}
+            </label>
             <input
               type='number'
               value={input.date}
+              min='0'
               name='date'
               onChange={handleChange}
               className={styles.input}
@@ -190,45 +238,12 @@ export default function Form() {
           <div className={styles.formGroup}>
             <label className={styles.label}>
               {' '}
-              <FaArrowsAltH className={`${styles.icon} icon`} /> Width:{' '}
-            </label>
-            <input
-              type='number'
-              value={input.width}
-              name='width'
-              onChange={handleChange}
-              className={styles.input}
-              placeholder='Enter a width'
-            />
-            {submitted && errors.width && (
-              <p className={styles.error}>{errors.width}</p>
-            )}
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>
-              <FaArrowsAltV className={`${styles.icon} icon`} /> Height:{' '}
-            </label>
-            <input
-              type='number'
-              value={input.height}
-              name='height'
-              onChange={handleChange}
-              className={styles.input}
-              placeholder='Enter a height'
-            />
-            {submitted && errors.height && (
-              <p className={styles.error}>{errors.height}</p>
-            )}
-          </div>
-          <div className={styles.separator}></div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>
-              {' '}
               <FaDollarSign className={`${styles.icon} icon`} /> Price:{' '}
             </label>
             <input
               type='number'
               value={input.price}
+              min='1'
               name='price'
               onChange={handleChange}
               className={styles.input}
@@ -241,18 +256,31 @@ export default function Form() {
           <div className={styles.separator}></div>
           <div className={styles.formGroup}>
             <label className={styles.label}>
-              <FaUser className={`${styles.icon} icon`} /> userId:{' '}
+              <FaTags className={`${styles.icon} icon`} /> Category:
             </label>
-            <input
-              type='text'
-              value={input.userId}
-              name='userId'
+            <select
+              value={input.category}
+              name='category'
               onChange={handleChange}
               className={styles.input}
-              placeholder='Enter a userId'
-            />
-            {submitted && errors.userId && (
-              <p className={styles.error}>{errors.userId}</p>
+              placeholder='Select a category'
+            >
+              <option value=''>Select a category</option>
+              {[
+                'Painting',
+                'Illustration',
+                '3D',
+                'Collage',
+                'Pixel Art',
+                'Photography',
+              ].map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            {submitted && errors.category && (
+              <p className={styles.error}>{errors.category}</p>
             )}
           </div>
           <button type='submit' className={styles.button}>

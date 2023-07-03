@@ -1,12 +1,13 @@
 .login-container {
-  margin-bottom: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .login-container .bg-box {
   background-image: url('https://cdn.pixabay.com/photo/2016/12/15/20/21/texture-1909992_1280.jpg');
   background-position: bottom;
 }
-.error{
+.error {
   font-size: 10px;
   color: red;
   margin-left: 10em;

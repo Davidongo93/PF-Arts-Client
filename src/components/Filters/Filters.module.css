@@ -15,24 +15,54 @@
 
 .container label {
   margin-right: 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 
-.container input[type='date'] {
-  padding: 5px;
+.container select {
+  background-color: #f0efef;
+  margin: 5px;
+  height: 35px;
+  width: 120px;
+  border: 1px solid #ccc;
 }
 
-.span {
-  font-style: oblique;
+.container select:hover {
+  background-color: #dedede;
+}
+
+.container option {
+  background-color: #f0efef;
+}
+
+.container input {
+  width: 90px;
+  height: 35px;
+  background-color: #f0efef;
+  border: 1px solid #ccc;
+}
+
+.container input:hover {
+  background-color: #dedede;
+}
+
+.container input[type='number']::-webkit-inner-spin-button,
+.container input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .container button {
   padding: 5px 10px;
-  background-color: #f8f8f8;
+  background-color: #f0efef;
   border: 1px solid #ccc;
-  border-radius: 4px;
   cursor: pointer;
+  height: 35px;
+  width: 120px;
+  text-align: center;
 }
 
 .container button:hover {
-  background-color: #eaeaea;
+  background-color: #dedede;
 }

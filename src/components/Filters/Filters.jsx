@@ -10,9 +10,11 @@ const Filters = ({ setCurrentPage }) => {
   const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
-    century: '',
+    category: '',
+    orderType: '',
     order: '',
-    created: '',
+    minPrice: '',
+    maxPrice: '',
   });
 
   const handleFilterChange = (e) => {
@@ -25,8 +27,8 @@ const Filters = ({ setCurrentPage }) => {
 
   const handleFilterSubmit = (event) => {
     event.preventDefault();
-    const { century, order, created } = filters;
-    dispatch(getArtsByFilters(century, order, created));
+    const { minPrice, maxPrice, order, category, orderType } = filters;
+    dispatch(getArtsByFilters(minPrice, maxPrice, order, category, orderType));
     setCurrentPage(1);
     navigate(`/?page=1`);
   };
@@ -35,33 +37,44 @@ const Filters = ({ setCurrentPage }) => {
     <div className={styles.container}>
       <form onSubmit={handleFilterSubmit}>
         <label>
-          <span className={styles.span}>By Century </span>
-          <select name='century' value={filters.century} onChange={handleFilterChange}>
+          <select name='category' value={filters.category} onChange={handleFilterChange}>
+            <option value='' disabled>
+              Category
+            </option>
             <option value=''>All</option>
-            <option value='15'>15th</option>
-            <option value='16'>16th</option>
-            <option value='17'>17th</option>
-            <option value='18'>18th</option>
-            <option value='19'>19th</option>
-            <option value='20'>20th</option>
-            <option value='21'>21st</option>
+            <option value='Painting'>Painting</option>
+            <option value='Illustration'>Illustration</option>
+            <option value='3D'>3D</option>
+            <option value='Collage'>Collage</option>
+            <option value='Pixel Art'>Pixel Art</option>
+            <option value='Photography'>Photography</option>
           </select>
         </label>
         <label>
-          <span className={styles.span}>By Price </span>
-          <select name='order' value={filters.order} onChange={handleFilterChange}>
-            <option value=''>All</option>
-            <option value='ASC'>Lowest</option>
-            <option value='DESC'>Highest</option>
+          <select name='orderType' value={filters.orderType} onChange={handleFilterChange}>
+            <option value=''>Order By</option>
+            <option value='title'>Title</option>
+            <option value='price'>Price</option>
           </select>
-        </label>
-        <label>
-          <span className={styles.span}>By Source </span>
-          <select name='created' value={filters.created} onChange={handleFilterChange}>
-            <option value=''>All</option>
-            <option value='true'>Users Art</option>
-            <option value='false'>Historical Art</option>
-          </select>
+          {filters.orderType === 'title' && (
+            <select name='order' value={filters.order} onChange={handleFilterChange}>
+              <option value=''>Random</option>
+              <option value='ASC'>A-Z</option>
+              <option value='DESC'>Z-A</option>
+            </select>
+          )}
+          {filters.orderType === 'price' && (
+            <>
+              <select name='order' value={filters.order} onChange={handleFilterChange}>
+                <option value=''>Random</option>
+                <option value='ASC'>Low to High</option>
+                <option value='DESC'>High to Low</option>
+              </select>
+              <input type='number' name='minPrice' value={filters.minPrice} onChange={handleFilterChange} placeholder='Min.' />
+              <p>__</p>
+              <input type='number' name='maxPrice' value={filters.maxPrice} onChange={handleFilterChange} placeholder='Max.' />
+            </>
+          )}
         </label>
         <button type='submit'>Apply Filters</button>
       </form>
