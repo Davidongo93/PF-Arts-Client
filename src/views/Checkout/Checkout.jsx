@@ -14,7 +14,7 @@ import { clearCart, postTransaction } from '../../redux/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadScript } from '@paypal/paypal-js';
-import styles from './checkout.module.css';
+import styles from './Checkout.module.css';
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart);
