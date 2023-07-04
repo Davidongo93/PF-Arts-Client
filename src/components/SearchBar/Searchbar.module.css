@@ -9,6 +9,12 @@
   height: 30px;
 }
 
+.NavSearch {
+  border-radius: 20px 0 0 20px;
+  border: 1px solid rgb(146, 146, 146);
+  height: 30px;
+}
+
 .NavSearch::placeholder {
   font-size: 12px;
   font-style: oblique;
@@ -16,6 +22,11 @@
 
 .NavSearch:focus {
   outline: none;
+}
+
+.BottonSearch {
+  border-radius: 0 20px 20px 0;
+  border: 1px solid rgb(146, 146, 146);
 }
 
 .BottonSearch:hover {

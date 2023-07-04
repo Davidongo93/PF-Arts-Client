@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
 import { getAllArts } from '../../redux/actions';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
@@ -13,7 +13,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(getAllArts());
-  }, []);
+  }, [dispatch]);
 
   const handleArtworkClick = (artworkId) => {
     navigate(`/detail/${artworkId}`);
@@ -53,10 +53,7 @@ const Products = () => {
               <h1 className='h2'>Products</h1>
               <div className='btn-toolbar mb-2 mb-md-0'>
                 <div className='btn-group mr-2'>
-                  <button
-                    className='btn btn-sm btn-outline-secondary'
-                    onClick={handleShare}
-                  >
+                  <button className='btn btn-sm btn-outline-secondary' onClick={handleShare}>
                     <FaShare /> Share
                   </button>
                   <button className='btn btn-sm btn-outline-secondary'>
@@ -75,7 +72,7 @@ const Products = () => {
                 <thead>
                   <tr>
                     <th>Title</th>
-                    <th>Author</th>
+                    <th>User</th>
                     <th>Date</th>
                     <th>Price</th>
                     <th>Status</th>
@@ -86,22 +83,16 @@ const Products = () => {
                     currentArts.map((art) => (
                       <tr key={art.artworkId}>
                         <td>{art.title}</td>
-                        <td>{art.authorName}</td>
+                        <td>{art.user.userName}</td>
                         <td>{art.date}</td>
                         <td>{art.price}</td>
                         <td>
                           {art.sold ? (
-                            <button
-                              className='btn btn-sm btn-danger'
-                              onClick={() => handleArtworkClick(art.artworkId)}
-                            >
+                            <button className='btn btn-sm btn-danger' onClick={() => handleArtworkClick(art.artworkId)}>
                               Sold
                             </button>
                           ) : (
-                            <button
-                              className='btn btn-sm btn-success'
-                              onClick={() => handleArtworkClick(art.artworkId)}
-                            >
+                            <button className='btn btn-sm btn-success' onClick={() => handleArtworkClick(art.artworkId)}>
                               Published
                             </button>
                           )}

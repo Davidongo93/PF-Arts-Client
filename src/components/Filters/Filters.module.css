@@ -21,11 +21,12 @@
 }
 
 .container select {
-  background-color: #f0efef;
+  background-color: #f8f8f8;
   margin: 5px;
   height: 35px;
   width: 120px;
   border: 1px solid #ccc;
+  border-radius: 20px;
 }
 
 .container select:hover {
@@ -33,7 +34,11 @@
 }
 
 .container option {
-  background-color: #f0efef;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 14px;
+  padding: 8px;
+  width: 300px;
 }
 
 .container input {
@@ -41,6 +46,7 @@
   height: 35px;
   background-color: #f0efef;
   border: 1px solid #ccc;
+  border-radius: 20px;
 }
 
 .container input:hover {
@@ -55,12 +61,13 @@
 
 .container button {
   padding: 5px 10px;
-  background-color: #f0efef;
+  background-color: #f8f8f8;
   border: 1px solid #ccc;
   cursor: pointer;
   height: 35px;
   width: 120px;
   text-align: center;
+  border-radius: 20px;
 }
 
 .container button:hover {

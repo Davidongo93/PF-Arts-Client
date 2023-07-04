@@ -4,7 +4,7 @@
   justify-content: center;
   padding: 25px;
   margin: 50px 50px 150px 70px;
-  margin-top: 25px;
+  margin-top: 100px;
   margin-bottom: 25px;
 }
 
@@ -39,9 +39,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  box-shadow: -8px 13px 15px 28px rgba(0, 0, 0, 0.35);
-  -webkit-box-shadow: -8px 13px 15px 28px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: -8px 13px 15px 28px rgba(0, 0, 0, 0.35);
+  box-shadow: -13px 29px 34px 4px rgba(0, 0, 0, 0.56);
+  -webkit-box-shadow: -13px 29px 34px 4px rgba(0, 0, 0, 0.56);
+  -moz-box-shadow: -13px 29px 34px 4px rgba(0, 0, 0, 0.56);
 }
 
 .frame img {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers } from '../../redux/actions';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
 
@@ -48,10 +48,7 @@ const Customers = () => {
               <h1 className='h2'>Customers</h1>
               <div className='btn-toolbar mb-2 mb-md-0'>
                 <div className='btn-group mr-2'>
-                  <button
-                    className='btn btn-sm btn-outline-secondary'
-                    onClick={handleShare}
-                  >
+                  <button className='btn btn-sm btn-outline-secondary' onClick={handleShare}>
                     <FaShare /> Share
                   </button>
                   <button className='btn btn-sm btn-outline-secondary'>
@@ -73,7 +70,7 @@ const Customers = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Country</th>
+                    <th>Location</th>
                     <th>Profile</th>
                   </tr>
                 </thead>
@@ -85,12 +82,7 @@ const Customers = () => {
                       <td>{user.phoneNumber}</td>
                       <td>{user.location}</td>
                       <td>
-                        <button
-                          className='btn btn-sm btn-primary'
-                          onClick={() =>
-                            navigate(`/users/detail/${user.userId}`)
-                          }
-                        >
+                        <button className='btn btn-sm btn-primary' onClick={() => navigate(`/users/detail/${user.userId}`)}>
                           View Profile
                         </button>
                       </td>

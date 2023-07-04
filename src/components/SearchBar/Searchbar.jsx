@@ -28,7 +28,7 @@ const Searchbar = ({ setCurrentPage }) => {
   return (
     <div className={style['searchbar-container']}>
       <form onSubmit={handleSubmit}>
-        <input className={style['NavSearch']} placeholder='Search by title/author...' type='search' value={searchQuery} onChange={handleChange} />
+        <input className={style['NavSearch']} placeholder='Search by title/artist...' type='search' value={searchQuery} onChange={handleChange} />
         <button className={style['BottonSearch']} type='submit'>
           <MdSearch className={style['icon']} />
         </button>

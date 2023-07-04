@@ -6,7 +6,7 @@ import { addFavorite, clearDetail, deleteFavorite, getDetail, deleteArt, getAllA
 import { FaShoppingCart, FaTwitter, FaFacebook, FaInstagram, FaPencilAlt } from 'react-icons/fa';
 import Loader from '../../components/Loader/Loader';
 import ReviewSection from '../ReviewSection/ReviewSection';
-import frame from '../../assets/img/marco.png';
+import frame from '../../assets/img/marco4.png';
 import styles from './Detail.module.css';
 
 const Detail = () => {
@@ -176,111 +176,113 @@ const Detail = () => {
   // ------------------------------------------------------------------------------
 
   return (
-    <div className={styles.detailContainer}>
-      <div className={styles.imgContainer}>
-        <div className={styles.frameContainer}>
-          <div className={styles.frame}>
-            <img src={frame} alt='' />
-          </div>
-        </div>
-        <div className={styles.imageWrapper}>
-          <img src={detail.image} alt={detail.title} />
-        </div>
-      </div>
-      <div className={styles.all}>
-        <div className={styles.propsContainer}>
-          <h3>{detail.title}</h3>
-          <hr className={styles.hr} />
-          <p>
-            <span className={styles.prop}>Artist:</span> {isEditing ? <input type='text' value={artist} onChange={(e) => setArtist(e.target.value)} /> : <span>{detail.authorName}</span>}
-          </p>
-          <p>
-            <span className={styles.prop}>Year:</span> {isEditing ? <input type='text' value={year} onChange={(e) => setYear(e.target.value)} /> : <span>{detail.date}</span>}
-          </p>
-          <p>
-            <span className={styles.prop}>Dimensions:</span>{' '}
-            {isEditing ? (
-              <input type='text' value={dimensions} onChange={(e) => setDimensions(e.target.value)} />
-            ) : (
-              <span>
-                {detail.height} x {detail.width}
-              </span>
-            )}
-          </p>
-          <p>
-            <span className={styles.prop}>Price:</span> {isEditing ? <input type='text' value={price} onChange={(e) => setPrice(e.target.value)} /> : <span>{detail.price} USD</span>}
-          </p>
-          {detail.user && detail.user.userName.length > 0 && (
-            <div>
-              <p>
-                <span className={styles.prop}>Published By:</span>{' '}
-                <Link to={`/users/detail/${detail.userId}`} className={styles.user}>
-                  {detail.user.userName}
-                </Link>
-              </p>
+    <>
+      <div className={styles.detailContainer}>
+        <div className={styles.imgContainer}>
+          <div className={styles.frameContainer}>
+            <div className={styles.frame}>
+              <img src={frame} alt='' />
             </div>
-          )}
-        </div>
-        <div className={styles.editC}>
-          {isEditing ? (
-            <>
-              <button className={styles.updateButtonSave} onClick={handleSave}>
-                Save
-              </button>
-              <button className={styles.updateButtonCancel} onClick={handleCancel}>
-                Cancel
-              </button>
-            </>
-          ) : (
-            enabledUserEdit && (
-              <button className={`${styles.updateButtonSave} ${styles.updateButtonCancel} ${styles.editButton}`} onClick={handleUpdate}>
-                <FaPencilAlt className={styles.updateIcon} />
-              </button>
-            )
-          )}
-          {isEditing && detail.user && detail.user.userName.length > 0 && (
-            <button
-              className={styles.deleteButton}
-              onClick={() => {
-                handleDelete();
-                homeButton();
-              }}
-            >
-              Delete
-            </button>
-          )}
-        </div>
-      </div>
-      <div className={styles.actionsContainer}>
-        <button className={styles['likeStyle']} onClick={handleFavorite}>
-          {isFav ? <span className={styles['red']}>♥️</span> : <span className={styles['white']}>♥️</span>}
-        </button>
-        <button className={styles.cartButton} onClick={handleBuy}>
-          <FaShoppingCart className={styles.cartIcon} />
-          Add to Cart
-        </button>
-        {showNotification && (
-          <Alert variant='danger' onClose={() => setShowNotification(false)} dismissible>
-            You cannot add more than 4 items to the cart.
-          </Alert>
-        )}
-
-        <div>
-          <div className={styles.shareButtons}>
-            <button className={styles.shareButton} onClick={handleTwitterShare}>
-              <FaTwitter className={styles.shareIcon} />
-            </button>
-            <button className={styles.shareButton} onClick={handleFacebookShare}>
-              <FaFacebook className={styles.shareIcon} />
-            </button>
-            <button className={styles.shareButton} onClick={handleInstagramShare}>
-              <FaInstagram className={styles.shareIcon} />
-            </button>
+          </div>
+          <div className={styles.imageWrapper}>
+            <img src={detail.image} alt={detail.title} />
           </div>
         </div>
-        <ReviewSection artworkId={id} />
+        <div className={styles.all}>
+          <div className={styles.propsContainer}>
+            <h3>{detail.title}</h3>
+            <hr className={styles.hr} />
+            <p>
+              <span className={styles.prop}>Artist:</span> {isEditing ? <input type='text' value={artist} onChange={(e) => setArtist(e.target.value)} /> : <span>{detail.authorName}</span>}
+            </p>
+            <p>
+              <span className={styles.prop}>Year:</span> {isEditing ? <input type='text' value={year} onChange={(e) => setYear(e.target.value)} /> : <span>{detail.date}</span>}
+            </p>
+            <p>
+              <span className={styles.prop}>Dimensions:</span>{' '}
+              {isEditing ? (
+                <input type='text' value={dimensions} onChange={(e) => setDimensions(e.target.value)} />
+              ) : (
+                <span>
+                  {detail.height} x {detail.width}
+                </span>
+              )}
+            </p>
+            <p>
+              <span className={styles.prop}>Price:</span> {isEditing ? <input type='text' value={price} onChange={(e) => setPrice(e.target.value)} /> : <span>{detail.price} USD</span>}
+            </p>
+            {detail.user && detail.user.userName.length > 0 && (
+              <div>
+                <p>
+                  <span className={styles.prop}>Published By:</span>{' '}
+                  <Link to={`/users/detail/${detail.userId}`} className={styles.user}>
+                    {detail.user.userName}
+                  </Link>
+                </p>
+              </div>
+            )}
+          </div>
+          <div className={styles.editC}>
+            {isEditing ? (
+              <>
+                <button className={styles.updateButtonSave} onClick={handleSave}>
+                  Save
+                </button>
+                <button className={styles.updateButtonCancel} onClick={handleCancel}>
+                  Cancel
+                </button>
+              </>
+            ) : (
+              enabledUserEdit && (
+                <button className={`${styles.updateButtonSave} ${styles.updateButtonCancel} ${styles.editButton}`} onClick={handleUpdate}>
+                  <FaPencilAlt className={styles.updateIcon} />
+                </button>
+              )
+            )}
+            {isEditing && detail.user && detail.user.userName.length > 0 && (
+              <button
+                className={styles.deleteButton}
+                onClick={() => {
+                  handleDelete();
+                  homeButton();
+                }}
+              >
+                Delete
+              </button>
+            )}
+          </div>
+        </div>
+        <div className={styles.actionsContainer}>
+          <button className={styles['likeStyle']} onClick={handleFavorite}>
+            {isFav ? <span className={styles['red']}>♥️</span> : <span className={styles['white']}>♥️</span>}
+          </button>
+          <button className={styles.cartButton} onClick={handleBuy}>
+            <FaShoppingCart className={styles.cartIcon} />
+            Add to Cart
+          </button>
+          {showNotification && (
+            <Alert variant='danger' onClose={() => setShowNotification(false)} dismissible>
+              You cannot add more than 4 items to the cart.
+            </Alert>
+          )}
+
+          <div>
+            <div className={styles.shareButtons}>
+              <button className={styles.shareButton} onClick={handleTwitterShare}>
+                <FaTwitter className={styles.shareIcon} />
+              </button>
+              <button className={styles.shareButton} onClick={handleFacebookShare}>
+                <FaFacebook className={styles.shareIcon} />
+              </button>
+              <button className={styles.shareButton} onClick={handleInstagramShare}>
+                <FaInstagram className={styles.shareIcon} />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      <ReviewSection artworkId={id} />
+    </>
   );
 };
 
