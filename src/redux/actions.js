@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://pf-arts-api-production.up.railway.app/';
+const URL = 'https://pf-arts-api-production.up.railway.app';
 //const URL = 'http://localhost:3001';
 
 // -------- ARTS ---------
