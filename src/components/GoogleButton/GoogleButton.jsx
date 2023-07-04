@@ -34,7 +34,7 @@ const GoogleButton = () => {
       if (userExists) {
         try {
           const response = await axios.post(
-            'http://localhost:3001/users/login',
+            '/login',
             {
               username: userExists.userName,
               password: userExists.password,
@@ -86,7 +86,7 @@ const GoogleButton = () => {
         dispatch(postUsers(newUser)).then(async () => {
           try {
             const response = await axios.post(
-              'http://localhost:3001/users/login',
+              '/login',
               {
                 username: newUser.userName,
                 password: newUser.password,
