@@ -84,23 +84,25 @@ const Products = () => {
                 <tbody>
                   {currentArts && currentArts.length > 0 ? (
                     currentArts.map((art) => (
-                      <tr
-                        key={art.artworkId}
-                        onClick={() => handleArtworkClick(art.artworkId)}
-                      >
+                      <tr key={art.artworkId}>
                         <td>{art.title}</td>
                         <td>{art.authorName}</td>
                         <td>{art.date}</td>
                         <td>{art.price}</td>
                         <td>
                           {art.sold ? (
-                            <button className='btn btn-sm btn-danger'>
+                            <button
+                              className='btn btn-sm btn-danger'
+                              onClick={() => handleArtworkClick(art.artworkId)}
+                            >
                               Sold
                             </button>
                           ) : (
-                            <button className='btn btn-sm btn-success'>
+                            <button
+                              className='btn btn-sm btn-success'
+                              onClick={() => handleArtworkClick(art.artworkId)}
+                            >
                               Published
-                              {/* Available (podemos poner esto si manejamos stock) */}
                             </button>
                           )}
                         </td>

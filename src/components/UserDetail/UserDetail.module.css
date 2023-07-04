@@ -94,6 +94,66 @@
   font-weight: 380;
 }
 
+.inputSocial {
+  position: relative;
+  margin-right: 25px;
+  left: -490px; /* Ajusta esta posición según tus necesidades */
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.updateSocialButtonSave {
+  font-size: 12px;
+  position: relative;
+  margin-right: 25px;
+  left: -490px; /* Ajusta esta posición según tus necesidades */
+  background-color: rgb(146, 194, 146); /*fondo*/
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  color: #ffffff; /*texto*/
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateSocialButtonSave:focus {
+  outline: none;
+}
+
+.updateSocialButtonSave:hover {
+  background-color: rgb(95, 129, 95);
+  color: #ffffff;
+}
+
+.updateSocialButtonCancel {
+  font-size: 12px;
+  position: absolute;
+  margin-right: 25px;
+  left: 32px; /* Ajusta esta posición según tus necesidades */
+  background-color: rgb(121, 165, 190);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  color: #ffffff; /*texto*/
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateSocialButtonCancel:focus {
+  outline: none;
+}
+
+.updateSocialButtonCancel:hover {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
 .socialIcons {
   position: relative;
   left: 489px;
@@ -199,8 +259,8 @@
 
 .updateIcon {
   margin-bottom: 6px;
-  margin-left: 10px;
-  font-size: 12px;
+  margin-left: 5px;
+  font-size: 14px;
 }
 
 /* Estilos para la edición y lápiz */

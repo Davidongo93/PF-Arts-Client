@@ -73,7 +73,7 @@ const Customers = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Century</th>
+                    <th>Country</th>
                     <th>Profile</th>
                   </tr>
                 </thead>
