@@ -42,7 +42,7 @@ function Card({ art, imageSize, containerSize, onDelete }) {
     if (userId) {
       dispatch(getFavorites(userId))
         .then((res) => {
-          console.log('dispatch getfavorites');
+          console.log('dispatch getfavorites',userId);
           if (res.data && res.data.userFav) {
             const userFavString = JSON.stringify(res.data.userFav);
             localStorage.setItem('Favorites', userFavString);
@@ -55,7 +55,7 @@ function Card({ art, imageSize, containerSize, onDelete }) {
           console.error('Error al obtener favoritos:', error);
         });
     }
-  }, [userId]);
+  }, [dispatch]);
 
   return (
     <div className={styles['cardContainer']} style={{ width: containerSize, height: '350px' }}>
