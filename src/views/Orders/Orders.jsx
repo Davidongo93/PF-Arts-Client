@@ -4,8 +4,32 @@ import { Table } from 'react-bootstrap';
 // import { postTransaction } from '../../redux/actions'; //Acá capaz sería mejor llamar a ruta GET
 import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
+import { getTransaction } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import style from './Orders.module.css';
 
 const Orders = () => {
+  const dispatch = useDispatch();
+  const transactions = useSelector((state) => state.allTrans);
+  const [paypal, setPaypal] = useState('');
+
+  useEffect(() => {
+    dispatch(getTransaction());
+  }, [dispatch]);
+
+  const handleChange = (event) => {
+    setPaypal(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!paypal) {
+      dispatch(getTransaction());
+    } else {
+      dispatch(getTransaction(paypal));
+    }
+  };
   const handleShare = () => {
     if (navigator.share) {
       navigator
@@ -25,8 +49,13 @@ const Orders = () => {
     }
   };
 
+  let summary = 0;
+  transactions.map((transaction) => {
+    summary = summary + parseInt(transaction.artwork_value);
+  });
+
   return (
-    <div>
+    <div className={style.allContainer}>
       <div className='container-fluid'>
         <div className='row'>
           <nav className='col-md-2 d-none d-md-block bg-light sidebar'>
@@ -56,26 +85,65 @@ const Orders = () => {
                 </button>
               </div>
             </div>
+            <form onSubmit={handleSubmit}>
+              <input
+                className={style.search}
+                placeholder='Search by Paypal ID...'
+                type='search'
+                onChange={handleChange}
+              />
+              <button className={style.buttonSearch} type='submit'>
+                Search
+              </button>
+            </form>
 
+            <p className={style.totalSales}>
+              {' '}
+              <span style={{ fontWeight: 'bold', fontStyle: 'oblique' }}>
+                Total Sales:
+              </span>{' '}
+              {summary.toLocaleString()} USD
+            </p>
             <div>
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>Transaction ID</th>
-                    <th>Customer Name</th>
-                    <th>Artwork</th>
+                    <th>Paypal ID</th>
+                    <th>Title</th>
+                    <th>User</th>
+                    <th>Value</th>
+                    <th>Buyer</th>
+                    <th>Seller</th>
+                    <th>Status</th>
+                    <th>Date</th>
+
                     {/* Agregar más encabezados de columna según necesidades */}
                   </tr>
                 </thead>
-                {/* <tbody>
-                  {transactions.map((transaction) => (
-                    <tr key={transaction.id}>
-                      <td>{transaction.id}</td>
-                      <td>{transaction.customerName}</td>
-                      <td>{transaction.artworkIdsString}</td>
-                    </tr>
-                  ))}
-                </tbody> */}
+                <tbody>
+                  {transactions.map((transaction) => {
+                    return (
+                      <tr key={transaction.id}>
+                        <td>{transaction.paypal_id}</td>
+                        <td>
+                          {transaction.artworks[0]?.title
+                            ? transaction.artworks[0].title
+                            : '-'}
+                        </td>
+                        <td>
+                          {transaction.artworks[0]?.user.userName
+                            ? transaction.artworks[0].user.userName
+                            : ' ' + '-'}
+                        </td>
+                        <td>{transaction.artwork_value} USD</td>
+                        <td>{transaction.buyer}</td>
+                        <td>{transaction.seller}</td>
+                        <td>{transaction.status}</td>
+                        <td>{transaction.createdAt}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
               </Table>
             </div>
           </main>

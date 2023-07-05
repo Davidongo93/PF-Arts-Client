@@ -95,29 +95,6 @@
   text-align: center;
 }
 
-.uploadButton {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #f2f2f2;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.uploadButton:hover {
-  background-color: #ddd;
-}
-
-.uploadButton:active {
-  background-color: #ccc;
-}
-
-.uploadButton input[type='file'] {
-  display: none;
-}
-
 .separator {
   height: 1px;
   background-color: #e7d6d6;
@@ -137,4 +114,25 @@
   flex-basis: 40%;
   text-align: right;
   margin-top: 1em;
+}
+
+.fileInput {
+  /* Con esto oculto el input de archivo en español */
+  display: none;
+}
+
+.selectFileButton {
+  /* Estilos para el botón de subir foto */
+  background-color: #f2f2f2;
+  color: 333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 6px 5px;
+  margin-right: 25px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.selectFileButton:hover {
+  background-color: #ddd;
 }

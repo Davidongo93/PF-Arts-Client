@@ -7,7 +7,7 @@
   /* Fondo transparente */
 }
 
-.footer-year{
+.footer-year {
   font-size: 10px;
 }
 
@@ -40,6 +40,5 @@
 }
 
 .links-container a:hover {
-  font-weight: bold;
-  color: blue;
+  color: rgb(81, 81, 154);
 }

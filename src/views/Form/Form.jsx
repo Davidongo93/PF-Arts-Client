@@ -161,11 +161,16 @@ export default function Form() {
             <label className={styles.label}>
               <FaImage className={`${styles.icon} icon`} /> Image:
             </label>
+            <label htmlFor='fileInput' className={styles.selectFileButton}>
+              Upload image
+            </label>
             <input
+              id='fileInput'
               type='file'
               name='image'
               accept='image/*'
               onChange={handleImageChange}
+              className={styles.fileInput}
             />
             {input.image && <p className={styles.fileInfo}>Selected file</p>}
           </div>

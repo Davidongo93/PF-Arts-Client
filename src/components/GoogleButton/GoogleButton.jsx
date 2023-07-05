@@ -4,13 +4,7 @@ import { auth, googleProvider } from '../../Firebase/config';
 import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAllUsers,
-  postUsers,
-  updateUser,
-  setLoggedUser,
-  showNotification,
-} from '../../redux/actions';
+import { getAllUsers, postUsers, updateUser, setLoggedUser, showNotification } from '../../redux/actions';
 import axios from 'axios';
 import googleLogo from '../../assets/img/google.png';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
@@ -33,13 +27,10 @@ const GoogleButton = () => {
 
       if (userExists) {
         try {
-          const response = await axios.post(
-            '/login',
-            {
-              username: userExists.userName,
-              password: userExists.password,
-            }
-          );
+          const response = await axios.post('/login', {
+            username: userExists.userName,
+            password: userExists.password,
+          });
 
           const { token, success } = response.data;
 
@@ -49,15 +40,15 @@ const GoogleButton = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(loginUser));
             navigate('/');
-            dispatch(showNotification("Login successfully"));
+            dispatch(showNotification('Login successfully'));
           } else {
             setLoginError(true); // Mostrar mensaje de error
-            dispatch(showNotification("Login error"))
+            dispatch(showNotification('Login error'));
           }
         } catch (error) {
           console.error('Error:', error);
           setLoginError(true); // Mostrar mensaje de error
-          dispatch(showNotification(error.message))
+          dispatch(showNotification(error.message));
         }
 
         if (!userExists.googleUser) {
@@ -70,7 +61,7 @@ const GoogleButton = () => {
           console.log(updatedUser);
           dispatch(updateUser(updatedUser));
           localStorage.setItem('user', JSON.stringify(updatedUser));
-          dispatch(showNotification("Login successfully"))
+          dispatch(showNotification('Login successfully'));
         }
       } else {
         const newPassword = data._tokenResponse.idToken.slice(0, 12);
@@ -85,13 +76,10 @@ const GoogleButton = () => {
         console.log(newUser);
         dispatch(postUsers(newUser)).then(async () => {
           try {
-            const response = await axios.post(
-              '/login',
-              {
-                username: newUser.userName,
-                password: newUser.password,
-              }
-            );
+            const response = await axios.post('/login', {
+              username: newUser.userName,
+              password: newUser.password,
+            });
 
             const { token, success } = response.data;
 
@@ -99,15 +87,15 @@ const GoogleButton = () => {
               localStorage.setItem('token', token);
               localStorage.setItem('user', JSON.stringify(newUser));
               navigate('/');
-              dispatch(showNotification("Login successfully"))
+              dispatch(showNotification('Login successfully'));
             } else {
               setLoginError(true); // Mostrar mensaje de error
-              dispatch(showNotification("Login error"))
+              dispatch(showNotification('Login error'));
             }
           } catch (error) {
             console.error('Error:', error);
             setLoginError(true); // Mostrar mensaje de error
-            dispatch(showNotification(error.message))
+            dispatch(showNotification(error.message));
           }
         });
       }
@@ -120,9 +108,9 @@ const GoogleButton = () => {
   useEffect(() => {
     dispatch(getAllUsers());
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
+      /*     if (user) {
         navigate('/');
-      }
+      } */
     });
 
     return unsubscribe;
@@ -137,11 +125,7 @@ const GoogleButton = () => {
       <Container className='w-100 my-3'>
         <Row>
           <Col>
-            <Button
-              variant='outline-danger'
-              className='w-100 my-1'
-              onClick={handleGoogleSignIn}
-            >
+            <Button variant='outline-danger' className='w-100 my-1' onClick={handleGoogleSignIn}>
               <Row className='align-items-center'>
                 <Col xs={1} className='d-block'>
                   <Image src={googleLogo} width='24' alt='' />

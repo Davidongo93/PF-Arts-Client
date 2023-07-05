@@ -57,7 +57,7 @@ const Login = () => {
 
     if (Object.keys(errors).length === 0 && input.username && input.password) {
       try {
-        const response = await axios.post('http://localhost:3001/users/login', {
+        const response = await axios.post('/users/login', {
           username: input.username,
           password: input.password,
         });
@@ -79,6 +79,7 @@ const Login = () => {
             username: '',
             password: '',
           });
+          console.log("loginredirect2home");
           navigate('/');
         } else {
           setLoginError(true); // Mostrar mensaje de error

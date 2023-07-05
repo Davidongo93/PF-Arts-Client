@@ -13,6 +13,7 @@
   border-radius: 20px 0 0 20px;
   border: 1px solid rgb(146, 146, 146);
   height: 30px;
+  padding-left: 10px;
 }
 
 .NavSearch::placeholder {

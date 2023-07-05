@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import NavMenu from '../NavMenu/NavMenu';
@@ -45,13 +44,15 @@ function Navbar() {
   const handleNavigate = () => {
     navigate(`/users/detail/${userId}`);
   };
-  const onClickHome = () => {
+
+  const handleHome = () => {
     navigate('/');
   };
+
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <NavMenu userId={userId} />
-      <div className='navbar-title' onClick={onClickHome}>
+      <div className='navbar-title' onClick={handleHome}>
         <span className='logo'>aA</span>
         <span className='space'> </span>
       </div>

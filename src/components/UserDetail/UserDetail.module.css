@@ -97,7 +97,7 @@
 .inputSocial {
   position: relative;
   margin-right: 25px;
-  left: -490px; /* Ajusta esta posición según tus necesidades */
+  left: -490px;
   font-size: 12px;
   font-weight: lighter;
 }
@@ -106,7 +106,7 @@
   font-size: 12px;
   position: relative;
   margin-right: 25px;
-  left: -490px; /* Ajusta esta posición según tus necesidades */
+  left: -490px;
   background-color: rgb(146, 194, 146); /*fondo*/
   border: none;
   cursor: pointer;
@@ -297,4 +297,27 @@
 
 .editIcon {
   margin-right: 8px;
+}
+
+.fileInput {
+  /* Con esto oculto el input de archivo en español */
+  display: none;
+}
+
+.selectFileButton {
+  /* Estilos para el botón de subir foto */
+  background-color: #999999;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 25px;
+  border: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.selectFileButton:hover {
+  background-color: #c7c7c7;
 }

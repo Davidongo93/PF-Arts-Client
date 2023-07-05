@@ -56,13 +56,15 @@ const Detail = () => {
   }, [detail]);
 
   useEffect(() => {
-    dispatch(getFavorites(userId)).then((res) => {
-      const userFavString = JSON.stringify(res.data.userFav);
-      localStorage.setItem('Favorites', userFavString);
-      const favorites = JSON.parse(userFavString);
-      const isFavorite = favorites.some((favorite) => favorite.title === detail.title);
-      setIsFav(isFavorite);
-    });
+    if (userId) {
+      dispatch(getFavorites(userId)).then((res) => {
+        const userFavString = JSON.stringify(res.data.userFav);
+        localStorage.setItem('Favorites', userFavString);
+        const favorites = JSON.parse(userFavString);
+        const isFavorite = favorites.some((favorite) => favorite.title === detail.title);
+        setIsFav(isFavorite);
+      });
+    }
   }, [dispatch, detail.title, userId]);
 
   const handleFavorite = (event) => {

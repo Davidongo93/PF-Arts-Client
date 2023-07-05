@@ -16,6 +16,10 @@ function Card({ art, imageSize, containerSize, onDelete }) {
 
   const handleFavorite = (event) => {
     event.preventDefault();
+    if (!userId) {
+      return; // No se realiza ninguna acción si el usuario no está logeado
+    }
+
     if (isFav) {
       setIsFav(false);
       dispatch(deleteFavorite(userId, artworkId)).then(() => {
@@ -35,22 +39,31 @@ function Card({ art, imageSize, containerSize, onDelete }) {
   };
 
   useEffect(() => {
-    dispatch(getFavorites(userId)).then((res) => {
-      const userFavString = JSON.stringify(res.data.userFav);
-      localStorage.setItem('Favorites', userFavString);
-      const favorites = JSON.parse(userFavString);
-      const isFavorite = favorites.some((favorite) => favorite.title === title);
-      setIsFav(isFavorite);
-    });
-  }, [dispatch, title, userId]);
+    if (userId) {
+      dispatch(getFavorites(userId))
+        .then((res) => {
+          console.log('dispatch getfavorites');
+          if (res.data && res.data.userFav) {
+            const userFavString = JSON.stringify(res.data.userFav);
+            localStorage.setItem('Favorites', userFavString);
+            const favorites = JSON.parse(userFavString);
+            const isFavorite = favorites.some((favorite) => favorite.title === title);
+            setIsFav(isFavorite);
+          }
+        })
+        .catch((error) => {
+          console.error('Error al obtener favoritos:', error);
+        });
+    }
+  }, [userId]);
 
   return (
     <div className={styles['cardContainer']} style={{ width: containerSize, height: '350px' }}>
-      <button className={styles['likeStyle']} onClick={handleFavorite}>
+      <button className={styles['likeStyle']} onClick={handleFavorite} disabled={!userId}>
         {isFav ? <span className={styles['red']}>♥️</span> : <span className={styles['white']}>♥️</span>}
       </button>
       <div className={styles['imgContainer']}>
-        <img src={image} alt={'pic'} style={{ width: imageSize, height: '350px' }} />
+        <img src={image} alt='pic' style={{ width: imageSize, height: '350px' }} />
       </div>
       <div className={styles['propsContainer']} />
     </div>
