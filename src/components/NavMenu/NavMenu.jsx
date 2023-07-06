@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import { BsFillHouseFill, BsPersonFill } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,7 +9,7 @@ import { AiFillHeart } from 'react-icons/ai';
 import { IoStatsChartSharp } from 'react-icons/io5';
 import { auth } from '../../Firebase/config';
 import { signOut } from 'firebase/auth';
-import { showNotification } from '../../redux/actions';
+import { showNotification, setIsLoggedIn } from '../../redux/actions';
 import './NavMenu.css';
 
 const NavMenu = () => {
@@ -32,6 +33,7 @@ const NavMenu = () => {
     signOut(auth).then(() => {
       localStorage.clear();
       setLoggedIn(false);
+      dispatch(setIsLoggedIn(false)); // Eliminar los elementos del carrito del localStorage
     });
   };
 
@@ -51,7 +53,10 @@ const NavMenu = () => {
 
   return (
     <nav>
-      <div className={`navbar-menu ${menuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+      <div
+        className={`navbar-menu ${menuOpen ? 'active' : ''}`}
+        onClick={toggleMenu}
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -73,9 +78,9 @@ const NavMenu = () => {
               Artists
             </NavLink>
           </li>
-          <hr />
           {userId && (
             <>
+              <hr />
               <li>
                 <AiFillHeart />
                 <NavLink to={`/favorites/${userId}`} onClick={toggleMenu}>
@@ -83,16 +88,20 @@ const NavMenu = () => {
                   Favorites
                 </NavLink>
               </li>
-              <hr />
             </>
           )}
-          <li>
-            <GiPencilBrush />
-            <NavLink to='/create' onClick={toggleMenu}>
-              {' '}
-              Create
-            </NavLink>
-          </li>
+          {userId && (
+            <>
+              <hr />
+              <li>
+                <GiPencilBrush />
+                <NavLink to='/create' onClick={toggleMenu}>
+                  {' '}
+                  Create
+                </NavLink>
+              </li>
+            </>
+          )}
           {userAdmin && (
             <>
               <hr />
@@ -105,6 +114,7 @@ const NavMenu = () => {
               </li>
             </>
           )}
+
           <hr />
           <li>
             <FaPowerOff />
@@ -114,7 +124,11 @@ const NavMenu = () => {
                 Log Out
               </NavLink>
             ) : (
-              <span onClick={() => dispatch(showNotification("Please log in first."))}>
+              <span
+                onClick={() =>
+                  dispatch(showNotification('Please log in first.'))
+                }
+              >
                 {' '}
                 Log Out
               </span>

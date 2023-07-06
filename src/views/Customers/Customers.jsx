@@ -1,15 +1,39 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers, deleteAdmin } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
+import { PDFViewer } from '@react-pdf/renderer';
+import jsPDF from 'jspdf';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
-import style from './Customers.module.css';
+import CustomersPDF from './CustomersPDF';
+import styles from './Customers.module.css';
 
 const Customers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector((state) => state.allUsers);
+  const [showPreview, setShowPreview] = useState(false);
+
+  const handleExport = () => {
+    setShowPreview(true);
+  };
+
+  const handleClosePreview = () => {
+    setShowPreview(false);
+  };
+
+  const handleDownloadPDF = () => {
+    // Crear una instancia de jspdf
+    const doc = new jsPDF();
+
+    // Agregar contenido al PDF
+    doc.text('Customers', 10, 10);
+    doc.autoTable({ html: '#usersTable' });
+
+    // Descargar el PDF
+    doc.save('customers.pdf');
+  };
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -38,7 +62,7 @@ const Customers = () => {
   };
 
   return (
-    <div className={style.allContainer}>
+    <div className={styles.allContainer}>
       <div className='container-fluid'>
         <div className='row'>
           <nav className='col-md-2 d-none d-md-block bg-light sidebar'>
@@ -52,15 +76,18 @@ const Customers = () => {
               <h1 className='h2'>Customers</h1>
               <div className='btn-toolbar mb-2 mb-md-0'>
                 <div className='btn-group mr-2'>
-                  <button
-                    className='btn btn-sm btn-outline-secondary'
-                    onClick={handleShare}
-                  >
+                  <button className='btn btn-sm btn-outline-secondary' onClick={handleShare}>
                     <FaShare /> Share
                   </button>
-                  <button className='btn btn-sm btn-outline-secondary'>
-                    <FaFileExport /> Export
-                  </button>
+                  {showPreview ? (
+                    <button className='btn btn-sm btn-outline-secondary' onClick={handleClosePreview}>
+                      Close Preview
+                    </button>
+                  ) : (
+                    <button className='btn btn-sm btn-outline-secondary' onClick={handleExport}>
+                      <FaFileExport /> Export
+                    </button>
+                  )}
                 </div>
                 <button className='btn btn-sm btn-outline-secondary dropdown-toggle'>
                   <span className='feather' data-feather='calendar'></span>
@@ -90,21 +117,12 @@ const Customers = () => {
                       <td>{user.phoneNumber}</td>
                       <td>{user.location}</td>
                       <td>
-                        <button
-                          className='btn btn-sm btn-primary'
-                          onClick={() =>
-                            navigate(`/users/detail/${user.userId}`)
-                          }
-                        >
+                        <button className='btn btn-sm btn-primary' onClick={() => navigate(`/users/detail/${user.userId}`)}>
                           View Profile
                         </button>
                       </td>
                       <td>
-                        <button
-                          className={style.deleteButton}
-                          onClick={() => handleDelete(user.userId)}
-                          title='Delete'
-                        >
+                        <button className={styles.deleteButton} onClick={() => handleDelete(user.userId)} title='Delete'>
                           {' '}
                           x{' '}
                         </button>
@@ -114,6 +132,19 @@ const Customers = () => {
                 </tbody>
               </table>
             </div>
+            {showPreview ? (
+              <div className={styles.PDFPreview}>
+                <PDFViewer style={{ width: '100%', height: '90vh' }}>
+                  <CustomersPDF />
+                </PDFViewer>
+              </div>
+            ) : (
+              <div className={styles.DownloadButton}>
+                <button className='btn btn-sm btn-outline-secondary' onClick={handleDownloadPDF}>
+                  <FaFileExport /> Dowload PDF
+                </button>
+              </div>
+            )}
           </main>
         </div>
       </div>

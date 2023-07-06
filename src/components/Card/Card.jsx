@@ -42,7 +42,7 @@ function Card({ art, imageSize, containerSize, onDelete }) {
     if (userId) {
       dispatch(getFavorites(userId))
         .then((res) => {
-          console.log('dispatch getfavorites',userId);
+          console.log('dispatch getfavorites', userId);
           if (res.data && res.data.userFav) {
             const userFavString = JSON.stringify(res.data.userFav);
             localStorage.setItem('Favorites', userFavString);

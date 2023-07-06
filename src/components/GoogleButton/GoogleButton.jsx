@@ -4,7 +4,13 @@ import { auth, googleProvider } from '../../Firebase/config';
 import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, postUsers, updateUser, setLoggedUser, showNotification } from '../../redux/actions';
+import {
+  getAllUsers,
+  postUsers,
+  updateUser,
+  setLoggedUser,
+  showNotification,
+} from '../../redux/actions';
 import axios from 'axios';
 import googleLogo from '../../assets/img/google.png';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
@@ -108,9 +114,9 @@ const GoogleButton = () => {
   useEffect(() => {
     dispatch(getAllUsers());
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      /*     if (user) {
-        navigate('/');
-      } */
+      // if (user) {
+      //   navigate('/');
+      // }
     });
 
     return unsubscribe;
@@ -125,7 +131,11 @@ const GoogleButton = () => {
       <Container className='w-100 my-3'>
         <Row>
           <Col>
-            <Button variant='outline-danger' className='w-100 my-1' onClick={handleGoogleSignIn}>
+            <Button
+              variant='outline-danger'
+              className='w-100 my-1'
+              onClick={handleGoogleSignIn}
+            >
               <Row className='align-items-center'>
                 <Col xs={1} className='d-block'>
                   <Image src={googleLogo} width='24' alt='' />
