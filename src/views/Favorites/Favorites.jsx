@@ -46,7 +46,7 @@ const Favorites = () => {
   }, [myFavorites]);
 
   return (
-    <div>
+    <div className={styles['container']}>
       <div className={styles['textContainer']}>
         <p className={styles['text']}>
           Bookmarked Art <sup className={styles['expo']}>{numberOfFav}</sup>
@@ -60,8 +60,17 @@ const Favorites = () => {
         <div className={styles['boxFav']}>
           {userFav &&
             userFav.map((fav) => (
-              <NavLink to={`/detail/${fav.artworkId}`} key={fav.artworkId} className={styles.link}>
-                <Card art={fav} imageSize='120px' containerSize='120px' onDelete={handleCardDelete} />
+              <NavLink
+                to={`/detail/${fav.artworkId}`}
+                key={fav.artworkId}
+                className={styles.link}
+              >
+                <Card
+                  art={fav}
+                  imageSize='120px'
+                  containerSize='120px'
+                  onDelete={handleCardDelete}
+                />
               </NavLink>
             ))}
         </div>

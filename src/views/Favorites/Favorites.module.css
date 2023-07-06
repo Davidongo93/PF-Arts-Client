@@ -10,6 +10,11 @@
   }
 }
 
+.container{
+  height: 100%;
+  min-height: 70.5vh;
+}
+
 .textContainer {
   /* background-color: rgb(243, 243, 243); */
   width: fit-content;
@@ -25,7 +30,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  min-height: 60.5vh;
   margin-bottom: 30px;
   /* margin-left: -20px; */
 }

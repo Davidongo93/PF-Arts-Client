@@ -52,18 +52,32 @@ const ReviewList = ({ artworkId, loggedUserId }) => {
                 <>
                   {isEditing ? (
                     <>
-                      <button className={`${styles.updateButtonSave} ${styles.editButton}`} onClick={handleSave}>
-                        Save
-                      </button>
-                      <button className={`${styles.updateButtonCancel} ${styles.editButton}`} onClick={handleCancel}>
-                        Cancel
-                      </button>
-                      <button className={styles.deleteButton} onClick={handleDelete}>
-                        Delete
-                      </button>
+                      <div className={styles.buttons}>
+                        <button
+                          className={styles.updateButtonSave}
+                          onClick={handleSave}
+                        >
+                          Save
+                        </button>
+                        <button
+                          className={styles.updateButtonCancel}
+                          onClick={handleCancel}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className={styles.deleteButton}
+                          onClick={handleDelete}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </>
                   ) : (
-                    <button className={`${styles.updateButtonSave} ${styles.updateButtonCancel} ${styles.editButton}`} onClick={handleUpdate}>
+                    <button
+                      className={styles.editButton}
+                      onClick={handleUpdate}
+                    >
                       <FaPencilAlt className={styles.updateIcon} />
                     </button>
                   )}
@@ -71,7 +85,12 @@ const ReviewList = ({ artworkId, loggedUserId }) => {
               )}
               <div className={styles.ratingContainer}>
                 {[1, 2, 3, 4, 5].map((value) => (
-                  <span key={value} className={`${styles.star} ${value <= review.review.rating ? styles.checked : ''}`}>
+                  <span
+                    key={value}
+                    className={`${styles.star} ${
+                      value <= review.review.rating ? styles.checked : ''
+                    }`}
+                  >
                     ★
                   </span>
                 ))}

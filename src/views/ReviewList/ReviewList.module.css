@@ -38,3 +38,94 @@
 .comment {
   font-size: 16px;
 }
+
+.buttons{
+  margin-top: 10px;
+  display:flex;
+}
+
+.editButton {
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  color: #999999;
+  background-color: transparent;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+.updateIcon {
+  margin-bottom: 6px;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.deleteButton {
+  display: block;
+  font-size: 12px;
+  background-color: #999999;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.deleteButton:hover {
+  background-color: #cc0000;
+}
+
+.updateButtonSave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background-color: rgb(146, 194, 146);
+  /*fondo*/
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  color: #ffffff;
+  /*texto*/
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateButtonSave:focus {
+  outline: none;
+}
+
+.updateButtonSave:hover {
+  background-color: rgb(95, 129, 95);
+  color: #ffffff;
+}
+
+.updateButtonCancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background-color: rgb(121, 165, 190);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  margin-right: 2px;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.updateButtonCancel:focus {
+  outline: none;
+}
+
+.updateButtonCancel:hover {
+  background-color: #3498db;
+  color: #ffffff;
+}
