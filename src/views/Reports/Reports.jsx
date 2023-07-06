@@ -95,7 +95,7 @@ const Reports = () => {
               <div className={styles['ContainerGraf']}>
               <VictoryPie
                 //  grafico pastel
-                colorScale={['#e74c3c', 'rgb(46, 46, 46)', '#2ecc']}
+                colorScale={['#b3c5d7', '#7392b7', '#d8e1e9']}
                 data={[
                   { x: 'Users', y: totalUsers },
                   { x: 'Sales', y: totalSales },
@@ -116,9 +116,9 @@ const Reports = () => {
                   }}
                   alignment='start'
                   data={[
-                    { x: 'Users', y: totalUsers, fill: '#e74c3c' },
-                    { x: 'Sales', y: totalSales, fill: 'rgb(46, 46, 46)' },
-                    { x: 'artworks', y: totalArtworks, fill: '#2ecc' },
+                    { x: 'Users', y: totalUsers, fill: '#b3c5d7' },
+                    { x: 'Sales', y: totalSales, fill: '#7392b7' },
+                    { x: 'artworks', y: totalArtworks, fill: '#d8e1e9' },
                   ]}
                   labels={({ datum }) => datum.y}
                   labelComponent={<VictoryLabel dy={0} dx={15} />}

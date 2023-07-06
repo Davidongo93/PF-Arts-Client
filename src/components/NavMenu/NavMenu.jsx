@@ -30,8 +30,9 @@ const NavMenu = () => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('cartItems');
+    localStorage.clear();
     signOut(auth).then(() => {
-      localStorage.clear();
       setLoggedIn(false);
       dispatch(setIsLoggedIn(false)); // Eliminar los elementos del carrito del localStorage
     });
@@ -53,10 +54,7 @@ const NavMenu = () => {
 
   return (
     <nav>
-      <div
-        className={`navbar-menu ${menuOpen ? 'active' : ''}`}
-        onClick={toggleMenu}
-      >
+      <div className={`navbar-menu ${menuOpen ? 'active' : ''}`} onClick={toggleMenu}>
         <span></span>
         <span></span>
         <span></span>
@@ -114,26 +112,18 @@ const NavMenu = () => {
               </li>
             </>
           )}
-
-          <hr />
-          <li>
-            <FaPowerOff />
-            {userId ? (
-              <NavLink to='/login' onClick={() => handleLogout()}>
-                {' '}
-                Log Out
-              </NavLink>
-            ) : (
-              <span
-                onClick={() =>
-                  dispatch(showNotification('Please log in first.'))
-                }
-              >
-                {' '}
-                Log Out
-              </span>
-            )}
-          </li>
+          {userId && (
+            <>
+              <hr />
+              <li>
+                <FaPowerOff />
+                <NavLink to='/login' onClick={() => handleLogout()}>
+                  {' '}
+                  Log Out
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

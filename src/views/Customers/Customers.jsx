@@ -78,7 +78,10 @@ const Customers = () => {
               <h1 className='h2'>Customers</h1>
               <div className='btn-toolbar mb-2 mb-md-0'>
                 <div className='btn-group mr-2'>
-                  <button className='btn btn-sm btn-outline-secondary' onClick={handleShare}>
+                  <button
+                    className='btn btn-sm btn-outline-secondary'
+                    onClick={handleShare}
+                  >
                     <FaShare /> Share
                   </button>
                   {/* {showPreview ? (
@@ -91,9 +94,11 @@ const Customers = () => {
                     </button>
                   )} */}
                 </div>
-                <button className='btn btn-sm btn-outline-secondary dropdown-toggle' onClick={downloadPDF}>
-                  <span className='feather' data-feather='calendar'></span>
-                  <FaCalendar /> This week
+                <button
+                  className='btn btn-sm btn-outline-secondary dropdown-toggle'
+                  onClick={downloadPDF}
+                >
+                  <FaFileExport /> Export
                 </button>
               </div>
             </div>
@@ -119,12 +124,21 @@ const Customers = () => {
                       <td>{user.phoneNumber}</td>
                       <td>{user.location}</td>
                       <td>
-                        <button className='btn btn-sm btn-primary' onClick={() => navigate(`/users/detail/${user.userId}`)}>
+                        <button
+                          className='btn btn-sm btn-primary'
+                          onClick={() =>
+                            navigate(`/users/detail/${user.userId}`)
+                          }
+                        >
                           View Profile
                         </button>
                       </td>
                       <td>
-                        <button className={styles.deleteButton} onClick={() => handleDelete(user.userId)} title='Delete'>
+                        <button
+                          className={styles.deleteButton}
+                          onClick={() => handleDelete(user.userId)}
+                          title='Delete'
+                        >
                           {' '}
                           x{' '}
                         </button>

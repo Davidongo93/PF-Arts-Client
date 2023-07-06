@@ -116,7 +116,9 @@ export function deleteReview(artworkId) {
   };
 }
 
-export function updateReview(artworkId, reviewId, reviewData) {
+export function updateReview(artworkId, reviewData) {
+  console.log(artworkId);
+  console.log(reviewData);
   return async function (dispatch) {
     const token = localStorage.token;
     try {
@@ -125,7 +127,7 @@ export function updateReview(artworkId, reviewId, reviewData) {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.put(`/reviews/${artworkId}/${reviewId}`, reviewData, config);
+      const response = await axios.put(`/${artworkId}`, config, reviewData);
       dispatch({ type: UPDATE_REVIEW, payload: response.data });
       return response;
     } catch (error) {
@@ -264,6 +266,7 @@ export function clearCart() {
 }
 
 export const updateUser = (updatedUser) => {
+  console.log(updatedUser);
   const token = localStorage.token;
 
   const config = {

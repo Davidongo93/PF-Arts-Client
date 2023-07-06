@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import { addFavorite, clearDetail, deleteFavorite, getDetail, deleteArt, getAllArts, updateArtwork, addToCart, getFavorites } from '../../redux/actions';
+import { addFavorite, clearDetail, deleteFavorite, getDetail, deleteArt, getAllArts, updateArtwork, addToCart, getFavorites, showNotification } from '../../redux/actions';
 import { FaShoppingCart, FaTwitter, FaFacebook, FaInstagram, FaPencilAlt } from 'react-icons/fa';
 import Loader from '../../components/Loader/Loader';
 import ReviewSection from '../ReviewSection/ReviewSection';
@@ -115,7 +115,7 @@ const Detail = () => {
 
   const handleDelete = () => {
     dispatch(deleteArt(detail.artworkId));
-    window.alert('Artwork deleted successfully');
+    dispatch(getAllArts());
   };
 
   const handleUpdate = () => {

@@ -10,7 +10,7 @@ import {
   faLock,
   faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { clearCart, postTransaction } from '../../redux/actions';
+import { clearCart, getAllArts, postTransaction, showNotification } from '../../redux/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadScript } from '@paypal/paypal-js';
@@ -48,10 +48,7 @@ const Checkout = () => {
   };
 
   const calculateTotal = () => {
-    const total = cartItems.reduce(
-      (accumulator, item) => accumulator + parseFloat(item.price),
-      0
-    );
+    const total = cartItems.reduce((accumulator, item) => accumulator + parseFloat(item.price), 0);
     return total.toFixed(2);
   };
 
@@ -59,18 +56,14 @@ const Checkout = () => {
     const initializePayPal = async () => {
       try {
         paypal = await loadScript({
-          clientId:
-            'AR7Htz5PEZkht1GZRgG-IjedcAkciDgEHHRk1gLEcbnlWGmKIrUWyIBoRUmEXjhmdPj26nJL0MY5CmGR',
+          clientId: 'AR7Htz5PEZkht1GZRgG-IjedcAkciDgEHHRk1gLEcbnlWGmKIrUWyIBoRUmEXjhmdPj26nJL0MY5CmGR',
         });
 
         paypal
           .Buttons({
             locale: 'en_US',
             createOrder: function (data, actions) {
-              const total = cartItems.reduce(
-                (accumulator, item) => accumulator + parseFloat(item.price),
-                0
-              );
+              const total = cartItems.reduce((accumulator, item) => accumulator + parseFloat(item.price), 0);
               return actions.order.create({
                 purchase_units: [
                   {
@@ -89,13 +82,14 @@ const Checkout = () => {
                   purchase_value: cart.purchase_units[0].amount.value,
                   status: cart.status,
                 };
-                toast.success(
-                  'Successful purchase! Thank you for your purchase.'
-                );
+                toast.success('Successful purchase! Thank you for your purchase.');
                 setPaymentApproved(true);
                 // Actualizar el estado en cart, queda en 0.
                 dispatch(postTransaction(artworkIdsString, transactionData));
                 dispatch(clearCart());
+                localStorage.removeItem('cartItems');
+                dispatch(getAllArts());
+                dispatch(showNotification('Successful purchase! Thank you for your purchase.'))
               });
             },
           })
@@ -108,10 +102,7 @@ const Checkout = () => {
   }, []);
 
   return (
-    <div
-      className={`${styles.row} row g-0 text-center`}
-      style={{ height: '100%' }}
-    >
+    <div className={`${styles.row} row g-0 text-center`} style={{ height: '100%' }}>
       <div className='col-sm-6 col-md-8' style={{ width: '650px' }}>
         <h2 className={styles.checkoutTitle}>Checkout</h2>
         <div className={styles.separator}></div>
@@ -136,30 +127,24 @@ const Checkout = () => {
       >
         <div className={styles.infoBox}>
           <p>
-            <FontAwesomeIcon icon={faTruck} className={styles.icon} />{' '}
-            Professional delivery between 7 to 10 days
+            <FontAwesomeIcon icon={faTruck} className={styles.icon} /> Professional delivery between 7 to 10 days
           </p>
           <p>
-            <FontAwesomeIcon icon={faGlobe} className={styles.icon} />{' '}
-            International delivery
+            <FontAwesomeIcon icon={faGlobe} className={styles.icon} /> International delivery
           </p>
           <p>
-            <FontAwesomeIcon icon={faLock} className={styles.icon} /> Secure
-            payment
+            <FontAwesomeIcon icon={faLock} className={styles.icon} /> Secure payment
           </p>
           <p>
-            <FontAwesomeIcon icon={faUndo} className={styles.icon} /> Free
-            returns 14 days after delivery
+            <FontAwesomeIcon icon={faUndo} className={styles.icon} /> Free returns 14 days after delivery
           </p>
           <p>
-            <FontAwesomeIcon icon={faCertificate} className={styles.icon} />{' '}
-            Original piece with certificate of authenticity
+            <FontAwesomeIcon icon={faCertificate} className={styles.icon} /> Original piece with certificate of authenticity
           </p>
         </div>
         <div className={styles.separator}></div>
         <div id='your-container-element'></div>
-        <div id='paypal-button-container'></div>{' '}
-        {/* Contenedor para el botón de PayPal */}
+        <div id='paypal-button-container'></div> {/* Contenedor para el botón de PayPal */}
       </div>
     </div>
   );

@@ -95,7 +95,7 @@ const Dashboard = () => {
                             childName: ["pie", "bar"],
                             mutation: () => {
                               return {
-                                style: Object.assign({}, { fill: "tomato" })
+                                style: Object.assign({}, { fill: "#7392b7" })
                               };
                             }
                           }];
@@ -116,7 +116,7 @@ const Dashboard = () => {
                         width={200}
                         standalone={false}
                         style={{
-                          data: { width: 20 },
+                          data: { width: 10 },
                           labels: { fontSize: 10 }
                         }}
                         data={[

@@ -13,7 +13,6 @@ const Products = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   useEffect(() => {
     dispatch(getAdminArts());
   }, [dispatch]);
@@ -70,67 +69,74 @@ const Products = () => {
                     <FaFileExport /> Export
                   </button> */}
                 </div>
-                <button className='btn btn-sm btn-outline-secondary dropdown-toggle' onClick={downloadPDF}>
-                  <span className='feather' data-feather='calendar'></span>
-                  <FaCalendar /> This week
+                <button
+                  className='btn btn-sm btn-outline-secondary dropdown-toggle'
+                  onClick={downloadPDF}
+                >
+                  <FaFileExport /> Export
                 </button>
               </div>
             </div>
             <div className='A4'>
-            <div className='table-responsive'>
-              <table className='table table-sm'>
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentArts && currentArts.length > 0 ? (
-                    currentArts.map((art) => (
-                      <tr key={art.artworkId}>
-                        <td>{art.title}</td>
-                        <td>{art.user.userName}</td>
-                        <td>{art.date}</td>
-                        <td>{art.price}</td>
-                        <td>
-                          {art.deletedAt ? (
-                            <button className='btn btn-sm btn-danger' disabled>
-                              Sold
-                            </button>
-                          ) : (
-                            <button
-                              className='btn btn-sm btn-success'
-                              onClick={() => handleArtworkClick(art.artworkId)}
-                            >
-                              Available
-                            </button>
-                          )}
-                        </td>
-                        <td>
-                          <button
-                            className={style.deleteButton}
-                            onClick={() => handleDelete(art.artworkId)}
-                            title='Delete'
-                          >
-                            {' '}
-                            x{' '}
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
+              <div className='table-responsive'>
+                <table className='table table-sm'>
+                  <thead>
                     <tr>
-                      <td colSpan='5'>No articles available</td>
+                      <th>Title</th>
+                      <th>User</th>
+                      <th>Date</th>
+                      <th>Price</th>
+                      <th>Status</th>
+                      <th></th>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {currentArts && currentArts.length > 0 ? (
+                      currentArts.map((art) => (
+                        <tr key={art.artworkId}>
+                          <td>{art.title}</td>
+                          <td>{art.user.userName}</td>
+                          <td>{art.date}</td>
+                          <td>{art.price}</td>
+                          <td>
+                            {art.deletedAt ? (
+                              <button
+                                className='btn btn-sm btn-danger'
+                                disabled
+                              >
+                                Sold
+                              </button>
+                            ) : (
+                              <button
+                                className='btn btn-sm btn-success'
+                                onClick={() =>
+                                  handleArtworkClick(art.artworkId)
+                                }
+                              >
+                                Available
+                              </button>
+                            )}
+                          </td>
+                          <td>
+                            <button
+                              className={style.deleteButton}
+                              onClick={() => handleDelete(art.artworkId)}
+                              title='Delete'
+                            >
+                              {' '}
+                              x{' '}
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan='5'>No articles available</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </main>
         </div>
