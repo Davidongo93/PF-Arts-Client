@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Detail from './views/Detail/Detail';
@@ -28,42 +29,101 @@ import FloatingNotification from './components/FloatingNotifications/FloatingNot
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const loggedUser = useSelector((state) => state.loggedUser);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
+  const allowedRoutes = [
+    '/',
+    '/register',
+    '/login',
+    '/verify',
+    '/detail/:id',
+    '/advisory',
+    '/about-us',
+    '/FAQ',
+  ];
+
+  if (isLoggedIn) {
+    allowedRoutes.push(
+      '/favorites/:userId',
+      '/users',
+      '/users/detail/:userId',
+      '/cart',
+      '/checkout',
+      '/create'
+    );
+
+  }
+
+  const restrictedAdminRoutes = ['/dashboard', '/reports', '/orders', '/customers', '/products'];
+
   return (
     <div className={`App ${darkMode ? 'dark' : ''}`}>
-      {location.pathname !== '/register' &&
-        location.pathname !== '/login' && ( //Verifica si las rutas son estas no se muestra el icono
-          <Navbar />
-        )}
+      {location.pathname !== '/register' && location.pathname !== '/login' && (
+        <Navbar />
+      )}
       {location.pathname !== '/register' && location.pathname !== '/login' && (
         <button className='darkModeButton' onClick={toggleDarkMode}>
           {darkMode ? <FaSun className='icon' /> : <FaMoon className='icon' />}
         </button>
       )}
       <Routes>
-        <Route path='/verify/' element={<VerifyToken />} />
+        <Route path='/verify' element={<VerifyToken />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/' element={<Home />} />
         <Route path='/detail/:id' element={<Detail />} />
-        <Route path='/create' element={<Form />} />
-        <Route path='/advisory' element={<AdvisoryServices />} />
-        <Route path='/about-us' element={<Aboutus />} />
-        <Route path='/FAQ' element={<Buyer />} />
-        <Route path='/favorites/:userId' element={<Favorites />} />
-        <Route path='/users' element={<Users />} />
-        <Route path='/users/detail/:userId' element={<UserDetail />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/checkout' element={<Checkout />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/orders' element={<Orders />} />
-        <Route path='/reports' element={<Reports />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/customers' element={<Customers />} />
+        {allowedRoutes.includes('/create') && (
+          <Route path='/create' element={<Form />} />
+        )}
+        {allowedRoutes.includes('/advisory') && (
+          <Route path='/advisory' element={<AdvisoryServices />} />
+        )}
+        {allowedRoutes.includes('/about-us') && (
+          <Route path='/about-us' element={<Aboutus />} />
+        )}
+        {allowedRoutes.includes('/FAQ') && (
+          <Route path='/FAQ' element={<Buyer />} />
+        )}
+        {allowedRoutes.includes('/favorites/:userId') && (
+          <Route path='/favorites/:userId' element={<Favorites />} />
+        )}
+        {allowedRoutes.includes('/users') && (
+          <Route path='/users' element={<Users />} />
+        )}
+        {allowedRoutes.includes('/users/detail/:userId') && (
+          <Route path='/users/detail/:userId' element={<UserDetail />} />
+        )}
+        {allowedRoutes.includes('/cart') && (
+          <Route path='/cart' element={<Cart />} />
+        )}
+        {allowedRoutes.includes('/checkout') && (
+          <Route path='/checkout' element={<Checkout />} />
+        )}
+        {loggedUser.role === "admin" && (
+          <>
+            {restrictedAdminRoutes.includes('/dashboard') && (
+              <Route path='/dashboard' element={<Dashboard />} />
+            )}
+            {restrictedAdminRoutes.includes('/reports') && (
+              <Route path='/reports' element={<Reports />} />
+            )}
+            {restrictedAdminRoutes.includes('/orders') && (
+              <Route path='/orders' element={<Orders />} />
+            )}
+            {restrictedAdminRoutes.includes('/customers') && (
+              <Route path='/customers' element={<Customers />} />
+            )}
+            {restrictedAdminRoutes.includes('/products') && (
+              <Route path='/products' element={<Products />} />
+            )}
+          </>
+        )}
+        <Route path='/*' element={<Navigate to='/' />} />
       </Routes>
       {location.pathname !== '/register' && location.pathname !== '/login' && (
         <Footer />
