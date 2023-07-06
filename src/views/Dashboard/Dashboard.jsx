@@ -1,7 +1,23 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
+import { getAdminArts, getAllUsers, getTransaction } from '../../redux/actions';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
+import styles from './Dashboard.module.css'
+import { VictoryBar, VictoryLabel, VictoryPie, VictorySharedEvents } from 'victory';
+import downloadPDF from '../../components/DocsPDF/DocsPDF';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const artworks = useSelector((state) => state.allAdminArts); // obras
+  const allUsers = useSelector((state) => state.allUsers); // usuario
+  const allSales = useSelector((state) => state.allTrans); //ventas
+  const totalArtworks = artworks.length;
+  console.log('obras', totalArtworks);
+  const totalUsers = allUsers.length;
+  console.log('users', totalUsers);
+  const totalSales = allSales.length;
+  console.log('sales', totalSales);
   const handleShare = () => {
     if (navigator.share) {
       navigator
@@ -20,6 +36,11 @@ const Dashboard = () => {
       console.log('Web Share API not supported in this browser');
     }
   };
+  useEffect(() => {
+    dispatch(getAdminArts());
+    dispatch(getAllUsers());
+    dispatch(getTransaction());
+  }, [dispatch]);
 
   return (
     <div>
@@ -42,7 +63,7 @@ const Dashboard = () => {
                   >
                     <FaShare /> Share
                   </button>
-                  <button className='btn btn-sm btn-outline-secondary'>
+                  <button className='btn btn-sm btn-outline-secondary' onClick={downloadPDF}>
                     <FaFileExport /> Export
                   </button>
                 </div>
@@ -53,12 +74,75 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div>
-              <p>
-                {' '}
-                - Acá írian varios gráficos (escalas, mapas de usuarios por el
-                mundo, etc. Vi solo ejemplos en la web de Chart.js).{' '}
-              </p>
+            <div className='A4'>
+              <div className={styles['ContainerDataDash']}>
+                <div className={styles['Content']}>Users:
+                  <div className={styles['StyleNumber']}>{totalUsers}</div></div>
+                <div className={styles['Content']}>Sales:
+                  <div className={styles['StyleNumber']}>{totalSales}</div></div>
+                <div className={styles['Content']}>Artworks:
+                  <div className={styles['StyleNumber']}>{totalArtworks}</div></div>
+              </div>
+              <>
+                <svg viewBox="0 0 450 350">
+                  <VictorySharedEvents
+                    events={[{
+                      childName: ["pie", "bar"],
+                      target: "data",
+                      eventHandlers: {
+                        onMouseOver: () => {
+                          return [{
+                            childName: ["pie", "bar"],
+                            mutation: () => {
+                              return {
+                                style: Object.assign({}, { fill: "tomato" })
+                              };
+                            }
+                          }];
+                        },
+                        onMouseOut: () => {
+                          return [{
+                            childName: ["pie", "bar"],
+                            mutation: () => {
+                              return null;
+                            }
+                          }];
+                        }
+                      }
+                    }]}
+                  >
+                    <g transform={"translate(150, 50)"}>
+                      <VictoryBar name="bar"
+                        width={200}
+                        standalone={false}
+                        style={{
+                          data: { width: 20 },
+                          labels: { fontSize: 10 }
+                        }}
+                        data={[
+                          { x: 'Users', y: totalUsers },
+                          { x: 'Sales', y: totalSales },
+                          { x: 'Artworks', y: totalArtworks },
+                        ]}
+                        labels={["Users", "Sales", "Artworks"]}
+                        labelComponent={<VictoryLabel y={290} />}
+                      />
+                    </g>
+                    <g transform={"translate(0, -75)"}>
+                      <VictoryPie name="pie"
+                        width={200}
+                        standalone={false}
+                        style={{ labels: { fontSize: 10, padding: 10 } }}
+                        data={[
+                          { x: 'Users', y: totalUsers },
+                          { x: 'Sales', y: totalSales },
+                          { x: 'Artworks', y: totalArtworks },
+                        ]}
+                      />
+                    </g>
+                  </VictorySharedEvents>
+                </svg>
+              </>
             </div>
           </main>
         </div>

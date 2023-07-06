@@ -1,39 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers, deleteAdmin } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
-import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
-import { PDFViewer } from '@react-pdf/renderer';
-import jsPDF from 'jspdf';
+import { FaCalendar, FaShare } from 'react-icons/fa';
+// import { PDFViewer } from '@react-pdf/renderer';
+// import html2canvas from 'html2canvas';
+// import jsPDF from 'jspdf';
+import downloadPDF from '../../components/DocsPDF/DocsPDF';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
-import CustomersPDF from './CustomersPDF';
+// import CustomersPDF from './CustomersPDF';
 import styles from './Customers.module.css';
 
 const Customers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const users = useSelector((state) => state.allUsers);
-  const [showPreview, setShowPreview] = useState(false);
+  // const [showPreview, setShowPreview] = useState(false);
 
-  const handleExport = () => {
-    setShowPreview(true);
-  };
+  // const handleExport = () => {
+  //   setShowPreview(true);
+  // };
 
-  const handleClosePreview = () => {
-    setShowPreview(false);
-  };
+  // const handleClosePreview = () => {
+  //   setShowPreview(false);
+  // };
 
-  const handleDownloadPDF = () => {
-    // Crear una instancia de jspdf
-    const doc = new jsPDF();
+  // const handleDownloadPDF = () => {
+  //   // Crear una instancia de jspdf
+  //   const doc = new jsPDF();
 
-    // Agregar contenido al PDF
-    doc.text('Customers', 10, 10);
-    doc.autoTable({ html: '#usersTable' });
+  //   // Agregar contenido al PDF
+  //   doc.text('Customers', 10, 10);
+  //   doc.autoTable({ html: '#usersTable' });
 
-    // Descargar el PDF
-    doc.save('customers.pdf');
-  };
+  //   // Descargar el PDF
+  //   doc.save('customers.pdf');
+  // };
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -79,7 +81,7 @@ const Customers = () => {
                   <button className='btn btn-sm btn-outline-secondary' onClick={handleShare}>
                     <FaShare /> Share
                   </button>
-                  {showPreview ? (
+                  {/* {showPreview ? (
                     <button className='btn btn-sm btn-outline-secondary' onClick={handleClosePreview}>
                       Close Preview
                     </button>
@@ -87,16 +89,16 @@ const Customers = () => {
                     <button className='btn btn-sm btn-outline-secondary' onClick={handleExport}>
                       <FaFileExport /> Export
                     </button>
-                  )}
+                  )} */}
                 </div>
-                <button className='btn btn-sm btn-outline-secondary dropdown-toggle'>
+                <button className='btn btn-sm btn-outline-secondary dropdown-toggle' onClick={downloadPDF}>
                   <span className='feather' data-feather='calendar'></span>
                   <FaCalendar /> This week
                 </button>
               </div>
             </div>
 
-            <div>
+            <div className='A4'>
               {/* Tabla de usuarios */}
               <table className='table'>
                 <thead>
@@ -132,7 +134,7 @@ const Customers = () => {
                 </tbody>
               </table>
             </div>
-            {showPreview ? (
+            {/* {showPreview ? (
               <div className={styles.PDFPreview}>
                 <PDFViewer style={{ width: '100%', height: '90vh' }}>
                   <CustomersPDF />
@@ -144,7 +146,7 @@ const Customers = () => {
                   <FaFileExport /> Dowload PDF
                 </button>
               </div>
-            )}
+            )} */}
           </main>
         </div>
       </div>

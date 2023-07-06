@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
+import { FaCalendar, FaShare } from 'react-icons/fa';
 import { deleteAdmin, getAdminArts } from '../../redux/actions';
+import downloadPDF from '../../components/DocsPDF/DocsPDF';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
 import style from './Products.module.css';
 
@@ -11,6 +12,7 @@ const Products = () => {
   const currentArts = allArts && Array.isArray(allArts) && allArts;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(getAdminArts());
@@ -64,17 +66,17 @@ const Products = () => {
                   >
                     <FaShare /> Share
                   </button>
-                  <button className='btn btn-sm btn-outline-secondary'>
+                  {/* <button className='btn btn-sm btn-outline-secondary'>
                     <FaFileExport /> Export
-                  </button>
+                  </button> */}
                 </div>
-                <button className='btn btn-sm btn-outline-secondary dropdown-toggle'>
+                <button className='btn btn-sm btn-outline-secondary dropdown-toggle' onClick={downloadPDF}>
                   <span className='feather' data-feather='calendar'></span>
                   <FaCalendar /> This week
                 </button>
               </div>
             </div>
-
+            <div className='A4'>
             <div className='table-responsive'>
               <table className='table table-sm'>
                 <thead>
@@ -128,6 +130,7 @@ const Products = () => {
                   )}
                 </tbody>
               </table>
+            </div>
             </div>
           </main>
         </div>

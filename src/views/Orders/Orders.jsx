@@ -8,6 +8,8 @@ import { getTransaction } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import style from './Orders.module.css';
+import downloadPDF from '../../components/DocsPDF/DocsPDF';
+
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -75,8 +77,8 @@ const Orders = () => {
                   >
                     <FaShare /> Share
                   </button>
-                  <button className='btn btn-sm btn-outline-secondary'>
-                    <FaFileExport /> Export
+                  <button className='btn btn-sm btn-outline-secondary' onClick={downloadPDF}>
+                    <FaFileExport /> ExportPDF
                   </button>
                 </div>
                 <button className='btn btn-sm btn-outline-secondary dropdown-toggle'>
@@ -97,6 +99,7 @@ const Orders = () => {
               </button>
             </form>
 
+            <div className='A4'>
             <p className={style.totalSales}>
               {' '}
               <span style={{ fontWeight: 'bold', fontStyle: 'oblique' }}>
@@ -104,7 +107,7 @@ const Orders = () => {
               </span>{' '}
               {summary.toLocaleString()} USD
             </p>
-            <div>
+              <div>
               <Table striped bordered hover>
                 <thead>
                   <tr>
@@ -145,6 +148,7 @@ const Orders = () => {
                   })}
                 </tbody>
               </Table>
+            </div>
             </div>
           </main>
         </div>

@@ -5,9 +5,9 @@ import { VictoryPie, VictoryLabel, VictoryBar, VictoryChart } from 'victory';
 import { PDFViewer } from '@react-pdf/renderer';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
 import { getAdminArts, getAllUsers, getTransaction } from '../../redux/actions';
-import jsPDF from 'jspdf';
 import DocPDF from './DocPDF';
 import styles from './Reports.module.css';
+import downloadPDF from '../../components/DocsPDF/DocsPDF';
 
 const Reports = () => {
   const dispatch = useDispatch();
@@ -46,22 +46,10 @@ const Reports = () => {
     setShowPreview(true);
   };
 
-  const handleClosePreview = () => {
-    setShowPreview(false);
-  };
+  // const handleClosePreview = () => {
+  //   setShowPreview(false);
+  // };
 
-  const handleDownloadPDF = () => {
-    alert('PDF generated successfully');
-    // Crear una instancia de jspdf
-    const doc = new jsPDF(DocPDF);
-
-    // Agregar contenido al PDF
-    doc.text('Customers', 10, 10);
-    doc.autoTable({ html: '#usersTable' });
-
-    // Descargar el PDF
-    doc.save('customers.pdf');
-  };
   useEffect(() => {
     dispatch(getAdminArts());
     dispatch(getAllUsers());
@@ -87,8 +75,8 @@ const Reports = () => {
                     <FaShare /> Share
                   </button>
                   {showPreview ? (
-                    <button className='btn btn-sm btn-outline-secondary' onClick={handleClosePreview}>
-                      Close Preview
+                    <button className='btn btn-sm btn-outline-secondary' onClick={downloadPDF}>
+                     Close Preview
                     </button>
                   ) : (
                     <button className='btn btn-sm btn-outline-secondary' onClick={handleExport}>
@@ -102,8 +90,9 @@ const Reports = () => {
                 </button>
               </div>
             </div>
+            <div className='A4'>
 
-            <div className={styles['ContainerGraf']}>
+              <div className={styles['ContainerGraf']}>
               <VictoryPie
                 //  grafico pastel
                 colorScale={['#e74c3c', 'rgb(46, 46, 46)', '#2ecc']}
@@ -135,19 +124,17 @@ const Reports = () => {
                   labelComponent={<VictoryLabel dy={0} dx={15} />}
                 />
               </VictoryChart>
+              </div>
             </div>
+
             {showPreview ? (
-              <div className={styles.PDFPreview}>
+              <div>
                 <PDFViewer style={{ width: '100%', height: '90vh' }}>
                   <DocPDF />
                 </PDFViewer>
               </div>
             ) : (
-              <div className={styles.DownloadButton}>
-                <button className='btn btn-sm btn-outline-secondary' onClick={handleDownloadPDF}>
-                  <FaFileExport /> Dowload PDF
-                </button>
-              </div>
+              <button onClick={downloadPDF}>Dowload PDF</button>
             )}
           </main>
         </div>

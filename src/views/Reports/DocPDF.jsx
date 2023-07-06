@@ -1,4 +1,4 @@
-import {Page, View, Document,} from '@react-pdf/renderer';
+import {Page, View, Document,Text} from '@react-pdf/renderer';
 import { VictoryPie, VictoryLabel, VictoryBar, VictoryChart } from 'victory';
 import styles from './Reports.module.css';
 
@@ -6,6 +6,7 @@ const DocPDF = () => {
   return(
       <Document>
         <Page size='A4'>
+        <Text>Arts Gallery Reports</Text>
             <View className={styles['ContainerGraf']}>            
               <VictoryPie
                 colorScale={['#e74c3c', '#2ecc', '#eeeb22cc']}
