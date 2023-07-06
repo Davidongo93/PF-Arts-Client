@@ -11,9 +11,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './index.css';
 
-//axios.defaults.baseURL = 'https://pf-arts-api-production.up.railway.app';
+axios.defaults.baseURL = 'https://pf-arts-api-production.up.railway.app';
 
-axios.defaults.baseURL = 'http://localhost:3001';
+//axios.defaults.baseURL = 'http://localhost:3001';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
