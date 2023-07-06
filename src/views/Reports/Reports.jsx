@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaCalendar, FaShare, FaFileExport } from 'react-icons/fa';
 import { VictoryPie, VictoryLabel, VictoryBar, VictoryChart } from 'victory';
-import { PDFViewer } from '@react-pdf/renderer';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
 import { getAdminArts, getAllUsers, getTransaction } from '../../redux/actions';
-import DocPDF from './DocPDF';
 import styles from './Reports.module.css';
 import downloadPDF from '../../components/DocsPDF/DocsPDF';
 
 const Reports = () => {
   const dispatch = useDispatch();
-  const [showPreview, setShowPreview] = useState(false);
   const artworks = useSelector((state) => state.allAdminArts); // obras
   const allUsers = useSelector((state) => state.allUsers); // usuario
   const allSales = useSelector((state) => state.allTrans); //ventas
@@ -41,11 +38,6 @@ const Reports = () => {
       console.log('Web Share API not supported in this browser');
     }
   };
-
-  const handleExport = () => {
-    setShowPreview(true);
-  };
-
   // const handleClosePreview = () => {
   //   setShowPreview(false);
   // };
@@ -74,15 +66,10 @@ const Reports = () => {
                   <button className='btn btn-sm btn-outline-secondary' onClick={handleShare}>
                     <FaShare /> Share
                   </button>
-                  {showPreview ? (
+
                     <button className='btn btn-sm btn-outline-secondary' onClick={downloadPDF}>
-                     Close Preview
-                    </button>
-                  ) : (
-                    <button className='btn btn-sm btn-outline-secondary' onClick={handleExport}>
                       <FaFileExport /> Export
                     </button>
-                  )}
                 </div>
                 <button className='btn btn-sm btn-outline-secondary dropdown-toggle'>
                   <span className='feather' data-feather='calendar'></span>
@@ -126,16 +113,6 @@ const Reports = () => {
               </VictoryChart>
               </div>
             </div>
-
-            {showPreview ? (
-              <div>
-                <PDFViewer style={{ width: '100%', height: '90vh' }}>
-                  <DocPDF />
-                </PDFViewer>
-              </div>
-            ) : (
-              <button onClick={downloadPDF}>Dowload PDF</button>
-            )}
           </main>
         </div>
       </div>

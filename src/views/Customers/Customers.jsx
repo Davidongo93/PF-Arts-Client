@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers, deleteAdmin } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
-import { FaCalendar, FaShare } from 'react-icons/fa';
+import { FaFileExport, FaShare } from 'react-icons/fa';
 // import { PDFViewer } from '@react-pdf/renderer';
 // import html2canvas from 'html2canvas';
 // import jsPDF from 'jspdf';

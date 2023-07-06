@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FaCalendar, FaShare } from 'react-icons/fa';
+import { FaFileExport, FaShare } from 'react-icons/fa';
 import { deleteAdmin, getAdminArts } from '../../redux/actions';
 import downloadPDF from '../../components/DocsPDF/DocsPDF';
 import DashboardMenu from '../../components/DashboardMenu/DashboardMenu';
