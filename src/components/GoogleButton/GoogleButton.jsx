@@ -33,7 +33,7 @@ const GoogleButton = () => {
 
       if (userExists) {
         try {
-          const response = await axios.post('/login', {
+          const response = await axios.post('/users/login', {
             username: userExists.userName,
             password: userExists.password,
           });
