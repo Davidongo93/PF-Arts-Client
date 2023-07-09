@@ -10,6 +10,7 @@ import {
   updateUser,
   setLoggedUser,
   showNotification,
+  setIsLoggedIn,
 } from '../../redux/actions';
 import axios from 'axios';
 import googleLogo from '../../assets/img/google.png';
@@ -43,6 +44,7 @@ const GoogleButton = () => {
           if (success) {
             const loginUser = allUsers.find((user) => user.email === email);
             dispatch(setLoggedUser(loginUser));
+            dispatch(setIsLoggedIn(true));
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(loginUser));
             navigate('/');
