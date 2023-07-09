@@ -1,14 +1,205 @@
-.login-container {
-  margin-top: 30px;
-  margin-bottom: 30px;
+@font-face {
+  font-family: 'alien';
+  src: url('../../assets/fonts/The-Orb-Report.ttf') format('truetype');
+  /* Ruta relativa a tu archivo CSS */
 }
 
-.login-container .bg-box {
-  background-image: url('https://cdn.pixabay.com/photo/2016/12/15/20/21/texture-1909992_1280.jpg');
-  background-position: bottom;
+@font-face {
+  font-family: 'arialBold';
+  src: url('../../assets/fonts/ARLRDBD.TTF') format('truetype');
+  /* Ruta relativa a tu archivo CSS */
 }
-.error {
+
+
+/*Logo */
+.logoArt{
+  font-family: 'alien', arial;
+  font-size: 35px;
+  color: rgb(245, 245, 245);
+  margin-left:10px;
+}
+
+.sub {
+  font-family: calibri, arial;
   font-size: 10px;
-  color: red;
-  margin-left: 10em;
+  color: rgb(245, 245, 245);
+  height: fit-content;
+  margin: 20px 0 0 5px;
 }
+
+/*Botones */
+.exploreContainer {
+  position: absolute;
+  bottom: 75px;
+  left: 350px;
+  margin-top: 20px;
+  margin-right: 20px;
+  z-index: 1;
+}
+.explore{
+  color: white;
+  background-color: rgb(29, 29, 29);
+  border: none;
+  padding: 10px 20px 10px 20px;
+  font-size: 12px;
+  font-family: Arial;
+  font-weight: 600;
+  border-radius: 20px;
+ 
+}
+
+.explore:hover{
+  background-color: rgba(249, 249, 249, 0.104);
+}
+
+.registerContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.register {
+  color: white;
+  background-color: rgb(19, 19, 19);
+  border: none;
+  padding: 6px 10px 6px 10px;
+  font-size: 12px;
+  font-family: Arial;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+.register:hover {
+  background-color: rgba(249, 249, 249, 0.104);
+}
+
+/*CONTENEDOR */
+.sloganContainer{
+  position: absolute;
+  top: 315px;
+  left: 250px;
+  background-color: #a4a4a4be;
+    border-radius: 15px;
+    padding: 1px 35px;
+    filter: blur(2px)
+}
+.slogan{
+  font-family: 'arialBold', arial;
+  font-style: bold;
+    font-size: 30px;
+  color: rgba(255, 255, 255, 0.893);
+}
+
+.sloganL{
+  position: absolute;
+  font-family: 'arialBold', arial;
+    font-style: bold;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.893);
+    top: 316px;
+      left: 285px;
+
+}
+
+.login-container {
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
+  background-color: black;
+}
+
+.landingImage{
+  position: absolute;
+  top: 50px;
+  left: -100px;
+}
+
+
+.image {
+  height: 600px;
+  width: auto;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transform: translateX(-140px);
+  }
+
+.log {
+  background-color: rgba(31, 31, 31, 0.393);
+  border-radius: 15px;
+  padding: 10px;
+  height: 170px;
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  font-family: 'arialBold', arial;
+  font-size: 20px;
+  color: white;
+  margin-bottom: -3px;
+
+}
+
+.background {
+  display: flex;
+  width: 300px;
+}
+
+.username{
+    font-family: 'arialBold', arial;
+      font-size: 11px;
+      color: white;
+      /* margin: 20px; */
+}
+
+.input{
+  height: 15px;
+  width: 225px !important;
+  margin-top: -6px;
+  font-size: 10px !important;
+}
+
+.input::placeholder{
+  font-size: 10px;
+}
+
+.error {
+  font-size: 9px;
+  color: rgb(220, 69, 69);
+  margin-left: 80px;
+}
+
+.error2 {
+  font-size: 9px;
+  color: rgb(220, 69, 69);
+  margin-left: 100px;
+  margin-top: 4px;
+}
+
+
+
+.allForm{
+  margin-left: 20px;
+}
+
+.loginButtonContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.loginButtonContainer .loginButton {
+
+  margin-top:10px;
+  background-color: #1c1c1c;
+  border: none;
+  color: white;
+  font-size: 12px;
+
+}
+

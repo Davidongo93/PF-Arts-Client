@@ -1,0 +1,12 @@
+
+.google .button{
+    background-color: rgb(42, 42, 42);
+    border: none;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.googleLogo{
+    width: 20px;
+    margin-top: -10px;
+}

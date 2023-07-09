@@ -15,6 +15,7 @@
   flex-wrap: wrap;
   justify-content: center;
   min-height: 80vh;
+  margin: 20px;
 }
 
 .searchContainer {

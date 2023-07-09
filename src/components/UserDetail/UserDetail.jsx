@@ -77,11 +77,22 @@ const UserDetail = () => {
     setIsEditingSocial(true);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del formulario
+  
     try {
-      // Llama a la acción updateUser y pasa los datos actualizados
-      console.log(editedData);
-      dispatch(updateUser(editedData));
+      const formData = new FormData();
+      formData.append('userName', editedData.userName);
+      formData.append('description', editedData.description);
+      formData.append('phoneNumber', editedData.phoneNumber);
+      formData.append('location', editedData.location);
+      formData.append('fb', editedSocialData.fb);
+      formData.append('tw', editedSocialData.tw);
+      formData.append('ig', editedSocialData.ig);
+      formData.append('profilePicture', selectedFile);
+  
+      // Llama a la acción updateUser y pasa el objeto FormData
+      await dispatch(updateUser(formData));
       localStorage.setItem('user', JSON.stringify(editedData));
       setIsEditing(false);
       setEditedData({ ...editedData, ...editedSocialData });
@@ -89,6 +100,7 @@ const UserDetail = () => {
       console.error(error);
     }
   };
+  
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -97,7 +109,7 @@ const UserDetail = () => {
     // Actualizar la foto de perfil en el estado editedData
     setEditedData((prevData) => ({
       ...prevData,
-      profilePicture: URL.createObjectURL(file),
+      profilePicture: file,
     }));
   };
 
@@ -164,6 +176,7 @@ const UserDetail = () => {
 
   return (
     <div className={style['containerUserDetail']}>
+      <form onSubmit={handleSave} encType="multipart/form-data">
       <div className={style['userDetail']}>
         <div className={style['positionPhoto']}>
           {selectedFile ? (
@@ -375,6 +388,7 @@ const UserDetail = () => {
           images={combinedArtworks.map((artwork) => artwork.image)}
         />
       )}
+      </form>
     </div>
   );
 };
