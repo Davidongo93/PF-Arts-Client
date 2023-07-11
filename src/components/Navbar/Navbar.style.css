@@ -172,3 +172,19 @@
   height: 40px;
   margin: 0;
 }
+
+.login {
+  text-decoration: none;
+  color: rgb(53, 53, 53);
+  /* Color de texto */
+  font-size: 18px;
+  font-weight:400;
+  margin-right: 20px;
+  transition: color 0.3s ease;
+  /* Transición de color de texto */
+  text-shadow: black 0.4px 0.4px;
+}
+
+.login:hover {
+  color: rgb(255, 255, 255);
+}

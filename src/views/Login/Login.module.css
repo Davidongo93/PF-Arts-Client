@@ -40,7 +40,7 @@
   color: white;
   background-color: rgb(29, 29, 29);
   border: none;
-  padding: 10px 20px 10px 20px;
+  padding: 14px 20px 14px 20px;
   font-size: 12px;
   font-family: Arial;
   font-weight: 600;
@@ -48,9 +48,10 @@
  
 }
 
-.explore:hover{
-  background-color: rgba(249, 249, 249, 0.104);
-}
+.explore:hover {
+  color: black;
+  background: linear-gradient(135deg, #c792ea, #89cff0, #fddb6d, #ffb8a9);
+  }
 
 .registerContainer {
   position: absolute;

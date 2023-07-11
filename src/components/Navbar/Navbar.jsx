@@ -65,15 +65,15 @@ function Navbar() {
             <div className='profile-menu-photo-container'>
               <img src={profilePicture} alt='' className='profile-menu-photo' />
             </div>
-          </div>
-        ) : (
-          <NavLink to='/login' className='navlinks'>
-            Log in
-          </NavLink>
-        )}
         <NavLink to='/cart' className='navlinks'>
           <AiOutlineShoppingCart className='cartLogo' />
         </NavLink>
+          </div>
+        ) : (
+          <NavLink to='/login' className='login'>
+            Log in
+          </NavLink>
+        )}
       </div>
     </nav>
   );
