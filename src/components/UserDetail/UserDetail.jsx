@@ -22,6 +22,7 @@ const UserDetail = () => {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.allUsers); // usuario
   const artworkId = useSelector((state) => state.allArts); // obras
+  const loggedUser = useSelector((state) => state.loggedUser);
   const userDetail = allUsers.find((user) => user.userId === userId); // datos del usuario
   const filteredArtworks = artworkId.filter(
     (artwork) => artwork.userId === userId
@@ -30,26 +31,27 @@ const UserDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
   const storedUserJSON = localStorage.getItem('user');
   const storedUser = JSON.parse(storedUserJSON);
-  console.log(storedUser);
-
+  console.log("Storeduser",storedUser);
+ 
   const [editedData, setEditedData] = useState({
-    // Estado local para editar datos personales.
-    ...storedUser,
-    userName: userDetail?.userName || '',
-    description: userDetail?.description || '',
-    phoneNumber: userDetail?.phoneNumber || '',
-    location: userDetail?.location || '',
-    fb: userDetail?.fb || '',
-    tw: userDetail?.tw || '',
-    ig: userDetail?.ig || '',
-    profilePicture: userDetail?.profilePicture || '',
+    // Estado local para editar datos personales. 
+    userId: loggedUser.userId,
+    userName: loggedUser.userName || '',
+    description: loggedUser.description || '',
+    phoneNumber: loggedUser.phoneNumber || '',
+    location: loggedUser.location || '',
+    fb: loggedUser.fb || '',
+    tw: loggedUser.tw || '',
+    ig: loggedUser.ig || '',
+    profilePicture: loggedUser.profilePicture,
   });
-
+  console.log("editedata", editedData);
+  
   const [isEditingSocial, setIsEditingSocial] = useState(false);
   const [editedSocialData, setEditedSocialData] = useState({
-    fb: userDetail?.fb || '',
-    tw: userDetail?.tw || '',
-    ig: userDetail?.ig || '',
+    fb: loggedUser?.fb || '',
+    tw: loggedUser?.tw || '',
+    ig: loggedUser?.ig || '',
   });
 
   const [selectedFile, setSelectedFile] = useState(null);
