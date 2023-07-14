@@ -4,14 +4,7 @@ import { auth, googleProvider } from '../../Firebase/config';
 import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getAllUsers,
-  postUsers,
-  updateUser,
-  setLoggedUser,
-  showNotification,
-  setIsLoggedIn,
-} from '../../redux/actions';
+import { getAllUsers, postUsers, updateUser, setLoggedUser, showNotification, setIsLoggedIn } from '../../redux/actions';
 import axios from 'axios';
 import googleLogo from '../../assets/img/google.png';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
@@ -136,11 +129,7 @@ const GoogleButton = () => {
             <Button className={styles['button']} onClick={handleGoogleSignIn}>
               <Row>
                 <Col>
-                  <Image
-                    className={styles['googleLogo']}
-                    src={googleLogo}
-                    alt=''
-                  />
+                  <Image className={styles['googleLogo']} src={googleLogo} alt='' />
                 </Col>
               </Row>
             </Button>

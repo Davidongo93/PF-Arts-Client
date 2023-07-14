@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { GET_ARTS, GET_ARTS_BY_TITLE, GET_ARTS_BY_AUTHOR_NAME, GET_USERS, SET_IS_LOGGED_IN, POST_ART, ADD_FAVORITE, DELETE_FAVORITE, GET_DETAIL, CLEAR_DETAIL, GET_ARTS_BY_FILTERS, POST_USERS, DELETE_ART, UPDATE_USER, UPDATE_ARTWORK, GET_FAVORITES, GET_USERS_DETAIL, SET_CART_ITEMS, ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, SET_LOGGED_USER, CHECK_AUTHENTICATION, SHOW_NOTIFICATION, HIDE_NOTIFICATION, GET_ADMIN_ARTS, DELETE_ADMIN, GET_TRANS, GET_REVIEWS, POST_REVIEW, DELETE_REVIEW, UPDATE_REVIEW } from './actions';
+import { GET_ARTS, GET_ARTS_BY_TITLE, GET_ARTS_BY_AUTHOR_NAME, GET_USERS, SET_IS_LOGGED_IN, POST_ART, ADD_FAVORITE, DELETE_FAVORITE, GET_DETAIL, CLEAR_DETAIL, GET_ARTS_BY_FILTERS, POST_USERS, DELETE_ART, UPDATE_USER, UPDATE_ARTWORK, GET_FAVORITES, GET_USER_DETAIL, SET_CART_ITEMS, ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, SET_LOGGED_USER, CHECK_AUTHENTICATION, SHOW_NOTIFICATION, HIDE_NOTIFICATION, GET_ADMIN_ARTS, DELETE_ADMIN, GET_TRANS, GET_REVIEWS, POST_REVIEW, DELETE_REVIEW, UPDATE_REVIEW } from './actions';
 
 const initialState = {
   notificationVisible: false,
@@ -12,7 +12,7 @@ const initialState = {
   myFavorites: [],
   detail: {},
   users: [], //almacena datos de usuarios individuales.
-  usersdetail: [],
+  userDetail: {},
   cart: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
   loggedUser: {},
   isLoggedIn: false,
@@ -82,10 +82,10 @@ const rootReducer = (state = initialState, action) => {
         allUsers: action.payload,
       };
 
-    case GET_USERS_DETAIL:
+    case GET_USER_DETAIL:
       return {
         ...state,
-        usersdetail: action.payload,
+        userDetail: action.payload,
       };
 
     case SET_IS_LOGGED_IN:

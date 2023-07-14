@@ -10,13 +10,12 @@
   /* Ruta relativa a tu archivo CSS */
 }
 
-
 /*Logo */
-.logoArt{
+.logoArt {
   font-family: 'alien', arial;
   font-size: 35px;
   color: rgb(245, 245, 245);
-  margin-left:10px;
+  margin-left: 10px;
 }
 
 .sub {
@@ -30,13 +29,13 @@
 /*Botones */
 .exploreContainer {
   position: absolute;
-  bottom: 75px;
+  bottom: 10px;
   left: 350px;
-  margin-top: 20px;
+  margin-top: 70px;
   margin-right: 20px;
   z-index: 1;
 }
-.explore{
+.explore {
   color: white;
   background-color: rgb(29, 29, 29);
   border: none;
@@ -45,13 +44,12 @@
   font-family: Arial;
   font-weight: 600;
   border-radius: 20px;
- 
 }
 
 .explore:hover {
   color: black;
   background: linear-gradient(135deg, #c792ea, #89cff0, #fddb6d, #ffb8a9);
-  }
+}
 
 .registerContainer {
   position: absolute;
@@ -77,46 +75,44 @@
 }
 
 /*CONTENEDOR */
-.sloganContainer{
+.sloganContainer {
   position: absolute;
   top: 315px;
   left: 250px;
   background-color: #a4a4a4be;
-    border-radius: 15px;
-    padding: 1px 35px;
-    filter: blur(2px)
+  border-radius: 15px;
+  padding: 1px 35px;
+  filter: blur(2px);
 }
-.slogan{
+.slogan {
   font-family: 'arialBold', arial;
   font-style: bold;
-    font-size: 30px;
+  font-size: 30px;
   color: rgba(255, 255, 255, 0.893);
 }
 
-.sloganL{
+.sloganL {
   position: absolute;
   font-family: 'arialBold', arial;
-    font-style: bold;
-    font-size: 30px;
-    color: rgba(255, 255, 255, 0.893);
-    top: 316px;
-      left: 285px;
-
+  font-style: bold;
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.893);
+  top: 316px;
+  left: 285px;
 }
 
 .login-container {
   display: flex;
   height: 100%;
-  min-height: 100vh;
+  min-height: 110vh;
   background-color: black;
 }
 
-.landingImage{
+.landingImage {
   position: absolute;
   top: 50px;
   left: -100px;
 }
-
 
 .image {
   height: 600px;
@@ -128,7 +124,7 @@
   justify-content: flex-end;
   align-items: center;
   transform: translateX(-140px);
-  }
+}
 
 .log {
   background-color: rgba(31, 31, 31, 0.393);
@@ -137,14 +133,13 @@
   height: 170px;
 }
 
-.header{
+.header {
   display: flex;
   justify-content: center;
   font-family: 'arialBold', arial;
   font-size: 20px;
   color: white;
   margin-bottom: -3px;
-
 }
 
 .background {
@@ -152,21 +147,21 @@
   width: 300px;
 }
 
-.username{
-    font-family: 'arialBold', arial;
-      font-size: 11px;
-      color: white;
-      /* margin: 20px; */
+.username {
+  font-family: 'arialBold', arial;
+  font-size: 11px;
+  color: white;
+  /* margin: 20px; */
 }
 
-.input{
+.input {
   height: 15px;
   width: 225px !important;
   margin-top: -6px;
   font-size: 10px !important;
 }
 
-.input::placeholder{
+.input::placeholder {
   font-size: 10px;
 }
 
@@ -180,27 +175,21 @@
   font-size: 9px;
   color: rgb(220, 69, 69);
   margin-left: 100px;
-  margin-top: 4px;
 }
 
-
-
-.allForm{
+.allForm {
   margin-left: 20px;
 }
 
-.loginButtonContainer{
+.loginButtonContainer {
   display: flex;
   flex-direction: row;
 }
 
 .loginButtonContainer .loginButton {
-
-  margin-top:10px;
+  margin-top: 10px;
   background-color: #1c1c1c;
   border: none;
   color: white;
   font-size: 12px;
-
 }
-

@@ -3,27 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { getFavorites } from '../../redux/actions';
 import Card from '../../components/Card/Card';
-// import Loader from '../../components/Loader/Loader';
-// import CustomPagination from '../../components/Pagination/Pagination';
-// import NavMenu from '../../components/NavMenu/NavMenu';
 import styles from './Favorites.module.css';
-
-const LOCAL_STORAGE_KEY = 'myFavorites';
 
 const Favorites = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const artsPerPage = 8;
-  // const pagination = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  //   const searchParams = new URLSearchParams(location.search);
-  //   searchParams.set('page', pageNumber);
-  //   const newSearch = searchParams.toString();
-  //   navigate(`/?${newSearch}`);
-  // };
 
   const myFavorites = useSelector((state) => state.myFavorites);
 
@@ -42,7 +26,7 @@ const Favorites = () => {
 
   useEffect(() => {
     // Guardar los favoritos en el almacenamiento local cuando se actualicen
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(myFavorites));
+    // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(myFavorites));
   }, [myFavorites]);
 
   return (
@@ -60,17 +44,8 @@ const Favorites = () => {
         <div className={styles['boxFav']}>
           {userFav &&
             userFav.map((fav) => (
-              <NavLink
-                to={`/detail/${fav.artworkId}`}
-                key={fav.artworkId}
-                className={styles.link}
-              >
-                <Card
-                  art={fav}
-                  imageSize='120px'
-                  containerSize='120px'
-                  onDelete={handleCardDelete}
-                />
+              <NavLink to={`/detail/${fav.artworkId}`} key={fav.artworkId} className={styles.link}>
+                <Card art={fav} imageSize='120px' containerSize='120px' onDelete={handleCardDelete} />
               </NavLink>
             ))}
         </div>

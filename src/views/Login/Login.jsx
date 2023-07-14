@@ -3,12 +3,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setLoggedUser,
-  setIsLoggedIn,
-  showNotification,
-  setCartItems,
-} from '../../redux/actions';
+import { setLoggedUser, setIsLoggedIn, showNotification, setCartItems } from '../../redux/actions';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import GoogleButton from '../../components/GoogleButton/GoogleButton';
 import axios from 'axios';
@@ -76,9 +71,7 @@ const Login = () => {
         const { token, success } = response.data;
 
         if (success) {
-          const loginUser = allUsers.find(
-            (user) => user.userName === input.username
-          );
+          const loginUser = allUsers.find((user) => user.userName === input.username);
           dispatch(setLoggedUser(loginUser)); //Almacena los detalles del usuario autenticado.
           dispatch(setIsLoggedIn(true)); //Indica que el usuario inicio sesión y me sirve para el cart.
           localStorage.setItem('token', token);
@@ -133,66 +126,30 @@ const Login = () => {
           <Col className={styles['log']}>
             <h2 className={styles['header']}>Log in</h2>
             <div className='login'>
-              <Form
-                className={styles['allForm']}
-                id='login'
-                onSubmit={handleSubmit}
-              >
+              <Form className={styles['allForm']} id='login' onSubmit={handleSubmit}>
                 <Form.Group>
                   <Form.Label htmlFor='username'>
                     <span className={styles['username']}>username</span>
-                    {errors.username && (
-                      <span className={styles.error}>{errors.username}</span>
-                    )}
+                    {errors.username && <span className={styles.error}>{errors.username}</span>}
                   </Form.Label>
-                  <Form.Control
-                    id='username'
-                    type='text'
-                    name='username'
-                    value={input.username}
-                    onChange={handleChange}
-                    className={styles.input}
-                    placeholder='Enter your username'
-                  />
+                  <Form.Control id='username' type='text' name='username' value={input.username} onChange={handleChange} className={styles.input} placeholder='Enter your username' />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label htmlFor='password'>
                     <span className={styles['username']}>password</span>
-                    {errors.password && (
-                      <span className={styles.error}>{errors.password}</span>
-                    )}
+                    {errors.password && <span className={styles.error}>{errors.password}</span>}
                   </Form.Label>
-                  <Form.Control
-                    id='password'
-                    type='password'
-                    name='password'
-                    value={input.password}
-                    onChange={handleChange}
-                    className={styles.input}
-                    placeholder='Enter your password'
-                  />
+                  <Form.Control id='password' type='password' name='password' value={input.password} onChange={handleChange} className={styles.input} placeholder='Enter your password' />
                 </Form.Group>
                 <div className={styles['loginButtonContainer']}>
-                  <Button
-                    variant='primary'
-                    type='submit'
-                    id='ingresar'
-                    className={styles['loginButton']}
-                    onClick={handleSubmit}
-                  >
+                  <Button variant='primary' type='submit' id='ingresar' className={styles['loginButton']} onClick={handleSubmit}>
                     Log in
                   </Button>
                   <GoogleButton />
-                  {showConfirmation && (
-                    <p className={styles.confirmation}>Ready!</p>
-                  )}
+                  {showConfirmation && <p className={styles.confirmation}>Ready!</p>}
                 </div>
-                {showAlert && (
-                  <p className={styles.error2}>Invalid username or password</p>
-                )}
-                {loginError && (
-                  <p className={styles.error2}>Invalid username or password</p>
-                )}
+                {showAlert && <p className={styles.error2}>Invalid username or password</p>}
+                {loginError && <p className={styles.error2}>Invalid username or password</p>}
               </Form>
               {/* LOGIN REDES SOCIALES */}
             </div>

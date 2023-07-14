@@ -18,7 +18,7 @@ export const GET_USERS = 'GET_USERS';
 export const POST_USERS = 'POST_USERS';
 export const UPDATE_USER = 'UPDATE_USER';
 export const SET_LOGGED_USER = 'SET_LOGGED_USER';
-export const GET_USERS_DETAIL = 'GET_USERS_DETAIL';
+export const GET_USER_DETAIL = 'GET_USER_DETAIL';
 // -------- REVIEWS ------
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const POST_REVIEW = 'POST_REVIEW';
@@ -168,7 +168,6 @@ export const hideNotification = () => {
 
 export const getAllArts = () => {
   return async function (dispatch) {
-    console.log('actions Get all arts');
     const response = await axios.get('/artworks');
     return dispatch({
       type: GET_ARTS,
@@ -204,6 +203,7 @@ export const filterByArtist = (payload) => {
 };
 
 export function postArts(payload) {
+  console.log(payload);
   return async function (dispatch) {
     const token = localStorage.token;
     try {
@@ -266,7 +266,6 @@ export function clearCart() {
 }
 
 export const updateUser = (updatedUser) => {
-  console.log(updatedUser);
   const token = localStorage.token;
 
   const config = {
@@ -310,7 +309,7 @@ export const getUserDetail = (id) => {
     try {
       const response = await axios.get(`/users/detail/${id}`);
       return dispatch({
-        type: GET_USERS_DETAIL,
+        type: GET_USER_DETAIL,
         payload: response.data,
       });
     } catch (error) {

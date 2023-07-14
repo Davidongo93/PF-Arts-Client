@@ -9,7 +9,7 @@ function Card({ art, imageSize, containerSize, onDelete }) {
   const dispatch = useDispatch();
   const { image, artworkId, title } = art;
   const [isFav, setIsFav] = useState(false);
-  const myFavorites = useSelector((state) => state.myFavorites);
+  // const myFavorites = useSelector((state) => state.myFavorites);
   const loggedUser = useSelector((state) => state.loggedUser);
 
   const { userId } = loggedUser;
@@ -23,17 +23,17 @@ function Card({ art, imageSize, containerSize, onDelete }) {
     if (isFav) {
       setIsFav(false);
       dispatch(deleteFavorite(userId, artworkId)).then(() => {
-        const updatedFavorites = myFavorites.userFav.filter((fav) => fav.artworkId !== artworkId);
-        const userFavString = JSON.stringify(updatedFavorites);
-        localStorage.setItem('Favorites', userFavString);
+        // const updatedFavorites = myFavorites.userFav.filter((fav) => fav.artworkId !== artworkId);
+        // const userFavString = JSON.stringify(updatedFavorites);
+        // localStorage.setItem('Favorites', userFavString);
         onDelete();
       });
     } else {
       setIsFav(true);
       dispatch(addFavorite(userId, artworkId, art)).then(() => {
-        const updatedFavorites = [...myFavorites.userFav, art];
-        const userFavString = JSON.stringify(updatedFavorites);
-        localStorage.setItem('Favorites', userFavString);
+        // const updatedFavorites = [...myFavorites.userFav, art];
+        // const userFavString = JSON.stringify(updatedFavorites);
+        // localStorage.setItem('Favorites', userFavString);
       });
     }
   };
@@ -45,7 +45,7 @@ function Card({ art, imageSize, containerSize, onDelete }) {
           console.log('dispatch getfavorites', userId);
           if (res.data && res.data.userFav) {
             const userFavString = JSON.stringify(res.data.userFav);
-            localStorage.setItem('Favorites', userFavString);
+            // localStorage.setItem('Favorites', userFavString);
             const favorites = JSON.parse(userFavString);
             const isFavorite = favorites.some((favorite) => favorite.title === title);
             setIsFav(isFavorite);
@@ -55,6 +55,7 @@ function Card({ art, imageSize, containerSize, onDelete }) {
           console.error('Error al obtener favoritos:', error);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   return (

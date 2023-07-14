@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import { addFavorite, clearDetail, deleteFavorite, getDetail, deleteArt, getAllArts, updateArtwork, addToCart, getFavorites, showNotification } from '../../redux/actions';
+import { addFavorite, clearDetail, deleteFavorite, getDetail, deleteArt, getAllArts, updateArtwork, addToCart, getFavorites } from '../../redux/actions';
 import { FaShoppingCart, FaTwitter, FaFacebook, FaInstagram, FaPencilAlt } from 'react-icons/fa';
 import Loader from '../../components/Loader/Loader';
 import ReviewSection from '../ReviewSection/ReviewSection';
@@ -22,7 +22,7 @@ const Detail = () => {
   const [showNotification, setShowNotification] = useState(false);
   const detail = useSelector((state) => state.detail);
   const cartItems = useSelector((state) => state.cart);
-  const myFavorites = useSelector((state) => state.myFavorites);
+  // const myFavorites = useSelector((state) => state.myFavorites);
   const loggedUser = useSelector((state) => state.loggedUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const Detail = () => {
     if (userId) {
       dispatch(getFavorites(userId)).then((res) => {
         const userFavString = JSON.stringify(res.data.userFav);
-        localStorage.setItem('Favorites', userFavString);
+        // localStorage.setItem('Favorites', userFavString);
         const favorites = JSON.parse(userFavString);
         const isFavorite = favorites.some((favorite) => favorite.title === detail.title);
         setIsFav(isFavorite);
@@ -72,16 +72,16 @@ const Detail = () => {
     if (isFav) {
       setIsFav(false);
       dispatch(deleteFavorite(userId, detail.artworkId)).then(() => {
-        const updatedFavorites = myFavorites.userFav.filter((fav) => fav.artworkId !== detail.artworkId);
-        const userFavString = JSON.stringify(updatedFavorites);
-        localStorage.setItem('Favorites', userFavString);
+        // const updatedFavorites = myFavorites.userFav.filter((fav) => fav.artworkId !== detail.artworkId);
+        // const userFavString = JSON.stringify(updatedFavorites);
+        // localStorage.setItem('Favorites', userFavString);
       });
     } else {
       setIsFav(true);
       dispatch(addFavorite(userId, detail.artworkId, detail)).then(() => {
-        const updatedFavorites = [...myFavorites.userFav, detail];
-        const userFavString = JSON.stringify(updatedFavorites);
-        localStorage.setItem('Favorites', userFavString);
+        // const updatedFavorites = [...myFavorites.userFav, detail];
+        // const userFavString = JSON.stringify(updatedFavorites);
+        // localStorage.setItem('Favorites', userFavString);
       });
     }
   };
