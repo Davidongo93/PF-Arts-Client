@@ -42,9 +42,6 @@ const ReviewList = ({ artworkId, loggedUserId }) => {
     setShowOptions(true);
   };
 
-  // console.log(editedReview);
-  // console.log(rating);
-
   const handleSave = () => {
     const updatedReview = {
       ...review,

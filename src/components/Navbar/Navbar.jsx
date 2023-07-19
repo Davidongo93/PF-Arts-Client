@@ -59,15 +59,17 @@ function Navbar() {
       <span className='sub'>BETA</span>
       <div className='navlinks-container'>
         {loggedIn ? (
-          <div className='profile-menu' onClick={handleNavigate}>
-            <p className='user-welcome'>{userName}</p>
-            <div className='profile-menu-photo-container'>
-              <img src={profilePicture} alt='' className='profile-menu-photo' />
+          <>
+            <div className='profile-menu' onClick={handleNavigate}>
+              <p className='user-welcome'>{userName}</p>
+              <div className='profile-menu-photo-container'>
+                <img src={profilePicture} alt='' className='profile-menu-photo' />
+              </div>
             </div>
-        <NavLink to='/cart' className='navlinks'>
-          <AiOutlineShoppingCart className='cartLogo' />
-        </NavLink>
-          </div>
+            <NavLink to='/cart' className='navlinks'>
+              <AiOutlineShoppingCart className='cartLogo' />
+            </NavLink>
+          </>
         ) : (
           <NavLink to='/login' className='login'>
             Log in

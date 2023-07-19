@@ -123,7 +123,6 @@ const Detail = () => {
   };
 
   const handleSave = () => {
-    console.log(detail);
     const updatedArtwork = {
       ...detail,
       authorName: artist,
@@ -195,7 +194,7 @@ const Detail = () => {
             <h3>{detail.title}</h3>
             <hr className={styles.hr} />
             <p>
-              <span className={styles.prop}>Artist:</span> {isEditing ? <input type='text' value={artist} onChange={(e) => setArtist(e.target.value)} /> : <span>{detail.authorName}</span>}
+              <span className={styles.prop}>Author:</span> {isEditing ? <input type='text' value={artist} onChange={(e) => setArtist(e.target.value)} /> : <span>{detail.authorName}</span>}
             </p>
             <p>
               <span className={styles.prop}>Year:</span> {isEditing ? <input type='text' value={year} onChange={(e) => setYear(e.target.value)} /> : <span>{detail.date}</span>}

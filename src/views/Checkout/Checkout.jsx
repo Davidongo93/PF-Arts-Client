@@ -2,14 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTruck,
-  faUndo,
-  faCertificate,
-  faGlobe,
-  faLock,
-  faArrowLeft,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTruck, faUndo, faCertificate, faGlobe, faLock, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { clearCart, getAllArts, postTransaction, showNotification } from '../../redux/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -82,14 +75,15 @@ const Checkout = () => {
                   purchase_value: cart.purchase_units[0].amount.value,
                   status: cart.status,
                 };
-                toast.success('Successful purchase! Thank you for your purchase.');
-                setPaymentApproved(true);
                 // Actualizar el estado en cart, queda en 0.
-                dispatch(postTransaction(artworkIdsString, transactionData));
-                dispatch(clearCart());
-                localStorage.removeItem('cartItems');
-                dispatch(getAllArts());
-                dispatch(showNotification('Successful purchase! Thank you for your purchase.'))
+                dispatch(postTransaction(artworkIdsString, transactionData)).then(() => {
+                  dispatch(getAllArts());
+                  dispatch(clearCart());
+                  localStorage.removeItem('cartItems');
+                  toast.success('Successful purchase! Thank you for your purchase.');
+                  setPaymentApproved(true);
+                  console.log(paymentApproved);
+                });
               });
             },
           })
@@ -100,6 +94,13 @@ const Checkout = () => {
     };
     initializePayPal();
   }, []);
+
+  useEffect(() => {
+    console.log(paymentApproved);
+    if (paymentApproved) {
+      dispatch(showNotification('Successful purchase! Thank you for your purchase.'));
+    }
+  }, [dispatch, paymentApproved]);
 
   return (
     <div className={`${styles.row} row g-0 text-center`} style={{ height: '100%' }}>

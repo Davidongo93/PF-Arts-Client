@@ -7,7 +7,6 @@ import style from './Searchbar.module.css';
 
 const Searchbar = ({ setCurrentPage }) => {
   const dispatch = useDispatch();
-
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleChange = (event) => {

@@ -177,18 +177,26 @@ export const getAllArts = () => {
 };
 export const getArtsByTitle = (title) => {
   return async function (dispatch) {
-    const arts = await axios.get(`/artworks?title=${title}`);
-    console.log(arts.data);
-    dispatch({ type: GET_ARTS_BY_TITLE, payload: arts.data });
+    try {
+      const arts = await axios.get(`/artworks?title=${title}`);
+      dispatch({ type: GET_ARTS_BY_TITLE, payload: arts.data });
+    } catch (error) {
+      dispatch({ type: GET_ARTS_BY_TITLE, payload: [] }); // Dispatch de un objeto vacío en caso de error
+    }
   };
 };
+
 export const getArtsByAuthor = (authorName) => {
   return async function (dispatch) {
-    const arts = await axios.get(`/artworks?authorName=${authorName}`);
-    console.log(arts.data);
-    dispatch({ type: GET_ARTS_BY_AUTHOR_NAME, payload: arts.data });
+    try {
+      const arts = await axios.get(`/artworks?authorName=${authorName}`);
+      dispatch({ type: GET_ARTS_BY_AUTHOR_NAME, payload: arts.data });
+    } catch (error) {
+      dispatch({ type: GET_ARTS_BY_AUTHOR_NAME, payload: [] }); // Dispatch de un objeto vacío en caso de error
+    }
   };
 };
+
 export const getAllUsers = () => {
   return async function (dispatch) {
     const response = await axios.get(`/users`);

@@ -17,7 +17,6 @@ const ReviewSection = ({ artworkId }) => {
   const { userId } = loggedUser;
 
   const hasComment = reviews?.some((reviewGroup) => reviewGroup?.reviews?.some((r) => r.userId === userId));
-  console.log(hasComment);
 
   const handleRatingChange = (value) => {
     setRating(value);
