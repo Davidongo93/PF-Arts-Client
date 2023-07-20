@@ -2,10 +2,19 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetail, updateUser, setLoggedUser } from '../../redux/actions';
 import { useParams } from 'react-router-dom';
-import { FaTwitterSquare, FaFacebookSquare, FaInstagramSquare, FaPencilAlt, FaMapMarkerAlt, FaEnvelope, FaMobileAlt, FaImage } from 'react-icons/fa';
+import {
+  FaTwitterSquare,
+  FaFacebookSquare,
+  FaInstagramSquare,
+  FaPencilAlt,
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaMobileAlt,
+  FaImage,
+} from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
-import CarruselUsers from '../CarruselUsers/CarruselUsers';
+import CarruselUsers from '../../components/CarruselUsers/CarruselUsers';
 import style from './UserDetail.module.css';
 
 const UserDetail = () => {
@@ -119,7 +128,9 @@ const UserDetail = () => {
   const artworksNeeded = 4 - filteredArtworks.length;
   //Si no completa le agrega una img en color gris:
   const grayImages = Array.from({ length: artworksNeeded }, (_, index) => ({
-    image: `https://via.placeholder.com/300x200/D5D1D1?text=Artwork+${index + 1}`,
+    image: `https://via.placeholder.com/300x200/D5D1D1?text=Artwork+${
+      index + 1
+    }`,
     title: `Artwork ${index + 1}`,
   }));
 
@@ -151,10 +162,38 @@ const UserDetail = () => {
     <div className={style['containerUserDetail']}>
       <form onSubmit={handleSave} encType='multipart/form-data'>
         <div className={style['userDetail']}>
-          <div className={style['positionPhoto']}>{selectedFile !== null ? <img src={URL.createObjectURL(selectedFile)} alt='img' className={style['photoPerfil']} /> : <img src={userDetail.profilePicture} alt='img' className={style['photoPerfil']} />}</div>
+          <div className={style['positionPhoto']}>
+            {selectedFile !== null ? (
+              <img
+                src={URL.createObjectURL(selectedFile)}
+                alt='img'
+                className={style['photoPerfil']}
+              />
+            ) : (
+              <img
+                src={userDetail.profilePicture}
+                alt='img'
+                className={style['photoPerfil']}
+              />
+            )}
+          </div>
           <div className={style['details']}>
             <div className={style['username']}>
-              {isEditing ? <input className={style.inputUserName} placeholder='Username' type='text' value={editedData.userName} onChange={(e) => setEditedData({ ...userDetail, userName: e.target.value })} /> : <span className={style['username-text']}>{userDetail?.userName || '-'}</span>}
+              {isEditing ? (
+                <input
+                  className={style.inputUserName}
+                  placeholder='Username'
+                  type='text'
+                  value={editedData.userName}
+                  onChange={(e) =>
+                    setEditedData({ ...userDetail, userName: e.target.value })
+                  }
+                />
+              ) : (
+                <span className={style['username-text']}>
+                  {userDetail?.userName || '-'}
+                </span>
+              )}
               <span>
                 {isEditing ? (
                   <>
@@ -162,7 +201,10 @@ const UserDetail = () => {
                       <button className={style.updateButtonSave} type='submit'>
                         Save
                       </button>
-                      <button className={style.updateButtonCancel} onClick={handleCancel}>
+                      <button
+                        className={style.updateButtonCancel}
+                        onClick={handleCancel}
+                      >
                         Cancel
                       </button>
                     </div>
@@ -178,19 +220,83 @@ const UserDetail = () => {
             </div>
 
             <div>
-              <FaEnvelope className={style['iconEmail']} /> <span className={style['email-text']}>{userDetail?.email || '-'}</span> <FaMapMarkerAlt className={style['iconLocation']} /> <span className={style['location']}>{isEditing ? <input className={style.inputName} placeholder='Location' type='text' value={editedData.location} onChange={(e) => setEditedData({ ...userDetail, location: e.target.value })} /> : <span className={style['location-text']}>{userDetail?.location || '-'}</span>}</span>
+              <FaEnvelope className={style['iconEmail']} />{' '}
+              <span className={style['email-text']}>
+                {userDetail?.email || '-'}
+              </span>{' '}
+              <FaMapMarkerAlt className={style['iconLocation']} />{' '}
+              <span className={style['location']}>
+                {isEditing ? (
+                  <input
+                    className={style.inputName}
+                    placeholder='Location'
+                    type='text'
+                    value={editedData.location}
+                    onChange={(e) =>
+                      setEditedData({ ...userDetail, location: e.target.value })
+                    }
+                  />
+                ) : (
+                  <span className={style['location-text']}>
+                    {userDetail?.location || '-'}
+                  </span>
+                )}
+              </span>
             </div>
 
             <div className={style['phone']}>
-              <FaMobileAlt className={style['iconPhone']} /> {isEditing ? <input className={style.inputName} placeholder='Phone number' type='number' value={editedData.phoneNumber} onChange={(e) => setEditedData({ ...userDetail, phoneNumber: e.target.value })} /> : <span className={style['phone-text']}>{userDetail?.phoneNumber || '-'}</span>}
+              <FaMobileAlt className={style['iconPhone']} />{' '}
+              {isEditing ? (
+                <input
+                  className={style.inputName}
+                  placeholder='Phone number'
+                  type='number'
+                  value={editedData.phoneNumber}
+                  onChange={(e) =>
+                    setEditedData({
+                      ...userDetail,
+                      phoneNumber: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                <span className={style['phone-text']}>
+                  {userDetail?.phoneNumber || '-'}
+                </span>
+              )}
             </div>
-            <div className={style['bio']}>{isEditing ? <textarea className={style.inputBio} placeholder='Tell us about yourself' value={editedData.description} onChange={(e) => setEditedData({ ...userDetail, description: e.target.value })} /> : <p className={style['bio-text']}>{userDetail?.description || '-'}</p>}</div>
+            <div className={style['bio']}>
+              {isEditing ? (
+                <textarea
+                  className={style.inputBio}
+                  placeholder='Tell us about yourself'
+                  value={editedData.description}
+                  onChange={(e) =>
+                    setEditedData({
+                      ...userDetail,
+                      description: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                <p className={style['bio-text']}>
+                  {userDetail?.description || '-'}
+                </p>
+              )}
+            </div>
             {isEditing && (
               <div>
                 <label htmlFor='fileInput' className={style.selectFileButton}>
-                  <FaImage className={`${style.icon} icon`} /> Upload profile picture
+                  <FaImage className={`${style.icon} icon`} /> Upload profile
+                  picture
                 </label>
-                <input id='fileInput' type='file' accept='image/*' onChange={handleFileChange} className={style.fileInput} />
+                <input
+                  id='fileInput'
+                  type='file'
+                  accept='image/*'
+                  onChange={handleFileChange}
+                  className={style.fileInput}
+                />
               </div>
             )}
           </div>
@@ -198,24 +304,69 @@ const UserDetail = () => {
           <div className={style['socialIcons']}>
             {isEditingSocial ? (
               <>
-                <input className={style.inputSocial} type='text' name='tw' placeholder='Twitter' value={editedSocialData.tw} onChange={handleSocialInputChange} />
-                <input className={style.inputSocial} type='text' name='fb' placeholder='Facebook' value={editedSocialData.fb} onChange={handleSocialInputChange} />
-                <input className={style.inputSocial} type='text' name='ig' placeholder='Instagram' value={editedSocialData.ig} onChange={handleSocialInputChange} />
-                <button className={style.updateSocialButtonSave} onClick={handleSaveSocial}>
+                <input
+                  className={style.inputSocial}
+                  type='text'
+                  name='tw'
+                  placeholder='Twitter'
+                  value={editedSocialData.tw}
+                  onChange={handleSocialInputChange}
+                />
+                <input
+                  className={style.inputSocial}
+                  type='text'
+                  name='fb'
+                  placeholder='Facebook'
+                  value={editedSocialData.fb}
+                  onChange={handleSocialInputChange}
+                />
+                <input
+                  className={style.inputSocial}
+                  type='text'
+                  name='ig'
+                  placeholder='Instagram'
+                  value={editedSocialData.ig}
+                  onChange={handleSocialInputChange}
+                />
+                <button
+                  className={style.updateSocialButtonSave}
+                  onClick={handleSaveSocial}
+                >
                   Save
                 </button>
-                <button className={style.updateSocialButtonCancel} onClick={handleCancelSocial}>
+                <button
+                  className={style.updateSocialButtonCancel}
+                  onClick={handleCancelSocial}
+                >
                   Cancel
                 </button>
               </>
             ) : (
               <>
-                <FaTwitterSquare className={style['shareIcon']} style={{ color: '#55acee' }} onClick={handleTwitterClick} />
-                <FaFacebookSquare className={style['shareIcon']} style={{ color: '#3b5998' }} onClick={handleFacebookClick} />
-                <FaInstagramSquare className={style['shareIcon']} style={{ color: '#3374FF' }} onClick={handleInstagramClick} />
+                <FaTwitterSquare
+                  className={style['shareIcon']}
+                  style={{ color: '#55acee' }}
+                  onClick={handleTwitterClick}
+                />
+                <FaFacebookSquare
+                  className={style['shareIcon']}
+                  style={{ color: '#3b5998' }}
+                  onClick={handleFacebookClick}
+                />
+                <FaInstagramSquare
+                  className={style['shareIcon']}
+                  style={{ color: '#3374FF' }}
+                  onClick={handleInstagramClick}
+                />
                 {enabledUserEdit && (
-                  <button className={style.editButton} onClick={handleEditSocial}>
-                    <FontAwesomeIcon icon={faCog} className={style.updateIcon} />
+                  <button
+                    className={style.editButton}
+                    onClick={handleEditSocial}
+                  >
+                    <FontAwesomeIcon
+                      icon={faCog}
+                      className={style.updateIcon}
+                    />
                   </button>
                 )}
               </>
@@ -223,7 +374,11 @@ const UserDetail = () => {
           </div>
         </div>
 
-        {showCarousel && <CarruselUsers images={combinedArtworks.map((artwork) => artwork.image)} />}
+        {showCarousel && (
+          <CarruselUsers
+            images={combinedArtworks.map((artwork) => artwork.image)}
+          />
+        )}
       </form>
     </div>
   );
