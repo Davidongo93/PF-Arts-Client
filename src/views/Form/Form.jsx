@@ -3,16 +3,7 @@ import { useState } from 'react';
 import { postArts } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  FaPen,
-  FaArrowsAltH,
-  FaArrowsAltV,
-  FaDollarSign,
-  FaCalendar,
-  FaUser,
-  FaImage,
-  FaTags,
-} from 'react-icons/fa';
+import { FaPen, FaArrowsAltH, FaArrowsAltV, FaDollarSign, FaCalendar, FaUser, FaImage, FaTags } from 'react-icons/fa';
 import { showNotification, getAllArts } from '../../redux/actions';
 import styles from './Form.module.css';
 
@@ -161,9 +152,7 @@ export default function Form() {
               className={styles.input}
               placeholder='Enter an author name'
             />
-            {submitted && errors.authorName && (
-              <p className={styles.error}>{errors.authorName}</p>
-            )}
+            {submitted && errors.authorName && <p className={styles.error}>{errors.authorName}</p>}
           </div>
           <div className={styles.separator}></div>
           <div className={styles.formGroup}>
@@ -208,9 +197,7 @@ export default function Form() {
               className={styles.input}
               placeholder='Enter a height'
             />
-            {submitted && errors.height && (
-              <p className={styles.error}>{errors.height}</p>
-            )}
+            {submitted && errors.height && <p className={styles.error}>{errors.height}</p>}
           </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>
@@ -226,9 +213,7 @@ export default function Form() {
               className={styles.input}
               placeholder='Enter a width'
             />
-            {submitted && errors.width && (
-              <p className={styles.error}>{errors.width}</p>
-            )}
+            {submitted && errors.width && <p className={styles.error}>{errors.width}</p>}
           </div>
           <div className={styles.separator}></div>
           <div className={styles.formGroup}>
@@ -244,9 +229,7 @@ export default function Form() {
               className={styles.input}
               placeholder='Enter a year'
             />
-            {submitted && errors.date && (
-              <p className={styles.error}>{errors.date}</p>
-            )}
+            {submitted && errors.date && <p className={styles.error}>{errors.date}</p>}
           </div>
           <div className={styles.separator}></div>
           <div className={styles.formGroup}>
@@ -263,9 +246,7 @@ export default function Form() {
               className={styles.input}
               placeholder='Enter a price'
             />
-            {submitted && errors.price && (
-              <p className={styles.error}>{errors.price}</p>
-            )}
+            {submitted && errors.price && <p className={styles.error}>{errors.price}</p>}
           </div>
           <div className={styles.separator}></div>
           <div className={styles.formGroup}>
@@ -280,29 +261,18 @@ export default function Form() {
               placeholder='Select a category'
             >
               <option value=''>Select a category</option>
-              {[
-                'Painting',
-                'Illustration',
-                '3D',
-                'Collage',
-                'Pixel Art',
-                'Photography',
-              ].map((category) => (
+              {['Painting', 'Illustration', '3D', 'Collage', 'Pixel Art', 'Photography'].map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
               ))}
             </select>
-            {submitted && errors.category && (
-              <p className={styles.error}>{errors.category}</p>
-            )}
+            {submitted && errors.category && <p className={styles.error}>{errors.category}</p>}
           </div>
           <button type='submit' className={styles.button}>
             Create
           </button>
-          {showConfirmation && (
-            <p className={styles.confirmation}>Art created successfully!</p>
-          )}
+          {showConfirmation && <p className={styles.confirmation}>Art created successfully!</p>}
         </form>
       </div>
     </div>

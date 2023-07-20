@@ -125,19 +125,16 @@ const UserDetail = () => {
   }, [enabledUserEdit, dispatch, userDetail]);
 
   // Necesita 4 obras para completar el carrusel:
-  const artworksNeeded = 4 - filteredArtworks.length;
+  const artworksNeeded = 4 - filteredArtworks?.length;
   //Si no completa le agrega una img en color gris:
   const grayImages = Array.from({ length: artworksNeeded }, (_, index) => ({
-    image: `https://via.placeholder.com/300x200/D5D1D1?text=Artwork+${
-      index + 1
-    }`,
+    image: `https://via.placeholder.com/300x200/D5D1D1?text=Artwork+${index + 1}`,
     title: `Artwork ${index + 1}`,
   }));
 
   // Combina las obras del usuario con la img en gris si es necesario:
   const combinedArtworks = [...filteredArtworks, ...grayImages];
   // Muestra el carrusel solo si el usuario tiene al menos una obra:
-  const showCarousel = combinedArtworks.length > 0;
 
   //enlaces para las redes
   const handleTwitterClick = () => {
@@ -164,17 +161,9 @@ const UserDetail = () => {
         <div className={style['userDetail']}>
           <div className={style['positionPhoto']}>
             {selectedFile !== null ? (
-              <img
-                src={URL.createObjectURL(selectedFile)}
-                alt='img'
-                className={style['photoPerfil']}
-              />
+              <img src={URL.createObjectURL(selectedFile)} alt='img' className={style['photoPerfil']} />
             ) : (
-              <img
-                src={userDetail.profilePicture}
-                alt='img'
-                className={style['photoPerfil']}
-              />
+              <img src={userDetail.profilePicture} alt='img' className={style['photoPerfil']} />
             )}
           </div>
           <div className={style['details']}>
@@ -185,14 +174,10 @@ const UserDetail = () => {
                   placeholder='Username'
                   type='text'
                   value={editedData.userName}
-                  onChange={(e) =>
-                    setEditedData({ ...userDetail, userName: e.target.value })
-                  }
+                  onChange={(e) => setEditedData({ ...userDetail, userName: e.target.value })}
                 />
               ) : (
-                <span className={style['username-text']}>
-                  {userDetail?.userName || '-'}
-                </span>
+                <span className={style['username-text']}>{userDetail?.userName || '-'}</span>
               )}
               <span>
                 {isEditing ? (
@@ -201,10 +186,7 @@ const UserDetail = () => {
                       <button className={style.updateButtonSave} type='submit'>
                         Save
                       </button>
-                      <button
-                        className={style.updateButtonCancel}
-                        onClick={handleCancel}
-                      >
+                      <button className={style.updateButtonCancel} onClick={handleCancel}>
                         Cancel
                       </button>
                     </div>
@@ -221,9 +203,7 @@ const UserDetail = () => {
 
             <div>
               <FaEnvelope className={style['iconEmail']} />{' '}
-              <span className={style['email-text']}>
-                {userDetail?.email || '-'}
-              </span>{' '}
+              <span className={style['email-text']}>{userDetail?.email || '-'}</span>{' '}
               <FaMapMarkerAlt className={style['iconLocation']} />{' '}
               <span className={style['location']}>
                 {isEditing ? (
@@ -232,14 +212,10 @@ const UserDetail = () => {
                     placeholder='Location'
                     type='text'
                     value={editedData.location}
-                    onChange={(e) =>
-                      setEditedData({ ...userDetail, location: e.target.value })
-                    }
+                    onChange={(e) => setEditedData({ ...userDetail, location: e.target.value })}
                   />
                 ) : (
-                  <span className={style['location-text']}>
-                    {userDetail?.location || '-'}
-                  </span>
+                  <span className={style['location-text']}>{userDetail?.location || '-'}</span>
                 )}
               </span>
             </div>
@@ -260,9 +236,7 @@ const UserDetail = () => {
                   }
                 />
               ) : (
-                <span className={style['phone-text']}>
-                  {userDetail?.phoneNumber || '-'}
-                </span>
+                <span className={style['phone-text']}>{userDetail?.phoneNumber || '-'}</span>
               )}
             </div>
             <div className={style['bio']}>
@@ -279,16 +253,13 @@ const UserDetail = () => {
                   }
                 />
               ) : (
-                <p className={style['bio-text']}>
-                  {userDetail?.description || '-'}
-                </p>
+                <p className={style['bio-text']}>{userDetail?.description || '-'}</p>
               )}
             </div>
             {isEditing && (
               <div>
                 <label htmlFor='fileInput' className={style.selectFileButton}>
-                  <FaImage className={`${style.icon} icon`} /> Upload profile
-                  picture
+                  <FaImage className={`${style.icon} icon`} /> Upload profile picture
                 </label>
                 <input
                   id='fileInput'
@@ -328,16 +299,10 @@ const UserDetail = () => {
                   value={editedSocialData.ig}
                   onChange={handleSocialInputChange}
                 />
-                <button
-                  className={style.updateSocialButtonSave}
-                  onClick={handleSaveSocial}
-                >
+                <button className={style.updateSocialButtonSave} onClick={handleSaveSocial}>
                   Save
                 </button>
-                <button
-                  className={style.updateSocialButtonCancel}
-                  onClick={handleCancelSocial}
-                >
+                <button className={style.updateSocialButtonCancel} onClick={handleCancelSocial}>
                   Cancel
                 </button>
               </>
@@ -359,14 +324,8 @@ const UserDetail = () => {
                   onClick={handleInstagramClick}
                 />
                 {enabledUserEdit && (
-                  <button
-                    className={style.editButton}
-                    onClick={handleEditSocial}
-                  >
-                    <FontAwesomeIcon
-                      icon={faCog}
-                      className={style.updateIcon}
-                    />
+                  <button className={style.editButton} onClick={handleEditSocial}>
+                    <FontAwesomeIcon icon={faCog} className={style.updateIcon} />
                   </button>
                 )}
               </>
@@ -374,11 +333,7 @@ const UserDetail = () => {
           </div>
         </div>
 
-        {showCarousel && (
-          <CarruselUsers
-            images={combinedArtworks.map((artwork) => artwork.image)}
-          />
-        )}
+        {combinedArtworks && <CarruselUsers images={combinedArtworks.map((artwork) => artwork.image)} />}
       </form>
     </div>
   );
