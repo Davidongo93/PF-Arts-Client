@@ -63,7 +63,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allArts: action.payload,
       };
-
+      
     case GET_ARTS_BY_TITLE:
       return {
         ...state,

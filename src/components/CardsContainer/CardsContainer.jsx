@@ -19,9 +19,8 @@ const CardsContainer = () => {
   const artsPerPage = 9;
   const indexOfLastArt = currentPage * artsPerPage;
   const indexOfFirstArt = indexOfLastArt - artsPerPage;
-  const [currentArts, setCurrentArts] = useState(allArts.slice(indexOfFirstArt, indexOfLastArt));
+  const [currentArts, setCurrentArts] = /*useState(allArts.slice(indexOfFirstArt, indexOfLastArt));*/ useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
     const searchParams = new URLSearchParams(locationCard.search);
@@ -41,9 +40,9 @@ const CardsContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allUsers, dispatch]);
-
+console.log(allArts);
   useEffect(() => {
-    setCurrentArts(allArts.slice(indexOfFirstArt, indexOfLastArt));
+    setCurrentArts(Array.isArray(allArts) ? allArts.slice(indexOfFirstArt, indexOfLastArt) : []);
   }, [allArts, currentPage, indexOfFirstArt, indexOfLastArt]);
 
   useEffect(() => {
@@ -67,7 +66,7 @@ const CardsContainer = () => {
           </div>
         ) : (
           <div className={styles['CardsContainer']}>
-            {currentArts.map((art) => (
+            {currentArts && currentArts.map((art) => (
               <NavLink to={`/detail/${art.artworkId}`} key={art.artworkId} className={styles.link}>
                 <Card art={art} />
               </NavLink>
