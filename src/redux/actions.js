@@ -167,6 +167,7 @@ export const hideNotification = () => {
 };
 
 export const getAllArts = () => {
+  console.log("get all arts axios")
   return async function (dispatch) {
     const response = await axios.get('/artworks');
     return dispatch({

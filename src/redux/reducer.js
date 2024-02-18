@@ -1,9 +1,42 @@
 /* eslint-disable no-case-declarations */
-import { GET_ARTS, GET_ARTS_BY_TITLE, GET_ARTS_BY_AUTHOR_NAME, GET_USERS, SET_IS_LOGGED_IN, POST_ART, ADD_FAVORITE, DELETE_FAVORITE, GET_DETAIL, CLEAR_DETAIL, GET_ARTS_BY_FILTERS, POST_USERS, DELETE_ART, UPDATE_USER, UPDATE_ARTWORK, GET_FAVORITES, GET_USER_DETAIL, SET_CART_ITEMS, ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, SET_LOGGED_USER, CHECK_AUTHENTICATION, SHOW_NOTIFICATION, HIDE_NOTIFICATION, GET_ADMIN_ARTS, DELETE_ADMIN, GET_TRANS, GET_REVIEWS, POST_REVIEW, DELETE_REVIEW, UPDATE_REVIEW } from './actions';
+import {
+  GET_ARTS,
+  GET_ARTS_BY_TITLE,
+  GET_ARTS_BY_AUTHOR_NAME,
+  GET_USERS,
+  SET_IS_LOGGED_IN,
+  POST_ART,
+  ADD_FAVORITE,
+  DELETE_FAVORITE,
+  GET_DETAIL,
+  CLEAR_DETAIL,
+  GET_ARTS_BY_FILTERS,
+  POST_USERS,
+  DELETE_ART,
+  UPDATE_USER,
+  UPDATE_ARTWORK,
+  GET_FAVORITES,
+  GET_USER_DETAIL,
+  SET_CART_ITEMS,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  CLEAR_CART,
+  SET_LOGGED_USER,
+  CHECK_AUTHENTICATION,
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
+  GET_ADMIN_ARTS,
+  DELETE_ADMIN,
+  GET_TRANS,
+  GET_REVIEWS,
+  POST_REVIEW,
+  DELETE_REVIEW,
+  UPDATE_REVIEW,
+} from "./actions";
 
 const initialState = {
   notificationVisible: false,
-  notificationMessage: '',
+  notificationMessage: "",
   allArts: [],
   allUsers: [], //almacena todos los usuarios.
   filteredArts: [],
@@ -13,7 +46,9 @@ const initialState = {
   detail: {},
   users: [], //almacena datos de usuarios individuales.
   userDetail: {},
-  cart: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
+  cart: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
   loggedUser: {},
   isLoggedIn: false,
   allAdminArts: [],
@@ -54,16 +89,19 @@ const rootReducer = (state = initialState, action) => {
       const { artworkId, userId } = action.payload;
       return {
         ...state,
-        allAdminArts: state.allAdminArts.filter((art) => art.artworkId !== artworkId),
+        allAdminArts: state.allAdminArts.filter(
+          (art) => art.artworkId !== artworkId
+        ),
         allUser: state.allUsers.filter((user) => user.userId !== userId),
       };
 
     case GET_ARTS:
+      console.log("all Arts reduecer");
       return {
         ...state,
         allArts: action.payload,
       };
-      
+
     case GET_ARTS_BY_TITLE:
       return {
         ...state,
@@ -109,7 +147,9 @@ const rootReducer = (state = initialState, action) => {
     case DELETE_FAVORITE:
       return {
         ...state,
-        myFavorites: state.myFavorites.filter((fav) => fav.artworkId !== action.payload),
+        myFavorites: state.myFavorites.filter(
+          (fav) => fav.artworkId !== action.payload
+        ),
       };
 
     case SET_LOGGED_USER:
@@ -200,7 +240,9 @@ const rootReducer = (state = initialState, action) => {
     case DELETE_REVIEW:
       return {
         ...state,
-        reviews: state.reviews.filter((review) => review.artworkId !== action.payload.artworkId),
+        reviews: state.reviews.filter(
+          (review) => review.artworkId !== action.payload.artworkId
+        ),
       };
 
     case UPDATE_REVIEW:
@@ -232,10 +274,12 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case REMOVE_FROM_CART:
-      console.log('Removing from cart:', action.payload.artworkId);
+      console.log("Removing from cart:", action.payload.artworkId);
       return {
         ...state,
-        cart: state.cart.filter((item) => item.artworkId !== action.payload.artworkId),
+        cart: state.cart.filter(
+          (item) => item.artworkId !== action.payload.artworkId
+        ),
       };
 
     case CLEAR_CART:

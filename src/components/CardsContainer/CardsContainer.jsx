@@ -40,7 +40,7 @@ const CardsContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allUsers, dispatch]);
-console.log(allArts);
+console.log("allArts",allArts);
   useEffect(() => {
     setCurrentArts(Array.isArray(allArts) ? allArts.slice(indexOfFirstArt, indexOfLastArt) : []);
   }, [allArts, currentPage, indexOfFirstArt, indexOfLastArt]);
